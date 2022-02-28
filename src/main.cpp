@@ -1,9 +1,15 @@
 #include <Arduino.h>
 
+//#define MQTT_HOST "192.168.0.10"
+
+#include <mqtt-now.h>
+
+MqttNow mqttNow;
+
 void setup() {
-  // put your setup code here, to run once:
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
 }
