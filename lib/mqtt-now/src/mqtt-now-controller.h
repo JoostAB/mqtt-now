@@ -1,6 +1,6 @@
 # pragma once
-#ifndef __MQTT_NOW_CONTROLLER__
-#define __MQTT_NOW_CONTROLLER__
+#ifndef __MQTT_NOW_CONTROLLER_H__
+#define __MQTT_NOW_CONTROLLER_H__
 
 #include <Arduino.h>
 #include "mqtt-now-base.h"
@@ -14,4 +14,4 @@ class MqttNowController : public MqttNowBase {
       update(); 
 };
 
-#endif // __MQTT_NOW_CONTROLLER__
+#endif // __MQTT_NOW_CONTROLLER_H__

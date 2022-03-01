@@ -7,9 +7,9 @@
 MqttNow mqttNow;
 
 void setup() {
-
+  mqttNow.begin();
 }
 
 void loop() {
-
+  mqttNow.update();
 }

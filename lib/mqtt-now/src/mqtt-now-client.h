@@ -1,15 +1,24 @@
 # pragma once
-#ifndef __MQTT_NOW_CLIENT__
-#define __MQTT_NOW_CLIENT__
+#ifdef MQTT_NOW_CLIENT
+#ifndef __MQTT_NOW_CLIENT_H__
+#define __MQTT_NOW_CLIENT_H__
 
 #include <Arduino.h>
 #include "mqtt-now-base.h"
 
-#ifdef ESP8266
-  #include <ESP8266WiFi.h>
-#elif defined(ESP32)
-  #include <WiFi.h>
-#endif
+// #ifdef ESP8266
+//   #include <ESP8266WiFi.h>
+// #elif defined(ESP32)
+//   #include <WiFi.h>
+// #endif
+
+#define AP_NAME "MQTTNow bridge"
+#define AP_PASSWORD "MQTTNow"
+#include <ESP8266WiFi.h>
+#include <DNSServer.h>
+#include <ESP8266mDNS.h>
+#include <ESP8266WebServer.h>
+#include <WiFiManager.h>
 
 #ifndef MQTT_ROOT_TOPIC
 #define MQTT_ROOT_TOPIC "mqtt-now"
@@ -51,6 +60,10 @@
 //#error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
 #endif
 
+void handleUpdate();
+void handleNotFound();
+void handleCommand();
+
 class MqttNowClient : public MqttNowBase {
   public:
     // MqttNowClient(String host, uint16_t port = 1883);
@@ -62,6 +75,13 @@ class MqttNowClient : public MqttNowBase {
     void
       begin(),
       update();
+      // handleUpdate(),
+      // handleNotFound(),
+      // handleCommand();
+
+  private:
+    
 };
 
-#endif // __MQTT_NOW_CLIENT__
+#endif // __MQTT_NOW_CLIENT_H__
+#endif // MQTT_NOW_CLIENT
