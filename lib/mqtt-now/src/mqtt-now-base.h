@@ -3,15 +3,9 @@
 #define __MQTT_NOW_BASE_H__
 
 #include <Arduino.h>
+#include <jbdebug.h>
 
-// #ifdef ESP32
-// #else
-//   #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
-//   //needed for library
-//   #include <ESP8266WebServer.h>
-// #endif
-
-// #include <DNSServer.h>
+typedef bool mqttnow_success;
 
 class MqttNowBase {
   public:

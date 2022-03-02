@@ -4,7 +4,6 @@
 
 #include <Arduino.h>
 
-
 #ifdef MQTT_NOW_CLIENT
   #include <mqtt-now-client.h>
   typedef MqttNowClient MqttNow;

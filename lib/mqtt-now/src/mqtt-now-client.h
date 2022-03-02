@@ -5,6 +5,7 @@
 
 #include <Arduino.h>
 #include "mqtt-now-base.h"
+#include <MQTTPubSubClient.h>
 
 // #ifdef ESP8266
 //   #include <ESP8266WiFi.h>
@@ -13,7 +14,7 @@
 // #endif
 
 #define AP_NAME "MQTTNow bridge"
-#define AP_PASSWORD "MQTTNow"
+// #define AP_PASSWORD "MQTTNow"
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
 #include <ESP8266mDNS.h>
@@ -57,30 +58,75 @@
 #endif
 
 #ifndef MQTT_HOST
+// TODO: uncomment for release
 //#error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
+#define MQTT_HOST "none"
 #endif
-
-void handleUpdate();
-void handleNotFound();
-void handleCommand();
 
 class MqttNowClient : public MqttNowBase {
   public:
-    // MqttNowClient(String host, uint16_t port = 1883);
-    // MqttNowClient(String host, String rootTopic, uint16_t port = 1883);
-    // MqttNowClient(String host, String rootTopic, String cmdTopic = "cmd", String statusTopic = "status", 
-    //     String lwtTopic = "lwt", String onCmd = "ON", String offCmd = "OFF", String onlineLwt = "Online",
-    //     String offlineLwt = "Offline", uint16_t port = 1883);
+    MqttNowClient();
+    MqttNowClient(String host, uint16_t port = MQTT_PORT);
+    MqttNowClient(String host, String rootTopic, uint16_t port = MQTT_PORT);
+    MqttNowClient(
+      String host, 
+      String rootTopic, 
+      String cmdTopic = MQTT_CMD_TOPIC, 
+      String statusTopic = MQTT_STATUS_TOPIC, 
+      String lwtTopic = MQTT_LWT_TOPIC, 
+      String onCmd = MQTT_ON_CMD, 
+      String offCmd = MQTT_OFF_CMD, 
+      String onlineLwt = MQTT_ONLINE_LWT,
+      String offlineLwt = MQTT_OFFLINE_LWT, 
+      uint16_t mqttPort = MQTT_PORT);
   
+    static void
+      handleUpdate(),
+      handleNotFound(),
+      handleCommand();
+
     void
       begin(),
-      update();
-      // handleUpdate(),
-      // handleNotFound(),
-      // handleCommand();
+      update(),
+      setRootTopic(String rootTopic),
+      setCmdTopic(String cmdTopic),
+      setstatusTopic(String statusTopic),
+      setLwtTopic(String lwtTopic),
+      setOnCmd(String onCmd),
+      setOffCmd(String offCmd),
+      setOnlineLwt(String onlineLwt),
+      setOfflineLwt(String offlineLwt);
+    
+    mqttnow_success
+      start(),
+      start(WiFiClient* wifiClient),
+      publishStatus(String status),
+      publishCmd(String cmd),
+      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)0U);
+      
 
   private:
-    
+    void
+      _startWebserver(),
+      _startMqttClient();
+
+    uint16_t _mqttPort = MQTT_PORT;
+    uint32_t _timeout = 5000;
+    String 
+          _host,
+          _rootTopic,
+          _cmdTopic,
+          _statusTopic,
+          _lwtTopic,
+          _onCmd,
+          _offCmd,
+          _onlineLwt,
+          _offlineLwt,
+          _mqttId,
+          _mqttUser,
+          _mqttPwd;
+    WiFiClient* _wifiClient;
+    MQTTPubSubClient* _mqttClient;
 };
 
 #endif // __MQTT_NOW_CLIENT_H__
