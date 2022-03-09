@@ -1,3 +1,13 @@
+/**
+ * @file mqtt-now.h
+ * @author Joost Bloemsma (joost.a@bloemsma.net)
+ * @brief 
+ * @version 0.1
+ * @date 2022-02-28
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 # pragma once
 #ifndef __MQTT_NOW_H__
 #define __MQTT_NOW_H__
