@@ -2,7 +2,7 @@
 
 MqttNowBase::MqttNowBase() {
   
-}
+};
 
 void MqttNowBase::begin() {};
 void MqttNowBase::update() {};

@@ -11,8 +11,9 @@
   #include <mqtt-now-controller.h>
   typedef MqttNowController MqttNow;
 #else
-  #include <mqtt-now-node.h>
-  typedef MqttNowNode MqttNow;
+  //#define MQTT_NOW_SLAVE 1
+  #include <mqtt-now-slave.h>
+  typedef MqttNowSlave MqttNow;
 #endif
 
 
