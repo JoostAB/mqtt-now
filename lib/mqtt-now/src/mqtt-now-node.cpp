@@ -1,5 +1,4 @@
 #include <mqtt-now-node.h>
-
 #if !defined(MQTT_NOW_CLIENT)
 
 /**
@@ -16,9 +15,9 @@ uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 struct_message myData;
 
-#if defined(ESP32)
-  esp_now_peer_info_t peerInfo;
-#endif
+
+esp_now_peer_info_t peerInfo;
+
 
 /*************************/
 /** OnDataSent Callback **/
@@ -56,8 +55,10 @@ struct_message myData;
   PRINTLF;
 }
 
-MqttNowNode::MqttNowNode() {};
+MqttNowNode::MqttNowNode() : MqttNowBase() {};
+
 void MqttNowNode::begin() {
+  MqttNowBase::begin();
   WiFi.mode(WIFI_STA);
   PRINTLN("MAC address: ", WiFi.macAddress());
 
@@ -70,28 +71,44 @@ void MqttNowNode::begin() {
 
   esp_now_register_send_cb(OnDataSent);
 
+  esp_now_register_recv_cb(onDataReceiver);
 
-};
-void MqttNowNode::update() {};
+}
 
-int MqttNowNode::addpeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
+void MqttNowNode::update() {
+  MqttNowBase::update();
+}
+
+esp_err_t MqttNowNode::addPeer(esp_now_peer_info_t *peer) {
   #ifdef ESP32
-      // ESP 32 uses a structure for peer information      
-      memcpy(peerInfo.peer_addr, mac_addr, 6);
-      peerInfo.channel = channel;
-      peerInfo.encrypt = encrypt;
-      if (encrypt == true) {
-        memcpy(peerInfo.lmk, _lmk, ESP_NOW_KEY_LEN);
-      }
-      return esp_now_add_peer(&peerInfo);
-    #elif defined(ESP8266)
-      // ESP 8266 has a simple method with std arguments to add a peer
-      if (encrypt) {
-        return esp_now_add_peer(mac_addr, ESP_NOW_ROLE_SLAVE, channel, _lmk, 16);
-      } else {
-        return esp_now_add_peer(mac_addr, ESP_NOW_ROLE_SLAVE, channel, NULL, 0);
-      }
-    #endif
+    if (!esp_now_is_peer_exist(peer->peer_addr)) {
+      return esp_now_add_peer(peer);
+    } else {
+      return ESP_OK;
+    }
+  #elif defined(ESP8266)
+    return addPeer(peer->peer_addr, peer->channel, peer->encrypt);
+  #endif 
+}
+
+esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
+  #ifdef ESP32
+    esp_now_peer_info_t info;
+    memcpy(info.peer_addr, mac_addr, 6);
+    info.channel = channel;
+    info.encrypt = encrypt;
+    if (encrypt == true) {
+      memcpy(info.lmk, _lmk, ESP_NOW_KEY_LEN);
+    }
+    return addPeer(&info);
+  #elif defined(ESP8266)
+    // ESP 8266 has a simple method with std arguments to add a peer
+    if (encrypt) {
+      return esp_now_add_peer(mac_addr, ESP_NOW_ROLE_SLAVE, channel, _lmk, 16);
+    } else {
+      return esp_now_add_peer(mac_addr, ESP_NOW_ROLE_SLAVE, channel, NULL, 0);
+    }
+  #endif
 }
 
 #endif // !defined(MQTT_NOW_CLIENT)

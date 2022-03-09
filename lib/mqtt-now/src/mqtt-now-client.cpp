@@ -41,7 +41,7 @@ MqttNowClient::MqttNowClient(
       String offCmd, 
       String onlineLwt,
       String offlineLwt, 
-      uint16_t mqttPort) {
+      uint16_t mqttPort) : MqttNowBase() {
   _host = host;
   _mqttPort = mqttPort;
 
@@ -119,7 +119,7 @@ mqttnow_success MqttNowClient::start(WiFiClient* wifiClient) {
 
 /** To be called from void setup() **/
 void MqttNowClient::begin() {
-  Serial.begin(115200); 
+  MqttNowBase::begin();
   delay(100);
 
   PRINTLNS("Booting MqttNow Client");
@@ -154,6 +154,7 @@ void MqttNowClient::_startMqttClient() {
 
 /** To be called from void loop() **/
 void MqttNowClient::update() {
+  MqttNowBase::update();
   server.handleClient();
   if(_mqttClient && _mqttClient->isConnected()) {
     _mqttClient->update();

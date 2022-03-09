@@ -2,8 +2,7 @@
 #ifndef __MQTT_NOW_BASE_H__
 #define __MQTT_NOW_BASE_H__
 
-#include <Arduino.h>
-#include <jbdebug.h>
+#include <baseinclude.h>
 
 typedef bool mqttnow_success;
 

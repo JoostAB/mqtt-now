@@ -3,7 +3,7 @@
 #ifndef __MQTT_NOW_SLAVE_H__
 #define __MQTT_NOW_SLAVE_H__
 
-#include <Arduino.h>
+#include <baseinclude.h>
 #include <mqtt-now-node.h>
 
 class MqttNowSlave : public MqttNowNode {

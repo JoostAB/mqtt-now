@@ -3,28 +3,19 @@
 #ifndef __MQTT_NOW_NODE_H__
 #define __MQTT_NOW_NODE_H__
 
-#include <Arduino.h>
+#include <baseinclude.h>
 #include <mqtt-now-base.h>
+
 
 #ifdef ESP8266
   #include <ESP8266WiFi.h>
   #include <espnow.h>
-  
-  // Following are defines from esp_now.h for ESP 32
-  // Defined here for compatibility
-  #define ESP_OK    0   /* Value indicating success (no error) */
-  #define ESP_FAIL -1   /* Value indicating failure */
-  
-  typedef enum {
-      ESP_NOW_SEND_SUCCESS = 0,       /* Send ESPNOW data successfully */
-      ESP_NOW_SEND_FAIL,              /* Send ESPNOW data fail */
-  } esp_now_send_status_t;
+  #include <esp8266-now-mock.h>
+
 #elif defined(ESP32)
   #include <esp_now.h>
   #include <WiFi.h>
 #endif
-
-
 
 // Structure example to send data
 // Must match the receiver structure
@@ -55,7 +46,8 @@ class MqttNowNode : public MqttNowBase {
       update(); 
   
   protected:
-    int addpeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false);
+    esp_err_t addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false);
+    esp_err_t addPeer(esp_now_peer_info_t *peer);
 };
 
 #endif // __MQTT_NOW_NODE_H__

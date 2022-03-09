@@ -39,11 +39,6 @@
 #define PRINTLNS(s)                  { Serial.println(s); }
 #define PRINTLN(s,v)                 { Serial.print(F(s)); Serial.println(v); }
 #define PRINTLF                      Serial.println()
-// #if SERIALBAUDRATE
-//   Serial.begin(SERIALBAUDRATE);
-// #else
-//   Serial.begin(115200);
-// #endif
 
 #else
 // No debugging, replace all PRINT*** calls with nothing
