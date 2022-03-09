@@ -4,7 +4,7 @@
 #define __MQTT_NOW_CLIENT_H__
 
 #include <Arduino.h>
-#include "mqtt-now-base.h"
+#include <mqtt-now-base.h>
 #include <MQTTPubSubClient.h>
 
 // #ifdef ESP8266

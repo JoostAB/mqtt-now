@@ -4,7 +4,7 @@
 #define __MQTT_NOW_SLAVE_H__
 
 #include <Arduino.h>
-#include "mqtt-now-node.h"
+#include <mqtt-now-node.h>
 
 class MqttNowSlave : public MqttNowNode {
   public:

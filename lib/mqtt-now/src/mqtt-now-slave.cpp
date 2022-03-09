@@ -1,4 +1,4 @@
-#include "mqtt-now-slave.h"
+#include <mqtt-now-slave.h>
 #if !(defined(MQTT_NOW_CLIENT) || defined(MQTT_NOW_CONTROLLER))
 
 MqttNowSlave::MqttNowSlave() {};

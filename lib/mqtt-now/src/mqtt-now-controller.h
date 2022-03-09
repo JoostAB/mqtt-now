@@ -4,7 +4,7 @@
 #define __MQTT_NOW_CONTROLLER_H__
 
 #include <Arduino.h>
-#include "mqtt-now-node.h"
+#include <mqtt-now-node.h>
 
 class MqttNowController : public MqttNowNode {
   public:
