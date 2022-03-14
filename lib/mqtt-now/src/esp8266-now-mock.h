@@ -14,6 +14,7 @@
 // Following are defines from esp_now.h for ESP 32
 // Defined here for compatibility
 #ifdef ESP8266
+#include <Arduino.h>
 #include <espnow.h>
 
 // Following are defines from esp_now.h for ESP 32

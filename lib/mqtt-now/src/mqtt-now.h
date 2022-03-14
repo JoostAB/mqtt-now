@@ -25,8 +25,4 @@
   typedef MqttNowSlave MqttNow;
 #endif
 
-
-
-
-
 #endif // __MQTT_NOW_H__

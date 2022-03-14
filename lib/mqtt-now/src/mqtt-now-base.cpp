@@ -16,8 +16,11 @@ MqttNowBase::MqttNowBase() {
   if (!Serial) { // But only if not already opened
    Serial.begin(SERIALBAUDRATE);
   }
+  PRINTLNS("MqttNow object created");
 #endif
 };
 
-void MqttNowBase::begin() {};
+void MqttNowBase::begin() {
+  PRINTLNS("MqttNow started");
+};
 void MqttNowBase::update() {};

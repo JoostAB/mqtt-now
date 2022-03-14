@@ -25,13 +25,13 @@ uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 struct_message myData;
 
-
 esp_now_peer_info_t peerInfo;
 
 
 /*************************/
 /** OnDataSent Callback **/
 /*************************/
+
 #if defined(ESP32)
   void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 #elif defined(ESP8266)
