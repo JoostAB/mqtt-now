@@ -14,7 +14,10 @@
 
 #include <baseinclude.h>
 
-typedef bool mqttnow_success;
+typedef int8_t result_t;
+const result_t result_success = 1;
+const result_t result_error = -1;
+
 
 class MqttNowBase {
   public:

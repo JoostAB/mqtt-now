@@ -15,6 +15,9 @@ MqttNowController::MqttNowController() : MqttNowNode() {};
 
 void MqttNowController::begin() {
   MqttNowNode::begin();
+  if (!COM) {
+    COM.begin(SERIALBAUDRATE);
+  }
 };
 void MqttNowController::update() {
   MqttNowNode::update();

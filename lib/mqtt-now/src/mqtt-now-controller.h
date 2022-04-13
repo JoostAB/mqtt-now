@@ -8,14 +8,16 @@
  * @copyright Copyright (c) 2022
  * 
  */
-# pragma once
+#pragma once
 #ifdef MQTT_NOW_CONTROLLER
 #ifndef __MQTT_NOW_CONTROLLER_H__
 #define __MQTT_NOW_CONTROLLER_H__
 
 #include <baseinclude.h>
 #include <mqtt-now-node.h>
+#include <mqtt-now-bridge.h>
 #include <list>
+
 using namespace std;
 
 class MqttNowController : public MqttNowNode {

@@ -15,13 +15,15 @@
 
 #include <baseinclude.h>
 #include <mqtt-now-base.h>
-#include <MQTTPubSubClient.h>
+#include <mqtt-now-bridge.h>
+// #include <MQTTPubSubClient.h>
+#include <PubSubClient.h>
 
-// #ifdef ESP8266
-//   #include <ESP8266WiFi.h>
-// #elif defined(ESP32)
-//   #include <WiFi.h>
-// #endif
+#ifdef ESP8266
+  #include <ESP8266WiFi.h>
+#elif defined(ESP32)
+  #include <WiFi.h>
+#endif
 
 #define AP_NAME "MQTTNow bridge"
 // #define AP_PASSWORD "MQTTNow"
@@ -29,7 +31,7 @@
 #include <DNSServer.h>
 #include <ESP8266mDNS.h>
 #include <ESP8266WebServer.h>
-#include <WiFiManager.h>
+// #include <WiFiManager.h>
 
 #ifndef MQTT_ROOT_TOPIC
 #define MQTT_ROOT_TOPIC "mqtt-now"
@@ -69,26 +71,30 @@
 
 #ifndef MQTT_HOST
 // TODO: uncomment for release
-//#error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
+// #error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
 #define MQTT_HOST "none"
+#endif
+
+#if !defined(COM)
+#define COM Serial
 #endif
 
 class MqttNowClient : public MqttNowBase {
   public:
-    MqttNowClient();
-    MqttNowClient(String host, uint16_t port = MQTT_PORT);
-    MqttNowClient(String host, String rootTopic, uint16_t port = MQTT_PORT);
+    //MqttNowClient();
+    // MqttNowClient(String host = MQTT_HOST, uint16_t port = MQTT_PORT);
+    // MqttNowClient(String host, String rootTopic, uint16_t port = MQTT_PORT);
     MqttNowClient(
-      String host, 
-      String rootTopic, 
+      String host = MQTT_HOST, 
+      uint16_t mqttPort = MQTT_PORT,
+      String rootTopic = MQTT_ROOT_TOPIC, 
       String cmdTopic = MQTT_CMD_TOPIC, 
       String statusTopic = MQTT_STATUS_TOPIC, 
       String lwtTopic = MQTT_LWT_TOPIC, 
       String onCmd = MQTT_ON_CMD, 
       String offCmd = MQTT_OFF_CMD, 
       String onlineLwt = MQTT_ONLINE_LWT,
-      String offlineLwt = MQTT_OFFLINE_LWT, 
-      uint16_t mqttPort = MQTT_PORT);
+      String offlineLwt = MQTT_OFFLINE_LWT);
   
     static void
       handleUpdate(),
@@ -107,12 +113,12 @@ class MqttNowClient : public MqttNowBase {
       setOnlineLwt(String onlineLwt),
       setOfflineLwt(String offlineLwt);
     
-    mqttnow_success
+    result_t
       start(),
       start(WiFiClient* wifiClient),
       publishStatus(String status),
       publishCmd(String cmd),
-      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)0U);
+      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U);
       
 
   private:
@@ -122,21 +128,29 @@ class MqttNowClient : public MqttNowBase {
 
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
+    result_t 
+      _handleComm(),
+      _handleSubscription(),
+      _handlePublish();
+
+    String _comBuff;
+
     String 
-          _host,
-          _rootTopic,
-          _cmdTopic,
-          _statusTopic,
-          _lwtTopic,
-          _onCmd,
-          _offCmd,
-          _onlineLwt,
-          _offlineLwt,
-          _mqttId,
-          _mqttUser,
-          _mqttPwd;
+      _host,
+      _rootTopic,
+      _cmdTopic,
+      _statusTopic,
+      _lwtTopic,
+      _onCmd,
+      _offCmd,
+      _onlineLwt,
+      _offlineLwt,
+      _mqttId,
+      _mqttUser,
+      _mqttPwd;
     WiFiClient* _wifiClient;
-    MQTTPubSubClient* _mqttClient;
+    //MQTTPubSubClient* _mqttClient;
+    PubSubClient* _mqttClient;
 };
 
 #endif // __MQTT_NOW_CLIENT_H__

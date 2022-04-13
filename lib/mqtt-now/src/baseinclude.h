@@ -10,6 +10,7 @@
  */
 #include <Arduino.h>
 #include <jbdebug.h>
+#include <secrets.h>
 
 #if !defined(SERIALBAUDRATE)
 #define SERIALBAUDRATE 115200

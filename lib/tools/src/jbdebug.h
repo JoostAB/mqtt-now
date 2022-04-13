@@ -26,6 +26,8 @@
 #define XQUOTE(x) #x
 #define QUOTE(x) XQUOTE(x)
 
+// #define DEBUG_ESP_WIFI
+// #define DEBUG_ESP_PORT
 
 #if DEBUGLOG
 #define PRINTS(s)                    { Serial.print(F(s)); }

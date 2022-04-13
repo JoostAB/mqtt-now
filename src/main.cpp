@@ -9,17 +9,20 @@
  * 
  */
 #include <Arduino.h>
-
-#define MQTT_HOST "192.168.0.10"
+#include <secrets.h>
 #define MQTTNOW_DEBUG 1
+#include <jbdebug.h>
 #include <mqtt-now.h>
+#include <test.h>
 
-MqttNow mqttNow;
+// MqttNow mqttNow;
 
 void setup() {
-  mqttNow.begin();
+  //mqttNow.begin();
+  test_setup();
 }
 
 void loop() {
-  mqttNow.update();
+  //mqttNow.update();
+  test_loop();
 }

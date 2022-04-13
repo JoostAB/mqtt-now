@@ -8,3 +8,5 @@
 platformio-device-monitor-*.log
 .vscode/extensions.json
 hardware/
+debug.log
+lib/mqtt-now/src/secrets.h
