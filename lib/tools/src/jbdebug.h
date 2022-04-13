@@ -31,6 +31,7 @@
 
 #if DEBUGLOG
 #define PRINTS(s)                    { Serial.print(F(s)); }
+#define PRINTDS(s)                    { Serial.print(s); }
 #define PRINT(s,v)                   { Serial.print(F(s)); Serial.print(v); }
 #define PRINTF(s,v1)                 { Serial.printf(s, v1); }
 #define PRINTF2(s,v1,v2)             { Serial.printf(s, v1, v2); }
@@ -45,6 +46,7 @@
 #else
 // No debugging, replace all PRINT*** calls with nothing
 #define PRINTS(s)
+#define PRINTDS(s)
 #define PRINT(s,v)
 #define PRINTX(s,v)
 #define PRINTF(s,v1)

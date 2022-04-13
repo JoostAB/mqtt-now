@@ -79,11 +79,9 @@
 #define COM Serial
 #endif
 
+
 class MqttNowClient : public MqttNowBase {
   public:
-    //MqttNowClient();
-    // MqttNowClient(String host = MQTT_HOST, uint16_t port = MQTT_PORT);
-    // MqttNowClient(String host, String rootTopic, uint16_t port = MQTT_PORT);
     MqttNowClient(
       String host = MQTT_HOST, 
       uint16_t mqttPort = MQTT_PORT,
@@ -114,8 +112,6 @@ class MqttNowClient : public MqttNowBase {
       setOfflineLwt(String offlineLwt);
     
     result_t
-      start(),
-      start(WiFiClient* wifiClient),
       publishStatus(String status),
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U);
@@ -123,8 +119,9 @@ class MqttNowClient : public MqttNowBase {
 
   private:
     void
-      _startWebserver(),
-      _startMqttClient();
+      _setupWifi(),
+      _callback(char* topic, byte* payload, unsigned int length),
+      _reconnect();
 
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
@@ -149,7 +146,6 @@ class MqttNowClient : public MqttNowBase {
       _mqttUser,
       _mqttPwd;
     WiFiClient* _wifiClient;
-    //MQTTPubSubClient* _mqttClient;
     PubSubClient* _mqttClient;
 };
 
