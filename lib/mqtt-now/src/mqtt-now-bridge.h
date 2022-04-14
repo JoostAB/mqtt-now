@@ -88,5 +88,7 @@
 //   be prepended with 'MQTT_ROOT_TOPIC/MQTT_DEV_TOPIC/'
 // - To access the MQTT_ROOT_TOPIC (eg 'mqtt-now' by default) start your topic with '@'
 
+#define RET_OK "OK"
+#define RET_ERROR "ERR"
 #endif // __MQTT_NOW_BRIDGE__
 #endif // MQTT_NOW_CLIENT | MQTT_NOW_CONTROLLER

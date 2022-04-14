@@ -160,6 +160,9 @@ void MqttNowClient::update() {
     if (c == 10 || c == 13) {
       if (_handleComm() == result_error) {
         PRINTLNS("Error handling command!");
+        COM.println(RET_ERROR);
+      } else {
+        COM.println(RET_OK);
       }
       _comBuff = "";
     } else {
@@ -224,7 +227,7 @@ result_t MqttNowClient::_handleSubscribe() {
   char qos = _comBuff.charAt(4);
   String topic = _modTopic(_comBuff.substring(5));
   PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos);
-  if (!client.subscribe(topic.c_str())) {
+  if (!client.subscribe(topic.c_str(), qos - '0')) {
     PRINTLNS("Error during subscribing");
     return result_error;
   } 
@@ -325,10 +328,14 @@ result_t MqttNowClient::_sendMsgToController() {
     COM.begin(SERIALBAUDRATE);
     yield();
   }
-  //String msg = MSG_START + MSG_ACTIONREC + lastReceivedTopic + MSG_PAYLOAD + lastReceivedPayload;
   
-  PRINTLN("Sending to controller: ", MSG_START + MSG_ACTIONREC + lastReceivedTopic + MSG_PAYLOAD + lastReceivedPayload);
-  //size_t send = COM.println(msg);
+  PRINTS("Sending to controller: ");
+  PRINTS(MSG_START);
+  PRINTDS(MSG_ACTIONREC);
+  PRINTDS(lastReceivedTopic);
+  PRINTS(MSG_PAYLOAD);
+  PRINTDS(lastReceivedPayload);
+
   size_t send = 0;
   send += COM.print(MSG_START);
   send += COM.print(MSG_ACTIONREC);
