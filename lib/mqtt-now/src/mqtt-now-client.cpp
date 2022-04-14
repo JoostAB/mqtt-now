@@ -11,25 +11,20 @@
 #include <mqtt-now-client.h>
 #ifdef MQTT_NOW_CLIENT
 
+bool mqttReceived = false;
+String lastReceivedTopic;
+String lastReceivedPayload;
 
 void mqttMsgReceived(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
+  PRINTF("Message arrived [%s]: ", topic)
+  lastReceivedTopic = String(topic);
+  lastReceivedPayload = "";
   for (unsigned int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
+    //Serial.print((char)payload[i]);
+    lastReceivedPayload += (char)payload[i];
   }
-  Serial.println();
-
-  // Switch on the LED if an 1 was received as first character
-  if ((char)payload[0] == '1') {
-    digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    // but actually the LED is on; this is because
-    // it is active low on the ESP-01)
-  } else {
-    digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
-  }
-
+  PRINTLNSA(lastReceivedPayload);
+  mqttReceived = true;
 }
 
 /** Constructors **/
@@ -103,7 +98,6 @@ MqttNowClient::MqttNowClient(
 /** To be called from void setup() **/
 void MqttNowClient::begin() {
   MqttNowBase::begin();
-  pinMode(LED_BUILTIN, OUTPUT);
 
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
@@ -173,11 +167,21 @@ void MqttNowClient::update() {
     }
   }
 
+  // Now check if a message was received from the broker
+  if (mqttReceived) {
+    PRINTLNS("Yup, got something");
+    if (lastReceivedTopic.equals(_cmdTopic)) {
+      _handleCommand();
+    } else {
+      _sendMsgToController();
+    }
+    mqttReceived = false;
+  }
+
   // Handle MQTT stuff
   if (!client.loop()) {
     _reconnect();
   }
-  
 };
 
 /** Serial communication **/
@@ -311,6 +315,29 @@ result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8
   return client.publish(topic.c_str(), payload.c_str(), retain);
 }
 
+result_t MqttNowClient::_handleCommand() {
+  PRINTLN("Performing command: ", lastReceivedPayload);
+  return result_success;
+}
+
+result_t MqttNowClient::_sendMsgToController() {
+  if (!COM) {
+    COM.begin(SERIALBAUDRATE);
+    yield();
+  }
+  //String msg = MSG_START + MSG_ACTIONREC + lastReceivedTopic + MSG_PAYLOAD + lastReceivedPayload;
+  
+  PRINTLN("Sending to controller: ", MSG_START + MSG_ACTIONREC + lastReceivedTopic + MSG_PAYLOAD + lastReceivedPayload);
+  //size_t send = COM.println(msg);
+  size_t send = 0;
+  send += COM.print(MSG_START);
+  send += COM.print(MSG_ACTIONREC);
+  send += COM.print(lastReceivedTopic);
+  send += COM.print(MSG_PAYLOAD);
+  send += COM.print(lastReceivedPayload);
+  COM.print("\n");
+  return (send > 0)?result_success:result_error;
+}
 
 /** Simple setters **/
 

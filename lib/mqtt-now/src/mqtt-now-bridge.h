@@ -68,6 +68,8 @@
                           // Directly after MSG_ACTIONPUB a 0,1 or 2 should follow to identify QOS,
                           // followed by 1 or 0 for retained flag
 
+#define MSG_ACTIONREC 'R' // Received message returned to controller
+
 // In case of publish, topic and payload are seperated by MSG_PAYLOAD tag
 #define MSG_PAYLOAD "#P#"
 
@@ -77,6 +79,9 @@
 // ###Umy-topic/status            : Unsubscibe from topic 'my-topic/status'
 // ###P11my-topic/status#P#data   : Publish payload 'data' to topic 'my-topic/status' with QOS 1
 //                                  and retained flag set to true
+// ###Rmy-topic/status#P#data     : A message with payload 'data' on topic 'my-topic/status'
+//                                  was received from the MQTT broker en is send back to the 
+//                                  controller.
 //
 // Notes:
 // - If a topic starts with '/', it is presumed to be a device specific message and the topic will

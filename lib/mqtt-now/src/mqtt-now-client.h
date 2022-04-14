@@ -99,9 +99,11 @@ class MqttNowClient : public MqttNowBase {
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
     result_t 
+      _sendMsgToController(),
       _handleComm(),
       _handleSubscribe(),
       _handleUnsubscribe(),
+      _handleCommand(),
       _handlePublish(String com = String(""));
 
     String _modTopic(String topic);
