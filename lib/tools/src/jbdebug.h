@@ -39,7 +39,8 @@
 #define PRINTF4(s,v1,v2,v3,v4)       { Serial.printf(s, v1, v2, v3, v4); }
 #define PRINTF5(s,v1,v2,v3,v4,v5)    { Serial.printf(s, v1, v2, v3, v4, v5); }
 #define PRINTF6(s,v1,v2,v3,v4,v5,v6) { Serial.printf(s, v1, v2, v3, v4, v5, v6); }
-#define PRINTLNS(s)                  { Serial.println(s); }
+#define PRINTLNS(s)                  { Serial.println(F(s)); }
+#define PRINTLNSA(s)                  { Serial.println(s); }
 #define PRINTLN(s,v)                 { Serial.print(F(s)); Serial.println(v); }
 #define PRINTLF                      Serial.println()
 
@@ -56,6 +57,7 @@
 #define PRINTF5(s,v1,v2,v3,v4,v5)
 #define PRINTF6(s,v1,v2,v3,v4,v5,v6)
 #define PRINTLNS(s)
+#define PRINTLNSA(s)
 #define PRINTLN(s,v)
 #define PRINTLNX(s,v)
 #define PRINTLF

@@ -12,7 +12,7 @@
 #ifdef MQTT_NOW_CLIENT
 
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void mqttMsgReceived(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
@@ -62,6 +62,7 @@ PubSubClient client(espClient);
  * @param cmdTopic 
  * @param statusTopic 
  * @param lwtTopic 
+ * @param devTopic 
  * @param onCmd 
  * @param offCmd 
  * @param onlineLwt 
@@ -74,6 +75,7 @@ MqttNowClient::MqttNowClient(
       String cmdTopic, 
       String statusTopic, 
       String lwtTopic, 
+      String devTopic, 
       String onCmd, 
       String offCmd, 
       String onlineLwt,
@@ -87,9 +89,10 @@ MqttNowClient::MqttNowClient(
 
   if (rootTopic.length() > 0) {
     setRootTopic(rootTopic);
-    setCmdTopic(_rootTopic + "/" + cmdTopic);
-    setstatusTopic(_rootTopic + "/" + statusTopic);
-    setLwtTopic(_rootTopic + "/" + lwtTopic);
+    setCmdTopic(_rootTopic + PATHSEP + cmdTopic);
+    setstatusTopic(_rootTopic + PATHSEP + statusTopic);
+    setLwtTopic(_rootTopic + PATHSEP + lwtTopic);
+    setDevicesTopic(_rootTopic + PATHSEP + devTopic);
     setOnCmd(onCmd);
     setOffCmd(offCmd);
     setOnlineLwt(onlineLwt);
@@ -109,27 +112,26 @@ void MqttNowClient::begin() {
   _setupWifi();
  
   client.setServer(MQTT_HOST, MQTT_PORT);
-  client.setCallback(callback);
+  client.setCallback(mqttMsgReceived);
 };
 
 void MqttNowClient::_reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Create a random client ID
+    PRINTLNS("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect(MQTT_ID, MQTT_USER, MQTT_PW)) {
-      Serial.println("connected");
-      // Once connected, publish an announcement...
-      client.publish(_lwtTopic.c_str(), "Online");
-      // ... and resubscribe
+    if (client.connect(MQTT_ID, MQTT_USER, MQTT_PW, _lwtTopic.c_str(), 1, true, _offlineLwt.c_str())) {
+      PRINTLNS("connected");
+      // Once connected, LWT Online message...
+      client.publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
+      // ... and resubscribe to command topic
       client.subscribe(_cmdTopic.c_str());
     } else {
       PRINTDS("failed, rc=");
       PRINTDS(client.state());
       PRINTDS(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
-      delay(5000);
+      // Wait 2 seconds before retrying
+      delay(2000);
     }
   }
 }
@@ -147,39 +149,18 @@ void MqttNowClient::_setupWifi() {
     delay(200);
   }
 
-  // Tiny non-blocking delay
-  randomSeed(micros());
-
   PRINTS("connected as :");
-  PRINTLNS(WiFi.localIP());
+  PRINTLNSA(WiFi.localIP());
   PRINTS("MAC :");
-  PRINTLNS(WiFi.macAddress());
+  PRINTLNSA(WiFi.macAddress());
 }
-
-// void MqttNowClient::_callback(char* topic, byte* payload, unsigned int length) {
-//   PRINTS("Message arrived [");
-//   PRINTDS(topic);
-//   PRINTS("] ");
-//   for (int i = 0; i < length; i++) {
-//     PRINTDS((char)payload[i]);
-//   }
-//   PRINTLF;
-
-//   // Switch on the LED if an 1 was received as first character
-//   if ((char)payload[0] == '1') {
-//     digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
-//     // but actually the LED is on; this is because
-//     // it is active low on the ESP-01)
-//   } else {
-//     digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
-//   }
-
-// }
-
 
 /** To be called from void loop() **/
 void MqttNowClient::update() {
   MqttNowBase::update();
+
+  // Store UART input in a local buffer, until
+  // CR (13) or LF (10) is received
   while (COM.available()) {
     char c = COM.read();
     if (c == 10 || c == 13) {
@@ -190,10 +171,11 @@ void MqttNowClient::update() {
     }
   }
 
-  if (!client.connected()) {
+  // Handle MQTT stuff
+  if (!client.loop()) {
     _reconnect();
   }
-  client.loop();
+  
 };
 
 /** Serial communication **/
@@ -212,9 +194,10 @@ result_t MqttNowClient::_handleComm() {
     return result_error;
   }
 
-  char c = _comBuff.charAt(3);
+  // Get character after MSG_START (the action tag)
+  char act = _comBuff.charAt(3);
 
-  switch (c) {
+  switch (act) {
     case MSG_ACTIONSUB:
       PRINTLNS("Subscribe command received");
       return _handleSubscription();
@@ -228,13 +211,50 @@ result_t MqttNowClient::_handleComm() {
 }
 
 result_t MqttNowClient::_handleSubscription() {
-  String c = _comBuff.substring(4);
-  return result_error;
+  // Everything after action tag is the topic to subscribe to
+  String top = _comBuff.substring(4);
+  PRINTLN("Subscribing to topic: ", top);
+  if (client.subscribe(top.c_str())) {
+    PRINTLNS("Error during subscribing");
+    return result_error;
+  } 
+  return result_success;  
 }
 
-result_t MqttNowClient::_handlePublish() {
-  String c = _comBuff.substring(4);
-  return publish(_statusTopic, c, true, 1);
+result_t MqttNowClient::_handlePublish(String com) {
+  static uint8 ctr = 0;
+
+  if (com.equals("")) {
+    com = String(_comBuff.c_str());
+  }
+  char qos = com.charAt(4);
+  char retained = com.charAt(5);
+  PRINTLN("QOS = ", qos);
+  PRINTLN("Retained = ", retained);
+  
+  int payloadPos = com.lastIndexOf(MSG_PAYLOAD);
+  String topic = _modTopic(com.substring(6,payloadPos));
+  String payload = com.substring(payloadPos + 3);
+
+  PRINTLN("Topic = ", topic);
+  PRINTLN("payload = ", payload);
+
+  // Try max 5 times to publish this
+  if (publish(topic, payload, (retained == '1'), (qos - '0')) == result_success) {
+    ctr = 0;
+    return result_success;
+  } else {
+    if (ctr < 5) {
+      yield();
+      ctr ++;
+      return _handlePublish(com);
+    } else {
+      // Reached max of 5 attempts, return error
+      PRINTLNS("Error publishing message");
+      ctr = 0;
+      return result_error;
+    }
+  }
 }
 
 /** Publishing **/
@@ -269,7 +289,6 @@ result_t MqttNowClient::publishCmd(String cmd) {
  * @return result_t 
  */
 result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8_t qos) {
-  //return _mqttClient->publish(topic, payload, retain, qos);
   PRINTLN("Publishing to ", topic);
   PRINTLN("Payload: ", payload);
   return client.publish(topic.c_str(), payload.c_str(), retain);
@@ -296,6 +315,11 @@ void MqttNowClient::setstatusTopic(String statusTopic) {
 void MqttNowClient::setLwtTopic(String lwtTopic) {
   _lwtTopic = lwtTopic; 
   PRINTLN("LWT topic set to ", _lwtTopic);
+}
+
+void MqttNowClient::setDevicesTopic(String devTopic) {
+  _devTopic = devTopic; 
+  PRINTLN("Devices topic set to ", _devTopic);
 }
 
 void MqttNowClient::setOnCmd(String onCmd) {
@@ -338,5 +362,16 @@ void MqttNowClient::setOfflineLwt(String offlineLwt) {
 //     server.send(404, "text/plain", "404: File Not Found");
 // }
 
-
+/** Utilities **/
+String MqttNowClient::_modTopic(String topic) {
+  
+  switch (topic.charAt(0)) {
+    case '/':
+      return _devTopic + PATHSEP + topic.substring(1);
+    case '@':
+      return _rootTopic + PATHSEP + topic.substring(1);
+    default:
+      return topic;
+  }
+}
 #endif // MQTT_NOW_CLIENT
