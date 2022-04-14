@@ -100,7 +100,8 @@ class MqttNowClient : public MqttNowBase {
     uint32_t _timeout = 5000;
     result_t 
       _handleComm(),
-      _handleSubscription(),
+      _handleSubscribe(),
+      _handleUnsubscribe(),
       _handlePublish(String com = String(""));
 
     String _modTopic(String topic);

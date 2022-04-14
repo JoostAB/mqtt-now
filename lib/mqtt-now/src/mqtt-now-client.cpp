@@ -164,7 +164,9 @@ void MqttNowClient::update() {
   while (COM.available()) {
     char c = COM.read();
     if (c == 10 || c == 13) {
-      _handleComm();
+      if (_handleComm() == result_error) {
+        PRINTLNS("Error handling command!");
+      }
       _comBuff = "";
     } else {
       _comBuff += c;
@@ -200,7 +202,10 @@ result_t MqttNowClient::_handleComm() {
   switch (act) {
     case MSG_ACTIONSUB:
       PRINTLNS("Subscribe command received");
-      return _handleSubscription();
+      return _handleSubscribe();
+    case MSG_ACTIONUNS:
+      PRINTLNS("Unsubscribe command received");
+      return _handleUnsubscribe();
     case MSG_ACTIONPUB:
       PRINTLNS("Publish command received");
       return _handlePublish();
@@ -210,12 +215,23 @@ result_t MqttNowClient::_handleComm() {
   }
 }
 
-result_t MqttNowClient::_handleSubscription() {
+result_t MqttNowClient::_handleSubscribe() {
   // Everything after action tag is the topic to subscribe to
-  String top = _comBuff.substring(4);
-  PRINTLN("Subscribing to topic: ", top);
-  if (client.subscribe(top.c_str())) {
+  char qos = _comBuff.charAt(4);
+  String topic = _modTopic(_comBuff.substring(5));
+  PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos);
+  if (!client.subscribe(topic.c_str())) {
     PRINTLNS("Error during subscribing");
+    return result_error;
+  } 
+  return result_success;  
+}
+
+result_t MqttNowClient::_handleUnsubscribe() {
+  String topic = _modTopic(_comBuff.substring(4));
+  PRINTLN("Unsubscribing from topic: ", topic.c_str());
+  if (!client.unsubscribe(topic.c_str())) {
+    PRINTLNS("Error during un-subscribing");
     return result_error;
   } 
   return result_success;  
@@ -245,8 +261,9 @@ result_t MqttNowClient::_handlePublish(String com) {
     return result_success;
   } else {
     if (ctr < 5) {
-      yield();
       ctr ++;
+      yield();
+      PRINTLN("Publish attempt nr ", (ctr+1));
       return _handlePublish(com);
     } else {
       // Reached max of 5 attempts, return error
