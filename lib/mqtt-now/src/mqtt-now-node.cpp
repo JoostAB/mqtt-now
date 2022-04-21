@@ -27,7 +27,6 @@ struct_message myData;
 
 esp_now_peer_info_t peerInfo;
 
-
 /*************************/
 /** OnDataSent Callback **/
 /*************************/
@@ -119,6 +118,18 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
       return esp_now_add_peer(mac_addr, ESP_NOW_ROLE_SLAVE, channel, NULL, 0);
     }
   #endif
+}
+
+esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
+
+}
+
+esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive) {
+  struct_msg wrapper;
+  wrapper.msgType = type;
+  wrapper.msgSize = sizeof(&msg);
+  memcpy(wrapper.contents, msg, wrapper.msgSize);
+  return esp_now_send(macReceive, (uint8_t *) &wrapper, sizeof(wrapper));
 }
 
 #endif // !defined(MQTT_NOW_CLIENT)

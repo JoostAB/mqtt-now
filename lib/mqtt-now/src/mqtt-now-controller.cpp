@@ -19,6 +19,7 @@ void MqttNowController::begin() {
     COM.begin(SERIALBAUDRATE);
   }
 };
+
 void MqttNowController::update() {
   MqttNowNode::update();
 };

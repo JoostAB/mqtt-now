@@ -16,7 +16,6 @@
 #include <baseinclude.h>
 #include <mqtt-now-base.h>
 
-
 #ifdef ESP8266
   #include <ESP8266WiFi.h>
   #include <espnow.h>
@@ -35,6 +34,55 @@ typedef struct struct_message {
   float c;
   bool d;
 } struct_message;
+
+
+typedef struct msg_base {} msg_base;
+
+typedef struct msg_intro:msg_base {
+  uint8_t mac_address[6];
+  uint8_t network_uuid[16];
+  uint8_t device_category;
+  char firendly_name[30];
+} msg_intro;
+
+typedef struct msg_welcome:msg_base {
+  uint8_t mac_address[6];
+} msg_welcome;
+
+typedef struct msg_reqconfig:msg_base {
+  // Empty structure.
+} msg_reqconfig;
+
+typedef struct msg_config:msg_base {
+  char wifi_ssid[32];
+  char wifi_key[64];
+  uint8_t mqtt_ip[4];
+  uint16_t mqtt_port;
+  char mqtt_user[20];
+  char mqtt_pw[20];
+} msg_config;
+
+typedef struct msg_data:msg_base {
+  uint8_t data_type;
+  char data[240];
+} msg_data;
+
+/**
+ * Wrapper structure. 
+ * The actual message that is being send and contains the message
+ * type and the message structure.
+ * Type can be one of:
+ * - 1: Intro message
+ * - 2: Welcome message
+ * - 3: Request Config message
+ * - 4: Config message
+ * - 5: Data message
+ **/
+typedef struct struct_msg {
+  uint8_t msgType;
+  uint8_t msgSize;
+  msg_base *contents;
+} struct_msg;
 
 /*************************/
 /** Callback prototypes **/
@@ -58,6 +106,7 @@ class MqttNowNode : public MqttNowBase {
   protected:
     esp_err_t addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false);
     esp_err_t addPeer(esp_now_peer_info_t *peer);
+    esp_err_t sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive);
 };
 
 #endif // __MQTT_NOW_NODE_H__
