@@ -18,6 +18,10 @@
 #include <mqtt-now-bridge.h>
 #include <list>
 
+#if !defined(COM)
+#define COM Serial
+#endif
+
 using namespace std;
 
 class MqttNowController : public MqttNowNode {
