@@ -18,21 +18,8 @@
 #include <mqtt-now-bridge.h>
 #include <PubSubClient.h>
 
-#ifdef ESP8266
-  #include <ESP8266WiFi.h>
-#elif defined(ESP32)
-  #include <WiFi.h>
-#endif
-
-#define AP_NAME "MQTTNow bridge"
-// #define AP_PASSWORD "MQTTNow"
-#include <ESP8266WiFi.h>
 #include <DNSServer.h>
 #include <ESP8266mDNS.h>
-#include <ESP8266WebServer.h>
-// #include <WiFiManager.h>
-
-
 
 #ifndef MQTT_PORT 
 #define MQTT_PORT 1883

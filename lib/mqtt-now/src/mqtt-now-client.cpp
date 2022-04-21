@@ -15,6 +15,8 @@ bool mqttReceived = false;
 String lastReceivedTopic;
 String lastReceivedPayload;
 
+bool stopWifiAfterOta = false;
+
 void mqttMsgReceived(char* topic, byte* payload, unsigned int length) {
   PRINTF("Message arrived [%s]: ", topic)
   lastReceivedTopic = String(topic);
@@ -103,7 +105,8 @@ void MqttNowClient::begin() {
     COM.begin(SERIALBAUDRATE);
   }
 
-  _setupWifi();
+  //_setupWifi();
+  startWifi();
  
   client.setServer(MQTT_HOST, MQTT_PORT);
   client.setCallback(mqttMsgReceived);
@@ -132,21 +135,21 @@ void MqttNowClient::_reconnect() {
 
 void MqttNowClient::_setupWifi() {
 
-  delay(10);
-  // We start by connecting to a WiFi network
+  // delay(10);
+  // // We start by connecting to a WiFi network
 
-  PRINTS("connecting to Wifi...");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PW);
-  while (WiFi.status() != WL_CONNECTED) {
-    PRINTS(".");
-    delay(200);
-  }
+  // PRINTS("connecting to Wifi...");
+  // WiFi.mode(WIFI_STA);
+  // WiFi.begin(WIFI_SSID, WIFI_PW);
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   PRINTS(".");
+  //   delay(200);
+  // }
 
-  PRINTS("connected as :");
-  PRINTLNSA(WiFi.localIP());
-  PRINTS("MAC :");
-  PRINTLNSA(WiFi.macAddress());
+  // PRINTS("connected as :");
+  // PRINTLNSA(WiFi.localIP());
+  // PRINTS("MAC :");
+  // PRINTLNSA(WiFi.macAddress());
 }
 
 /** To be called from void loop() **/
@@ -320,7 +323,18 @@ result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8
 
 result_t MqttNowClient::_handleCommand() {
   PRINTLN("Performing command: ", lastReceivedPayload);
-  return result_success;
+  if (lastReceivedPayload.equals(OTA_START)) {
+    startOTA();
+    return result_success;
+  }
+
+  if (lastReceivedPayload.equals(OTA_STOP)) {
+    stopOTA();
+    return result_success;
+  }
+  
+  // Unknown command
+  return result_error;
 }
 
 result_t MqttNowClient::_sendMsgToController() {

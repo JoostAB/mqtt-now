@@ -10,7 +10,18 @@
  */
 #include <Arduino.h>
 #include <jbdebug.h>
+#include <ElegantOTA.h>
 #include <secrets.h>
+
+#ifdef ESP8266
+  #include <ESP8266WiFi.h>
+  #include <ESP8266WebServer.h>
+  typedef ESP8266WebServer WServer;
+#elif defined(ESP32)
+  #include <WiFi.h>
+  #include <WebServer.h>
+  typedef WebServer WServer;
+#endif
 
 #if !defined(SERIALBAUDRATE)
 #define SERIALBAUDRATE 115200
