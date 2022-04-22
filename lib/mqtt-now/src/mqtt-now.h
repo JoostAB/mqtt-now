@@ -20,6 +20,13 @@
 #elif defined(MQTT_NOW_CONTROLLER)
   #include <mqtt-now-controller.h>
   typedef MqttNowController MqttNow;
+#elif defined(MQTT_TEST_COMPILE)
+  #define MQTT_NOW_CLIENT
+  #define MQTT_NOW_CONTROLLER
+  #include <mqtt-now-client.h>
+  #include <mqtt-now-controller.h>
+  #include <mqtt-now-slave.h>
+  typedef MqttNowController MqttNow;
 #else
   #include <mqtt-now-slave.h>
   typedef MqttNowSlave MqttNow;

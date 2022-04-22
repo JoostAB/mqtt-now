@@ -9,7 +9,7 @@
  * 
  */
 # pragma once
-#ifdef MQTT_NOW_CLIENT
+#if defined(MQTT_NOW_CLIENT) | defined(MQTT_TEST_COMPILE)
 #ifndef __MQTT_NOW_CLIENT_H__
 #define __MQTT_NOW_CLIENT_H__
 
@@ -19,7 +19,12 @@
 #include <PubSubClient.h>
 
 #include <DNSServer.h>
+
+#ifdef ESP8266
 #include <ESP8266mDNS.h>
+#elif defined(ESP32)
+#include <ESPmDNS.h>
+#endif
 
 #ifndef MQTT_PORT 
 #define MQTT_PORT 1883

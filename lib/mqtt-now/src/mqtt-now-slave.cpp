@@ -9,7 +9,7 @@
  * 
  */
 #include <mqtt-now-slave.h>
-#if !(defined(MQTT_NOW_CLIENT) || defined(MQTT_NOW_CONTROLLER))
+#if (!(defined(MQTT_NOW_CLIENT) || defined(MQTT_NOW_CONTROLLER))) | defined(MQTT_TEST_COMPILE)
 
 MqttNowSlave::MqttNowSlave() : MqttNowNode() {};
 
@@ -20,4 +20,7 @@ void MqttNowSlave::update() {
   MqttNowNode::update();
 };
 
+void MqttNowSlave::messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) {
+
+}
 #endif // !(defined(MQTT_NOW_CLIENT) || defined(MQTT_NOW_CONTROLLER))

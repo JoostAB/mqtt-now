@@ -9,7 +9,7 @@
  * 
  */
 #include <mqtt-now-client.h>
-#ifdef MQTT_NOW_CLIENT
+#if defined(MQTT_NOW_CLIENT) | defined(MQTT_TEST_COMPILE)
 
 bool mqttReceived = false;
 String lastReceivedTopic;
@@ -248,7 +248,7 @@ result_t MqttNowClient::_handleUnsubscribe() {
 }
 
 result_t MqttNowClient::_handlePublish(String com) {
-  static uint8 ctr = 0;
+  static uint8_t ctr = 0;
 
   if (com.equals("")) {
     com = String(_comBuff.c_str());

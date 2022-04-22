@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#if defined(MQTT_NOW_CLIENT) || defined(MQTT_NOW_CONTROLLER)
+#if defined(MQTT_NOW_CLIENT) | defined(MQTT_NOW_CONTROLLER) | defined(MQTT_TEST_COMPILE)
 #ifndef __MQTT_NOW_BRIDGE__
 #define __MQTT_NOW_BRIDGE__
 

@@ -9,7 +9,7 @@
  * 
  */
 # pragma once
-#if !defined(MQTT_NOW_CLIENT)
+#if (!defined(MQTT_NOW_CLIENT)) | defined(MQTT_TEST_COMPILE)
 #ifndef __MQTT_NOW_NODE_H__
 #define __MQTT_NOW_NODE_H__
 
@@ -26,17 +26,9 @@
   #include <WiFi.h>
 #endif
 
-// Structure example to send data
-// Must match the receiver structure
-typedef struct struct_message {
-  char a[32];
-  int b;
-  float c;
-  bool d;
-} struct_message;
-
-
-typedef struct msg_base {} msg_base;
+typedef struct msg_base {
+  uint8_t id;
+} msg_base;
 
 typedef struct msg_intro:msg_base {
   uint8_t mac_address[6];
@@ -81,8 +73,14 @@ typedef struct msg_data:msg_base {
 typedef struct struct_msg {
   uint8_t msgType;
   uint8_t msgSize;
-  msg_base *contents;
+  msg_base* contents;
 } struct_msg;
+
+const uint8_t msgTypeIntro     = 1;
+const uint8_t msgTypeWelcome   = 2;
+const uint8_t msgTypeReqConfig = 3;
+const uint8_t msgTypeConfig    = 4;
+const uint8_t msgTypeData      = 5;
 
 /*************************/
 /** Callback prototypes **/
@@ -101,12 +99,19 @@ class MqttNowNode : public MqttNowBase {
 
     void
       begin(),
-      update(); 
+      update();
+
+    virtual void 
+      messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) = 0;
   
   protected:
-    esp_err_t addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false);
-    esp_err_t addPeer(esp_now_peer_info_t *peer);
-    esp_err_t sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive);
+    esp_err_t 
+      addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false),
+      addPeer(esp_now_peer_info_t *peer),
+      sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive);
+    
+    result_t getMessageStruct(uint8_t type, msg_base *msg);
+    
 };
 
 #endif // __MQTT_NOW_NODE_H__
