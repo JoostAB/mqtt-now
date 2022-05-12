@@ -116,7 +116,9 @@ esp_err_t MqttNowNode::addPeer(esp_now_peer_info_t *peer) {
 esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
   #ifdef ESP32
     esp_now_peer_info_t info;
+    #pragma GCC diagnostic ignored "-Wuninitialized"
     memcpy(info.peer_addr, mac_addr, 6);
+
     info.channel = channel;
     info.encrypt = encrypt;
     if (encrypt == true) {
