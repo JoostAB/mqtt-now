@@ -15,8 +15,6 @@ bool mqttReceived = false;
 String lastReceivedTopic;
 String lastReceivedPayload;
 
-bool stopWifiAfterOta = false;
-
 void mqttMsgReceived(char* topic, byte* payload, unsigned int length) {
   PRINTF("Message arrived [%s]: ", topic)
   lastReceivedTopic = String(topic);
@@ -95,6 +93,8 @@ MqttNowClient::MqttNowClient(
     setOnlineLwt(onlineLwt);
     setOfflineLwt(offlineLwt);
   }
+
+  stopWifiAfterOta = false;
 }
 
 /** To be called from void setup() **/
