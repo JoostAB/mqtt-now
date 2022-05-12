@@ -103,6 +103,7 @@ class MqttNowNode : public MqttNowBase {
 
     virtual void 
       messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) = 0;
+    
   
   protected:
     esp_err_t 
@@ -111,7 +112,6 @@ class MqttNowNode : public MqttNowBase {
       sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive);
     
     result_t getMessageStruct(uint8_t type, msg_base *msg);
-    
 };
 
 #endif // __MQTT_NOW_NODE_H__

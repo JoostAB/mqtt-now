@@ -9,6 +9,7 @@
  * 
  */
 #include <mqtt-now-base.h>
+// #include <AsyncElegantOTA.h>
 
 WServer server(80);
 bool stopWifiAfterOta = true;
@@ -29,14 +30,14 @@ void MqttNowBase::begin() {
 };
 
 void MqttNowBase::update() {
-  if (serverRunning) {
-    server.handleClient();
-  }
+  // if (serverRunning) {
+  //   server.handleClient();
+  // }
 };
 
 void MqttNowBase::startOTA() {
   startWifi();
-  ElegantOTA.begin(&server);    // Start ElegantOTA
+  AsyncElegantOTA.begin(&server);    // Start ElegantOTA
   startServer();
   PRINTLNS("OTA started.");
   PRINTS("Go to http://");
@@ -45,7 +46,8 @@ void MqttNowBase::startOTA() {
 }
 
 void MqttNowBase::stopOTA() {
-  server.stop();
+  // server.stop();
+  server.end();
   if (stopWifiAfterOta) {
     stopWifi();
   }

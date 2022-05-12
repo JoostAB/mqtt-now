@@ -17,22 +17,21 @@
 #include <mqtt-now-base.h>
 #include <mqtt-now-bridge.h>
 #include <PubSubClient.h>
+#include <ESPConnect.h>
+// #include <DNSServer.h>
 
-#include <DNSServer.h>
-
-#ifdef ESP8266
-#include <ESP8266mDNS.h>
-#elif defined(ESP32)
-#include <ESPmDNS.h>
-#endif
+// #ifdef ESP8266
+// #include <ESP8266mDNS.h>
+// #elif defined(ESP32)
+// #include <ESPmDNS.h>
+// #endif
 
 #ifndef MQTT_PORT 
 #define MQTT_PORT 1883
 #endif
 
 #ifndef MQTT_HOST
-// TODO: uncomment for release
-// #error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
+#error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
 #define MQTT_HOST "none"
 #endif
 

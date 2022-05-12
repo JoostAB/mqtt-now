@@ -24,7 +24,7 @@ const result_t result_error = -1;
 // Reference to the webserver, needed for OTA
 extern WServer server;
 extern bool stopWifiAfterOta;
-extern bool serverRunning ;
+// extern bool serverRunning ;
 
 class MqttNowBase {
   public:
