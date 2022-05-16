@@ -1,6 +1,6 @@
 # MQTTNow, mqtt-now
 
-![Build](https://github.com/JoostAB/mqtt-now/workflows/Build/badge.svg?branch=master)
+![Build](https://github.com/JoostAB/mqtt-now/actions/workflows/main.yml/badge.svg)
 
 ## Overview
 
