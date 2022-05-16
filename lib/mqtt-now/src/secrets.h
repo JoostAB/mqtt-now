@@ -10,7 +10,7 @@
 #define MQTT_USER "mqtt_user"
 #define MQTT_PW "mqtt_pw"
 
-#define WIFI_SSID "myssid"
+#define WIFI_SSID "myssid_name"
 #define WIFI_PW "myssid_pw"
 
 #endif // __SECRETS_H__
