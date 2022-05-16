@@ -10,7 +10,12 @@
  */
 #include <Arduino.h>
 #include <jbdebug.h>
-#include <secrets.h>
+// #include <secrets.h>
+#if __has_include(<secrets.h>)
+#  include <secrets.h>
+#else
+#  include <secrets-dummy.h>
+#endif
 
 #ifdef ESP8266
   //#include <ESP8266WebServer.h>
