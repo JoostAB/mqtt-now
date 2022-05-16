@@ -1,5 +1,7 @@
 # MQTTNow, mqtt-now
 
+![Build](https://github.com/JoostAB/mqtt-now/workflows/Build/badge.svg?branch=master)
+
 ## Overview
 
 An implementation of the ESP-Now protocol in combination with MQTT.
