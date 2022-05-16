@@ -11,6 +11,6 @@ jobs:
       - name: Check main format
         uses: DoozyX/clang-format-lint-action@v0.6
         with:
-          source: "./main"
+          source: "./lib"
           extensions: "h,ino"
           clangFormatVersion: 9
