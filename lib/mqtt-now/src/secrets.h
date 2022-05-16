@@ -1,5 +1,5 @@
 /**
- * @file secrets-dummy.h
+ * @file secrets.h
  * @author Joost Bloemsma (joost.a@bloemsma.net)
  * @brief 
  * @version 0.1
@@ -7,8 +7,9 @@
  * 
  * @copyright Copyright (c) 2022
  * 
- * Copy this file to secrets.h in this same directory, and fill in your own values.
- * The new file will be included automatically
+ * Fill in your own values, but make sure not to commit those changes!
+ * use following command to ignore new changes
+ * git update-index --assume-unchanged lib\mqtt-now\src\secrets.h 
  */
 # pragma once
 #ifndef __SECRETS_H__
