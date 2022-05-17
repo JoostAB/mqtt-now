@@ -9,7 +9,7 @@
  * 
  */
 #include <mqtt-now-node.h>
-#if !defined(MQTT_NOW_CLIENT)
+#if (!defined(MQTT_NOW_CLIENT)) | defined(MQTT_TEST_COMPILE)
 
 /**
  * @brief A random key that will be used for encryption
@@ -23,7 +23,9 @@ uint8_t _lmk[] =
 // Broadcast address to all peers
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-struct_message myData;
+MqttNowNode *node;
+
+struct_msg wrapper;
 
 esp_now_peer_info_t peerInfo;
 
@@ -36,13 +38,14 @@ esp_now_peer_info_t peerInfo;
 #elif defined(ESP8266)
   void OnDataSent(uint8_t *mac_addr, uint8_t status) {
 #endif
-  PRINTS("Last Packet Send Status: ");
-  if (status == ESP_NOW_SEND_SUCCESS) {
-    PRINTLN("Delivery ", "success");
-  } else {
-    PRINTLN("Delivery ", "fail")
-  }
-  
+  #if DEBUGLOG
+    PRINTS("Last Packet Send Status: ");
+    if (status == ESP_NOW_SEND_SUCCESS) {
+      PRINTLN("Delivery ", "success");
+    } else {
+      PRINTLN("Delivery ", "fail")
+    }
+  #endif
 }
 
 /*****************************/
@@ -54,19 +57,25 @@ esp_now_peer_info_t peerInfo;
     void onDataReceiver(uint8_t * mac, uint8_t *incomingData, uint8_t len) {
   #endif
   PRINTLNS("Message received.");
-  memcpy(&myData, incomingData, sizeof(myData));
-  
-  PRINTLN("Bytes received: ", len);
-  PRINTLN("Char: ", myData.a);
-  PRINTLN("Int: ", myData.b);
-  PRINTLN("Float: ", myData.c);
-  PRINTLN("Bool: ", myData.d);
-  PRINTLF;
+  memcpy(&wrapper, incomingData, len);
+  #ifndef MQTT_NOW_CONTROLLER
+    if (wrapper.msgType == msgTypeIntro || wrapper.msgType == msgTypeReqConfig) {
+      // These messages are only intended for the controller, so ignore them
+      return;
+    }
+  #else
+    if (wrapper.msgType == msgTypeConfig || wrapper.msgType == msgTypeWelcome) {
+      // These messages are NOT intended for the controller
+      return;
+    }
+  #endif
+  node->messageReceived(mac, wrapper.msgType, wrapper.contents, wrapper.msgSize);
 }
 
 MqttNowNode::MqttNowNode() : MqttNowBase() {};
 
 void MqttNowNode::begin() {
+  node = this;
   MqttNowBase::begin();
   WiFi.mode(WIFI_STA);
   PRINTLN("MAC address: ", WiFi.macAddress());
@@ -87,6 +96,10 @@ void MqttNowNode::begin() {
 void MqttNowNode::update() {
   MqttNowBase::update();
 }
+
+// void MqttNowNode::messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) {
+
+// }
 
 esp_err_t MqttNowNode::addPeer(esp_now_peer_info_t *peer) {
   #ifdef ESP32
@@ -120,16 +133,40 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
   #endif
 }
 
-esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
-
-}
-
 esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive) {
   struct_msg wrapper;
+  
+  // wrapper.contents will be initialized in getMessageStruct, so ignore warning
+  #pragma GCC diagnostic ignored "-Wuninitialized"
+  if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
+  
   wrapper.msgType = type;
   wrapper.msgSize = sizeof(&msg);
   memcpy(wrapper.contents, msg, wrapper.msgSize);
   return esp_now_send(macReceive, (uint8_t *) &wrapper, sizeof(wrapper));
+}
+
+result_t MqttNowNode::getMessageStruct(uint8_t type, msg_base *msg) {
+  switch (type) {
+    case msgTypeIntro:
+      msg = new msg_intro;
+      break;
+    case msgTypeWelcome:
+      msg = new msg_welcome;
+      break;
+    case msgTypeReqConfig:
+      msg = new msg_reqconfig;
+      break;
+    case msgTypeConfig:
+      msg = new msg_config;
+      break;
+    case msgTypeData:
+      msg = new msg_data;
+      break;
+    default:
+      return result_error;
+  }
+  return result_success;
 }
 
 #endif // !defined(MQTT_NOW_CLIENT)

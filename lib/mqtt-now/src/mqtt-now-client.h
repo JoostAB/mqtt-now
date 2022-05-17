@@ -9,7 +9,7 @@
  * 
  */
 # pragma once
-#ifdef MQTT_NOW_CLIENT
+#if defined(MQTT_NOW_CLIENT) | defined(MQTT_TEST_COMPILE)
 #ifndef __MQTT_NOW_CLIENT_H__
 #define __MQTT_NOW_CLIENT_H__
 
@@ -17,30 +17,21 @@
 #include <mqtt-now-base.h>
 #include <mqtt-now-bridge.h>
 #include <PubSubClient.h>
+#include <ESPConnect.h>
+// #include <DNSServer.h>
 
-#ifdef ESP8266
-  #include <ESP8266WiFi.h>
-#elif defined(ESP32)
-  #include <WiFi.h>
-#endif
-
-#define AP_NAME "MQTTNow bridge"
-// #define AP_PASSWORD "MQTTNow"
-#include <ESP8266WiFi.h>
-#include <DNSServer.h>
-#include <ESP8266mDNS.h>
-#include <ESP8266WebServer.h>
-// #include <WiFiManager.h>
-
-
+// #ifdef ESP8266
+// #include <ESP8266mDNS.h>
+// #elif defined(ESP32)
+// #include <ESPmDNS.h>
+// #endif
 
 #ifndef MQTT_PORT 
 #define MQTT_PORT 1883
 #endif
 
 #ifndef MQTT_HOST
-// TODO: uncomment for release
-// #error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
+#error Need a host for MQTT broker. Please define MQTT_HOST before including mqtt-now.h
 #define MQTT_HOST "none"
 #endif
 

@@ -9,7 +9,7 @@
  * 
  */
 #include <mqtt-now-controller.h>
-#ifdef MQTT_NOW_CONTROLLER
+#if defined(MQTT_NOW_CONTROLLER) | defined(MQTT_TEST_COMPILE)
 
 MqttNowController::MqttNowController() : MqttNowNode() {};
 
@@ -23,5 +23,9 @@ void MqttNowController::begin() {
 void MqttNowController::update() {
   MqttNowNode::update();
 };
+
+void MqttNowController::messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) {
+
+}
 
 #endif // MQTT_NOW_CONTROLLER

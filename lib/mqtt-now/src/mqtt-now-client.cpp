@@ -9,7 +9,7 @@
  * 
  */
 #include <mqtt-now-client.h>
-#ifdef MQTT_NOW_CLIENT
+#if defined(MQTT_NOW_CLIENT) | defined(MQTT_TEST_COMPILE)
 
 bool mqttReceived = false;
 String lastReceivedTopic;
@@ -93,6 +93,8 @@ MqttNowClient::MqttNowClient(
     setOnlineLwt(onlineLwt);
     setOfflineLwt(offlineLwt);
   }
+
+  stopWifiAfterOta = false;
 }
 
 /** To be called from void setup() **/
@@ -103,7 +105,8 @@ void MqttNowClient::begin() {
     COM.begin(SERIALBAUDRATE);
   }
 
-  _setupWifi();
+  //_setupWifi();
+  startWifi();
  
   client.setServer(MQTT_HOST, MQTT_PORT);
   client.setCallback(mqttMsgReceived);
@@ -132,21 +135,21 @@ void MqttNowClient::_reconnect() {
 
 void MqttNowClient::_setupWifi() {
 
-  delay(10);
-  // We start by connecting to a WiFi network
+  // delay(10);
+  // // We start by connecting to a WiFi network
 
-  PRINTS("connecting to Wifi...");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PW);
-  while (WiFi.status() != WL_CONNECTED) {
-    PRINTS(".");
-    delay(200);
-  }
+  // PRINTS("connecting to Wifi...");
+  // WiFi.mode(WIFI_STA);
+  // WiFi.begin(WIFI_SSID, WIFI_PW);
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   PRINTS(".");
+  //   delay(200);
+  // }
 
-  PRINTS("connected as :");
-  PRINTLNSA(WiFi.localIP());
-  PRINTS("MAC :");
-  PRINTLNSA(WiFi.macAddress());
+  // PRINTS("connected as :");
+  // PRINTLNSA(WiFi.localIP());
+  // PRINTS("MAC :");
+  // PRINTLNSA(WiFi.macAddress());
 }
 
 /** To be called from void loop() **/
@@ -160,6 +163,9 @@ void MqttNowClient::update() {
     if (c == 10 || c == 13) {
       if (_handleComm() == result_error) {
         PRINTLNS("Error handling command!");
+        COM.println(RET_ERROR);
+      } else {
+        COM.println(RET_OK);
       }
       _comBuff = "";
     } else {
@@ -224,7 +230,7 @@ result_t MqttNowClient::_handleSubscribe() {
   char qos = _comBuff.charAt(4);
   String topic = _modTopic(_comBuff.substring(5));
   PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos);
-  if (!client.subscribe(topic.c_str())) {
+  if (!client.subscribe(topic.c_str(), qos - '0')) {
     PRINTLNS("Error during subscribing");
     return result_error;
   } 
@@ -242,7 +248,7 @@ result_t MqttNowClient::_handleUnsubscribe() {
 }
 
 result_t MqttNowClient::_handlePublish(String com) {
-  static uint8 ctr = 0;
+  static uint8_t ctr = 0;
 
   if (com.equals("")) {
     com = String(_comBuff.c_str());
@@ -317,7 +323,18 @@ result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8
 
 result_t MqttNowClient::_handleCommand() {
   PRINTLN("Performing command: ", lastReceivedPayload);
-  return result_success;
+  if (lastReceivedPayload.equals(OTA_START)) {
+    startOTA();
+    return result_success;
+  }
+
+  if (lastReceivedPayload.equals(OTA_STOP)) {
+    stopOTA();
+    return result_success;
+  }
+  
+  // Unknown command
+  return result_error;
 }
 
 result_t MqttNowClient::_sendMsgToController() {
@@ -325,10 +342,14 @@ result_t MqttNowClient::_sendMsgToController() {
     COM.begin(SERIALBAUDRATE);
     yield();
   }
-  //String msg = MSG_START + MSG_ACTIONREC + lastReceivedTopic + MSG_PAYLOAD + lastReceivedPayload;
   
-  PRINTLN("Sending to controller: ", MSG_START + MSG_ACTIONREC + lastReceivedTopic + MSG_PAYLOAD + lastReceivedPayload);
-  //size_t send = COM.println(msg);
+  PRINTS("Sending to controller: ");
+  PRINTS(MSG_START);
+  PRINTDS(MSG_ACTIONREC);
+  PRINTDS(lastReceivedTopic);
+  PRINTS(MSG_PAYLOAD);
+  PRINTDS(lastReceivedPayload);
+
   size_t send = 0;
   send += COM.print(MSG_START);
   send += COM.print(MSG_ACTIONREC);

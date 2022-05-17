@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-#ifdef MQTT_NOW_CONTROLLER
+#if defined(MQTT_NOW_CONTROLLER) | defined(MQTT_TEST_COMPILE)
 #ifndef __MQTT_NOW_CONTROLLER_H__
 #define __MQTT_NOW_CONTROLLER_H__
 
@@ -29,6 +29,7 @@ class MqttNowController : public MqttNowNode {
     MqttNowController();
 
     void
+      messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len),
       begin(),
       update(); 
   

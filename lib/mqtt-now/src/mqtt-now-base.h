@@ -18,6 +18,13 @@ typedef int8_t result_t;
 const result_t result_success = 1;
 const result_t result_error = -1;
 
+#define OTA_START "STARTOTA"
+#define OTA_STOP "STOPOTA"
+
+// Reference to the webserver, needed for OTA
+extern WServer server;
+extern bool stopWifiAfterOta;
+// extern bool serverRunning ;
 
 class MqttNowBase {
   public:
@@ -28,6 +35,14 @@ class MqttNowBase {
       update();
   
   protected:
+    void 
+      startWifi(),
+      stopWifi(),
+      startServer(),
+      stopServer(),
+      startOTA(),
+      stopOTA();
+
     uint8_t* _esp_now_id;
 };
 
