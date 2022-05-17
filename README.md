@@ -234,8 +234,14 @@ The response to the [Request Config Message](#request-config-message). This mess
 
 ### Includes
 
+`mqtt-now.h`
+
 ### Defines
 
+See `secrets.h`.
+
 ### Examples
+
+None yet
 
 ### Compilation
