@@ -19,14 +19,9 @@
   "dependencies":
     [
       {
-        "owner": "tzapu",
-        "name": "WiFiManager",
-        "version": "^0.16.0"
-      },
-      {
-        "owner": "hideakitai",
-        "name": "MQTTPubSubClient",
-        "version": "^0.1.2"
+        "owner": "knolleary",
+        "name": "PubSubClient",
+        "version": "^2.8"
       }
     ]
 }
