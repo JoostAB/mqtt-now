@@ -19,9 +19,28 @@
   "dependencies":
     [
       {
+        "owner": "m5stack",
+        "name": "M5Stack",
+        "version": "^0.3.9"
+      },
+      {
         "owner": "knolleary",
         "name": "PubSubClient",
         "version": "^2.8"
+      },
+      {
+        "owner": "ayushsharma82",
+        "name": "ESPConnect",
+        "version": "^1.0.4"
+      },
+      {
+        "owner": "me-no-dev",
+        "name": "ESP Async WebServer",
+        "version": "^1.2.3"
+      },
+      {
+        "name": "AsyncElegantOTA",
+        "version": "https://github.com/JoostAB/AsyncElegantOTA.git"
       }
     ]
 }
