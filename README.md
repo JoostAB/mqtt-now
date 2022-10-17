@@ -1,5 +1,7 @@
 # MQTTNow, mqtt-now
 
+![Build](https://github.com/JoostAB/mqtt-now/actions/workflows/main.yml/badge.svg)
+
 ## Overview
 
 An implementation of the ESP-Now protocol in combination with MQTT.
@@ -232,8 +234,14 @@ The response to the [Request Config Message](#request-config-message). This mess
 
 ### Includes
 
+`mqtt-now.h`
+
 ### Defines
 
+See `secrets.h`.
+
 ### Examples
+
+None yet
 
 ### Compilation

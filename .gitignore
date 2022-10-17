@@ -7,3 +7,6 @@
 .vscode/settings.json
 platformio-device-monitor-*.log
 .vscode/extensions.json
+hardware/
+debug.log
+

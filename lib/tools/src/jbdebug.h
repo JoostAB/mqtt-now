@@ -26,9 +26,12 @@
 #define XQUOTE(x) #x
 #define QUOTE(x) XQUOTE(x)
 
+// #define DEBUG_ESP_WIFI
+// #define DEBUG_ESP_PORT
 
 #if DEBUGLOG
 #define PRINTS(s)                    { Serial.print(F(s)); }
+#define PRINTDS(s)                    { Serial.print(s); }
 #define PRINT(s,v)                   { Serial.print(F(s)); Serial.print(v); }
 #define PRINTF(s,v1)                 { Serial.printf(s, v1); }
 #define PRINTF2(s,v1,v2)             { Serial.printf(s, v1, v2); }
@@ -36,18 +39,15 @@
 #define PRINTF4(s,v1,v2,v3,v4)       { Serial.printf(s, v1, v2, v3, v4); }
 #define PRINTF5(s,v1,v2,v3,v4,v5)    { Serial.printf(s, v1, v2, v3, v4, v5); }
 #define PRINTF6(s,v1,v2,v3,v4,v5,v6) { Serial.printf(s, v1, v2, v3, v4, v5, v6); }
-#define PRINTLNS(s)                  { Serial.println(s); }
+#define PRINTLNS(s)                  { Serial.println(F(s)); }
+#define PRINTLNSA(s)                  { Serial.println(s); }
 #define PRINTLN(s,v)                 { Serial.print(F(s)); Serial.println(v); }
 #define PRINTLF                      Serial.println()
-// #if SERIALBAUDRATE
-//   Serial.begin(SERIALBAUDRATE);
-// #else
-//   Serial.begin(115200);
-// #endif
 
 #else
 // No debugging, replace all PRINT*** calls with nothing
 #define PRINTS(s)
+#define PRINTDS(s)
 #define PRINT(s,v)
 #define PRINTX(s,v)
 #define PRINTF(s,v1)
@@ -57,6 +57,7 @@
 #define PRINTF5(s,v1,v2,v3,v4,v5)
 #define PRINTF6(s,v1,v2,v3,v4,v5,v6)
 #define PRINTLNS(s)
+#define PRINTLNSA(s)
 #define PRINTLN(s,v)
 #define PRINTLNX(s,v)
 #define PRINTLF
