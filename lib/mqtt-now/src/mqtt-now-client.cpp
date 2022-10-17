@@ -206,6 +206,8 @@ void MqttNowClient::setstatusTopic(String statusTopic) { _statusTopic = statusTo
 
 void MqttNowClient::setLwtTopic(String lwtTopic) { _lwtTopic = lwtTopic; }
 
+void MqttNowClient::setDiscoveryTopic(String discoveryTopic) { _discoveryTopic = discoveryTopic; }
+
 void MqttNowClient::setOnCmd(String onCmd) { _onCmd = onCmd; }
 
 void MqttNowClient::setOffCmd(String offCmd) { _offCmd = offCmd; }
