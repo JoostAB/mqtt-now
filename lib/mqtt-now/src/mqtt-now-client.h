@@ -63,6 +63,8 @@
 #define MQTT_HOST "none"
 #endif
 
+#define HA_DISCOVERY_TOPIC "homeassistant"
+
 class MqttNowClient : public MqttNowBase {
   public:
     MqttNowClient();
@@ -92,6 +94,7 @@ class MqttNowClient : public MqttNowBase {
       setCmdTopic(String cmdTopic),
       setstatusTopic(String statusTopic),
       setLwtTopic(String lwtTopic),
+      setDiscoveryTopic(String discoveryTopic),
       setOnCmd(String onCmd),
       setOffCmd(String offCmd),
       setOnlineLwt(String onlineLwt),
@@ -102,7 +105,8 @@ class MqttNowClient : public MqttNowBase {
       start(WiFiClient* wifiClient),
       publishStatus(String status),
       publishCmd(String cmd),
-      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)0U);
+      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)0U),
+      makeDiscoverable();
       
 
   private:
@@ -118,6 +122,7 @@ class MqttNowClient : public MqttNowBase {
           _cmdTopic,
           _statusTopic,
           _lwtTopic,
+          _discoveryTopic,
           _onCmd,
           _offCmd,
           _onlineLwt,
