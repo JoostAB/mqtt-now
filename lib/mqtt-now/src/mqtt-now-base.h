@@ -26,30 +26,6 @@ extern WServer server;
 extern bool stopWifiAfterOta;
 // extern bool serverRunning ;
 
-/*
-Supported components by by HA MQTT discovery:
-Alarm control panels
-Binary sensors
-Buttons
-Cameras
-Covers
-Device Trackers
-Device Triggers
-Fans
-Humidifiers
-HVACs
-Lights
-Locks
-Numbers
-Scenes
-Selects
-Sensors
-Sirens
-Switches
-Tag Scanners
-Vacuums
-*/
-
 enum ComponentType {
   alarmControlPanel,
   binarySensor,
@@ -68,7 +44,7 @@ enum ComponentType {
   select,
   sensor,
   siren,
-  switche,
+  switch,
   tagScanner,
   vacuum
 };
