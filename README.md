@@ -2,6 +2,12 @@
 
 ![Build](https://github.com/JoostAB/mqtt-now/actions/workflows/main.yml/badge.svg)
 
+[[toc]]
+
+{:toc}
+
+markdown-it-table-of-contents
+
 ## Overview
 
 An implementation of the ESP-Now protocol in combination with MQTT.
@@ -82,7 +88,7 @@ Available categories are:
 - tagScanner (*)
 - vacuum (*)
 
-###### (*) = Not implemented yet
+<sub>(*) = Not implemented yet</sub>
 
 ## Slave
 
