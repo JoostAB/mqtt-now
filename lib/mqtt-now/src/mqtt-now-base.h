@@ -41,10 +41,10 @@ enum ComponentType {
   lock,
   number,
   scene,
-  select,
+  // select,
   sensor,
   siren,
-  switch,
+  // switch,
   tagScanner,
   vacuum
 };
