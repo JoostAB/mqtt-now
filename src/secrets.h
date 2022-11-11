@@ -15,7 +15,7 @@
 #ifndef __SECRETS_H__
 #define __SECRETS_H__
 
-#define MQTT_HOST "10.0.1.1"
+#define MQTT_HOST "10.0.01.1"
 #define MQTT_PORT 1883
 #define MQTT_ID "mqtt_now"
 #define MQTT_USER "mqtt_user"
