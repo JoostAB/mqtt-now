@@ -10,3 +10,4 @@ platformio-device-monitor-*.log
 hardware/
 debug.log
 
+lib/mqtt-now/src/secrets.h
