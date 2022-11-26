@@ -321,6 +321,14 @@ result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8
   return client.publish(topic.c_str(), payload.c_str(), retain);
 }
 
+result_t MqttNowClient::makeDiscoverable() {
+  return makeDiscoverable(getNodeStruct());
+}
+
+result_t MqttNowClient::makeDiscoverable(Node node) {
+  return result_error;
+}
+
 result_t MqttNowClient::_handleCommand() {
   PRINTLN("Performing command: ", lastReceivedPayload);
   if (lastReceivedPayload.equals(OTA_START)) {
@@ -362,7 +370,10 @@ result_t MqttNowClient::_sendMsgToController() {
 
 /** Simple setters **/
 
-void MqttNowClient::setDiscoveryTopic(String discoveryTopic) { _discoveryTopic = discoveryTopic; }
+void MqttNowClient::setDiscoveryTopic(String discoveryTopic) { 
+  _discoveryTopic = discoveryTopic; 
+  PRINTLN("Discovery topic set to ", _discoveryTopic);
+}
 
 void MqttNowClient::setRootTopic(String rootTopic) { 
   _rootTopic = rootTopic; 
@@ -428,6 +439,10 @@ void MqttNowClient::setOfflineLwt(String offlineLwt) {
 // void MqttNowClient::handleNotFound() {
 //     server.send(404, "text/plain", "404: File Not Found");
 // }
+
+String MqttNowClient::_getFullDiscoveryPath(Node node) {
+  return _discoveryTopic + "/" + node.component + "/" + node.id + "/config";
+}
 
 /** Utilities **/
 String MqttNowClient::_modTopic(String topic) {

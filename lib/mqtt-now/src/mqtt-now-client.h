@@ -82,7 +82,8 @@ class MqttNowClient : public MqttNowBase {
       publishStatus(String status),
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
-      makeDiscoverable();
+      makeDiscoverable(),
+      makeDiscoverable(Node node);
       
 
   private:
@@ -101,8 +102,9 @@ class MqttNowClient : public MqttNowBase {
       _handleCommand(),
       _handlePublish(String com = String(""));
 
-    String _modTopic(String topic);
-
+    String _modTopic(String topic),
+           _getFullDiscoveryPath(Node node);
+    
     String 
       _comBuff,
       _host,
@@ -111,7 +113,7 @@ class MqttNowClient : public MqttNowBase {
       _statusTopic,
       _lwtTopic,
       _devTopic,
-      _discoveryTopic,
+      _discoveryTopic = "homeassistant",
       _onCmd,
       _offCmd,
       _onlineLwt,
