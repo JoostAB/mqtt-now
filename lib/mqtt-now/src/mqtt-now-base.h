@@ -96,9 +96,9 @@ class MqttNowBase {
 
     ComponentType getType();
     
-    char* getName();
-
-    String getNodeId();
+    String
+      getName(),  
+      getNodeId();
 
     virtual void
       begin(),
@@ -116,9 +116,9 @@ class MqttNowBase {
     Node  getNodeStruct();
 
   private:
-    char* _name;
+    String _name;
     ComponentType _type = noneType;
-    char _id[14];
+    char _id[15];
     uint8_t* _esp_now_id;
 
 };

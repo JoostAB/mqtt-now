@@ -74,17 +74,15 @@ void MqttNowBase::update() {
 };
 
 void MqttNowBase::setName(char* name) {
-  strcpy(_name, name);
+  _name = String(name);
 }
 
 void MqttNowBase::setType(ComponentType type) {
   _type = type;
 }
 
-char* MqttNowBase::getName() {
-  char* n;
-  strcpy(n,_name);
-  return n;
+String MqttNowBase::getName() {
+  return _name;
 }
 
 ComponentType MqttNowBase::getType() {
