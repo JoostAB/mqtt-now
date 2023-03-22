@@ -136,10 +136,13 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
 esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive) {
   struct_msg wrapper;
   
-  // wrapper.contents will be initialized in getMessageStruct, so ignore warning
+  // wrapper.contents will be initialized in getMessageStruct, so ignore warnings
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
   #pragma GCC diagnostic ignored "-Wuninitialized"
   if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
-  
+  #pragma GCC diagnostic pop
+
   wrapper.msgType = type;
   wrapper.msgSize = sizeof(&msg);
   memcpy(wrapper.contents, msg, wrapper.msgSize);
