@@ -13,13 +13,7 @@
 #define __MQTT_NOW_BASE_H__
 
 #include <baseinclude.h>
-#ifdef ESP32
-  #include <esp_wifi.h>
-  void getmac(uint8 *macaddr) {esp_wifi_get_mac(WIFI_IF_STA, macaddr);}
-#endif
-#ifdef ESP8266
-  void getmac(uint8 *macaddr) {wifi_get_macaddr(STATION_IF, macaddr);}
-#endif
+
 
 typedef int8_t result_t;
 
@@ -63,6 +57,8 @@ enum ComponentType {
   vacuumType
 };
 
+const char* toName(ComponentType type);
+/*
 std::map<ComponentType, const char*> componentName = {
   {noneType, "none"},
   {controllerType, "controller"},
@@ -87,7 +83,7 @@ std::map<ComponentType, const char*> componentName = {
   {tagScannerType, "tagscanner"},
   {vacuumType, "vacuum"}
 };
-
+*/
 struct Node {
   String name;
   ComponentType component;

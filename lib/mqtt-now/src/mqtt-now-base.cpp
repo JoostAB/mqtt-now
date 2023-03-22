@@ -15,6 +15,44 @@ WServer server(80);
 bool stopWifiAfterOta = true;
 bool serverRunning = false;
 
+#ifdef ESP32
+  #include <esp_wifi.h>
+  void getmac(uint8_t *macaddr) {esp_wifi_get_mac(WIFI_IF_STA, macaddr);}
+#endif
+#ifdef ESP8266
+  void getmac(uint8_t *macaddr) {wifi_get_macaddr(STATION_IF, macaddr);}
+#endif
+
+const char* toName(ComponentType type) {
+  return "";
+}
+/*
+std::map<ComponentType, const char*> componentName = {
+  {noneType, "none"},
+  {controllerType, "controller"},
+  {alarmControlPanelType, "alarmcontrolpanel"},
+  {binarySensorType, "binarysensor"},
+  {buttonType, "button"},
+  {cameraType, "camera"},
+  {coverType, "cover"},
+  {deviceTrackerType, "devicetracker"},
+  {deviceTriggerType, "devicetrigger"},
+  {fanType, "fan"},
+  {humidifierType, "humidifier"},
+  {hvacType, "hvac"},
+  {lightType, "light"},
+  {lockType, "lock"},
+  {numberType, "number"},
+  {sceneType, "scene"},
+  {selectType, "select"},
+  {sensorType, "sensor"},
+  {sirenType, "siren"},
+  {switchType, "switch"},
+  {tagScannerType, "tagscanner"},
+  {vacuumType, "vacuum"}
+};
+*/
+
 MqttNowBase::MqttNowBase() {
   // Open serial port for debugging if applicable
 #if DEBUGLOG

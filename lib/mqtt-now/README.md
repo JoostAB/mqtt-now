@@ -114,6 +114,19 @@ communication.
 
 ### Serial protocol
 
+The serial protocol only describes MQTT messages/actions.
+All bytes received over the serial bus are queued, until it is terminated with a CR or NL character (char(10)
+or char(13)). This way the serial communication can easily be emulated with a telnet client like Putty. After 
+termination the message is parsed.
+
+All messages MUST start with a message-start token '###'.  If the message does not start with this token, the complete message is discarded.
+After 
+
+
+
+#### From ESP-NOW controller to MQTT client:
+
+
 ## Protocol
 
 The protocol used for communication between the nodes is based on
