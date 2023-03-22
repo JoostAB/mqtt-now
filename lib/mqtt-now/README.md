@@ -1,5 +1,13 @@
 # MQTTNow
 
+![Build](https://github.com/JoostAB/mqtt-now/actions/workflows/main.yml/badge.svg)
+
+[[toc]]
+
+{:toc}
+
+markdown-it-table-of-contents
+
 ## Overview
 
 An implementation of the ESP-Now protocol in combination with MQTT.
@@ -27,6 +35,8 @@ The following borads have been defined:
 | Wemos D1 mini32  | wemos_d1_mini32         | ESP 32   |                    |                    |
 | Wemos D1 mini32  | wemos_d1_mini32_control | ESP 32   | :heavy_check_mark: |                    |
 | Do-It Devkit 32  | esp32doit-devkit-v1     | ESP 32   | :heavy_check_mark: |                    |
+
+ESP-01 512K is no longer supported...
 
 ---  
 
@@ -80,7 +90,7 @@ Available categories are:
 - tagScanner (*)
 - vacuum (*)
 
-###### (*) = Not implemented yet
+<sub>(*) = Not implemented yet</sub>
 
 ## Slave
 
@@ -113,19 +123,6 @@ communication.
 ### MQTT client
 
 ### Serial protocol
-
-The serial protocol only describes MQTT messages/actions.
-All bytes received over the serial bus are queued, until it is terminated with a CR or NL character (char(10)
-or char(13)). This way the serial communication can easily be emulated with a telnet client like Putty. After 
-termination the message is parsed.
-
-All messages MUST start with a message-start token '###'.  If the message does not start with this token, the complete message is discarded.
-After 
-
-
-
-#### From ESP-NOW controller to MQTT client:
-
 
 ## Protocol
 
