@@ -39,59 +39,33 @@ The following borads have been defined:
 
 ## Table Of Contents
 
-## **[Topology](#topology)**</br>
-
-## **[Network ID](#network-id)**</br>
-
-## **[Node Category](#node-category)**</br>
-
-## **[Slave](#slave)**</br>
-
-## **[Controller](#controller)**</br>
-
-## **[Dedicated controller](#dedicated-controller)**</br>
-
-## **[MQTT client](#mqtt-client)**</br>
-
-## **[Serial protocol](#serial-protocol)**</br>
-
-## **[Protocol](#protocol)**</br>
-
-## **[Controller selection](#controller-selection)**</br>
-
-## **[MQTT](#mqtt)**</br>
-
-### - **[Root topic](#root-topic)**</br>
-
-### - **[Discovery topic](#discovery-topic)**</br>
-
-### - **[Command topic](#command-topic)**</br>
-
-### - **[Status topic](#status-topic)**</br>
-
-### - **[Node Command topic](#node-command-topic)**</br>
-
-## **[Messages](#messages)**</br>
-
-### - **[Introduction message](#introduction-message)**</br>
-
-### - **[Welcome message](#welcome-message)**</br>
-
-### - **[Request config message](#request-config-message)**</br>
-
-### - **[Configuration message](#configuration-message)**</br>
-
-### - **[Data message](#data-message)**</br>
-
-## **[Library usage](#library-usage)**</br>
-
-### - **[Includes](#includes)**</br>
-
-### - **[Defines](#defines)**</br>
-
-### - **[Examples](#examples)**</br>
-
-### - **[Compilation](#compilation)**</br>
+**[Topology](#topology)**</br>
+**[Network ID](#network-id)**</br>
+**[Node Category](#node-category)**</br>
+**[Slave](#slave)**</br>
+**[Controller](#controller)**</br>
+**[Dedicated controller](#dedicated-controller)**</br>
+**[MQTT client](#mqtt-client)**</br>
+**[Serial protocol](#serial-protocol)**</br>
+**[Protocol](#protocol)**</br>
+**[Controller selection](#controller-selection)**</br>
+**[MQTT](#mqtt)**</br>
+*[Root topic](#root-topic)*</br>
+*[Discovery topic](#discovery-topic)*</br>
+*[Command topic](#command-topic)*</br>
+*[Status topic](#status-topic)*</br>
+*[Node Command topic](#node-command-topic)*</br>
+**[Messages](#messages)**</br>
+*[Introduction message](#introduction-message)*</br>
+*[Welcome message](#welcome-message)*</br>
+*[Request config message](#request-config-message)*</br>
+*[Configuration message](#configuration-message)*</br>
+*[Data message](#data-message)*</br>
+**[Library usage](#library-usage)**</br>
+*[Includes](#includes)*</br>
+*[Defines](#defines)*</br>
+*[Examples](#examples)*</br>
+*[Compilation](#compilation)*</br>
 
 &nbsp;
 &nbsp;
