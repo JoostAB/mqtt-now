@@ -67,5 +67,5 @@ typedef struct esp_now_peer_info {
   void *priv;                             /**< ESPNOW peer private data */
 } esp_now_peer_info_t;
 
-#endif
+#endif // ifdef ESP8266
 #endif // __ESP8266_NOW_MOCK__

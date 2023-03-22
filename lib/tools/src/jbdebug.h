@@ -30,8 +30,9 @@
 // #define DEBUG_ESP_PORT
 
 #if DEBUGLOG
+
 #define PRINTS(s)                    { Serial.print(F(s)); }
-#define PRINTDS(s)                    { Serial.print(s); }
+#define PRINTDS(s)                   { Serial.print(s); }
 #define PRINT(s,v)                   { Serial.print(F(s)); Serial.print(v); }
 #define PRINTF(s,v1)                 { Serial.printf(s, v1); }
 #define PRINTF2(s,v1,v2)             { Serial.printf(s, v1, v2); }
@@ -40,7 +41,7 @@
 #define PRINTF5(s,v1,v2,v3,v4,v5)    { Serial.printf(s, v1, v2, v3, v4, v5); }
 #define PRINTF6(s,v1,v2,v3,v4,v5,v6) { Serial.printf(s, v1, v2, v3, v4, v5, v6); }
 #define PRINTLNS(s)                  { Serial.println(F(s)); }
-#define PRINTLNSA(s)                  { Serial.println(s); }
+#define PRINTLNSA(s)                 { Serial.println(s); }
 #define PRINTLN(s,v)                 { Serial.print(F(s)); Serial.println(v); }
 #define PRINTLF                      Serial.println()
 

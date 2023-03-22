@@ -15,6 +15,44 @@ WServer server(80);
 bool stopWifiAfterOta = true;
 bool serverRunning = false;
 
+#ifdef ESP32
+  #include <esp_wifi.h>
+  void getmac(uint8_t *macaddr) {esp_wifi_get_mac(WIFI_IF_STA, macaddr);}
+#endif
+#ifdef ESP8266
+  void getmac(uint8_t *macaddr) {wifi_get_macaddr(STATION_IF, macaddr);}
+#endif
+
+const char* toName(ComponentType type) {
+  return "";
+}
+/*
+std::map<ComponentType, const char*> componentName = {
+  {noneType, "none"},
+  {controllerType, "controller"},
+  {alarmControlPanelType, "alarmcontrolpanel"},
+  {binarySensorType, "binarysensor"},
+  {buttonType, "button"},
+  {cameraType, "camera"},
+  {coverType, "cover"},
+  {deviceTrackerType, "devicetracker"},
+  {deviceTriggerType, "devicetrigger"},
+  {fanType, "fan"},
+  {humidifierType, "humidifier"},
+  {hvacType, "hvac"},
+  {lightType, "light"},
+  {lockType, "lock"},
+  {numberType, "number"},
+  {sceneType, "scene"},
+  {selectType, "select"},
+  {sensorType, "sensor"},
+  {sirenType, "siren"},
+  {switchType, "switch"},
+  {tagScannerType, "tagscanner"},
+  {vacuumType, "vacuum"}
+};
+*/
+
 MqttNowBase::MqttNowBase() {
   // Open serial port for debugging if applicable
 #if DEBUGLOG
@@ -34,6 +72,24 @@ void MqttNowBase::update() {
   //   server.handleClient();
   // }
 };
+
+void MqttNowBase::setName(char* name) {
+  strcpy(_name, name);
+}
+
+void MqttNowBase::setType(ComponentType type) {
+  _type = type;
+}
+
+char* MqttNowBase::getName() {
+  char* n;
+  strcpy(n,_name);
+  return n;
+}
+
+ComponentType MqttNowBase::getType() {
+  return _type;
+}
 
 void MqttNowBase::startOTA() {
   startWifi();
@@ -87,4 +143,24 @@ void MqttNowBase::startServer(){
 
 void MqttNowBase::stopServer(){
   serverRunning = false;
+}
+
+String MqttNowBase::getNodeId() {
+  char id[14];
+  if (_id[0] != 'M') {
+    uint8_t mac[6];
+    
+    getmac(&mac[0]);
+    sprintf(_id, "MN%02X%02X%02X%02X%02X%02X", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+  }
+  strcpy(id, _id);
+  return id;
+}
+
+Node MqttNowBase::getNodeStruct() {
+  Node me;
+  me.component = getType();
+  me.id = getNodeId();
+  me.name = getName();
+  return me;
 }
