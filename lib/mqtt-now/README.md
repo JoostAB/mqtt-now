@@ -386,7 +386,11 @@ None yet
 
 ### Compilation
 
-### Wishlist
+# Wishlist
 
 - Dynamic esp-now channel
+- Include wifi manager
+- Web interface for gateway incl OTA
+- Gateway as HASS device with entities for management and monitoring
+- OTA for nodes
 
