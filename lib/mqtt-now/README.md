@@ -385,3 +385,8 @@ See `secrets.h`.
 None yet
 
 ### Compilation
+
+### Wishlist
+
+- Dynamic esp-now channel
+
