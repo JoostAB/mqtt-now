@@ -265,10 +265,11 @@ what I do and who is the boss?". The message contains the following data:
 
 | name | type | data | description |
 |-|-|-|-|
-| Message type | int8 | 1 | Code for messagetype |
+| Message type | uint8 | 1 | Code for messagetype |
 | MAC address | byte[6] | A1:B2:C3:D4:E5:F6 | MAC address if this node |
 | Network UUID | byte[16] | 3d0bb7a9-f3e3-4fa5-86b7-b5f0aeca41ad | See [Network ID](#network-id) |
-| Category | int8 | 1 | See [Node category](#node-category) |
+| Category | uint8 | 1 | See [Node category](#node-category) |
+| Timeout | uint16 | 10 | Minutes before dead |
 | Friendly name | char[30] | "light livingroom" | Descriptive name |
 
      t
@@ -279,6 +280,12 @@ what I do and who is the boss?". The message contains the following data:
      0  1-7    8-33     34   35-65 
     (total 66 bytes)
 
+- **Message type**: Enumerated type of message being send. `1`
+- **MAC Address**: MAC address of node sending this message. Used as unique identifier of the node.
+- **Network UUID**: The unique ID of the network the node wants to connect to. Must be the same for all members of the network.
+- **Category**: Identifies the kind of node and its capabilities. In HA this is used to determine the device type.
+- **Timeout**: Tells the controller when to mark this node dead. If there is no communication coming from this node for x minutes, the node is considered dead.
+- **Friendly name**: How to call this node in the human interface to easely identify it. For example 'light livingroom'.
 ### Welcome message
 
 (`welc - 2`)

@@ -34,7 +34,8 @@ typedef struct msg_intro:msg_base {
   uint8_t mac_address[6];
   uint8_t network_uuid[16];
   uint8_t device_category;
-  char firendly_name[30];
+  uint16_t timeout;
+  char friendly_name[30];
 } msg_intro;
 
 typedef struct msg_welcome:msg_base {
