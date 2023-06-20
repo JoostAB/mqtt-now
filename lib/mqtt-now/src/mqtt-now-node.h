@@ -60,6 +60,11 @@ typedef struct msg_data:msg_base {
   char data[240];
 } msg_data;
 
+typedef struct msg_error:msg_base {
+  uint8_t error_code;
+  char error_msg[240];
+} msg_error;
+
 /**
  * Wrapper structure. 
  * The actual message that is being send and contains the message
@@ -70,6 +75,7 @@ typedef struct msg_data:msg_base {
  * - 3: Request Config message
  * - 4: Config message
  * - 5: Data message
+ * - 6: Error message
  **/
 typedef struct struct_msg {
   uint8_t msgType;
@@ -82,6 +88,7 @@ const uint8_t msgTypeWelcome   = 2;
 const uint8_t msgTypeReqConfig = 3;
 const uint8_t msgTypeConfig    = 4;
 const uint8_t msgTypeData      = 5;
+const uint8_t msgTypeError     = 6;
 
 /*************************/
 /** Callback prototypes **/
@@ -110,7 +117,14 @@ class MqttNowNode : public MqttNowBase {
     esp_err_t 
       addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false),
       addPeer(esp_now_peer_info_t *peer),
-      sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive);
+      sendMessage(uint8_t type, msg_base *msg, const uint8_t *macReceive),
+      sendMessage(msg_base *msg, const uint8_t *macReceive),
+      sendIntroMessage(uint8_t category, char friendlyName[30], const uint8_t *macReceiver),
+      sendWelcomeMessage(const uint8_t *macReceiver),
+      sendReqCfgMessage(const uint8_t *macReceiver),
+      sendErrorMessage(uint8_t error_code, const char error_msg[240], const uint8_t *macReceiver);
+
+
     
     result_t getMessageStruct(uint8_t type, msg_base *msg);
   

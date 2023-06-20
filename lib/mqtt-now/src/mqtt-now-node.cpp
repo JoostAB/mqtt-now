@@ -133,7 +133,45 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
   #endif
 }
 
-esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive) {
+esp_err_t MqttNowNode::sendIntroMessage(uint8_t category, char friendlyName[30], const uint8_t *macReceiver) {
+  msg_intro *msg;
+  getMessageStruct(msgTypeIntro, msg);
+  msg->device_category = category;
+  memcpy(msg->friendly_name, friendlyName, 30);
+  return sendMessage(msg, macReceiver);
+}
+
+esp_err_t MqttNowNode::sendWelcomeMessage(const uint8_t *macReceiver) {
+  msg_welcome *msg;
+  getMessageStruct(msgTypeWelcome, msg);
+  getMac(msg->mac_address);
+  return sendMessage(msg, macReceiver);
+}
+
+esp_err_t MqttNowNode::sendReqCfgMessage(const uint8_t *macReceiver) {
+  msg_welcome *msg;
+  getMessageStruct(msgTypeWelcome, msg);
+  getMac(msg->mac_address);
+  return sendMessage(msg, macReceiver);
+}
+
+esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg[240], const uint8_t *macReceiver) {
+  msg_error *msg;
+  getMessageStruct(msgTypeError, msg);
+  msg->error_code = error_code;
+  strcpy(msg->error_msg, error_msg);
+  return sendMessage(msg, macReceiver);
+}
+
+esp_err_t MqttNowNode::sendMessage(msg_base *msg, const uint8_t *macReceive) {
+  struct_msg wrapper;
+  wrapper.msgType = msg->id;
+  wrapper.msgSize = sizeof(&msg);
+  memcpy(wrapper.contents, msg, wrapper.msgSize);
+  return esp_now_send(macReceive, (uint8_t *) &wrapper, sizeof(wrapper));
+}
+
+esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, const uint8_t *macReceive) {
   struct_msg wrapper;
   
   // wrapper.contents will be initialized in getMessageStruct, so ignore warnings
@@ -166,9 +204,13 @@ result_t MqttNowNode::getMessageStruct(uint8_t type, msg_base *msg) {
     case msgTypeData:
       msg = new msg_data;
       break;
+    case msgTypeError:
+      msg = new msg_error;
+      break;
     default:
       return result_error;
   }
+  msg->id = type;
   return result_success;
 }
 

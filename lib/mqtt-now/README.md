@@ -74,25 +74,18 @@ The following borads have been defined:
 
 A network consists of several nodes, from which one has the role of [controller](#controller).
 
-The non-controller nodes (aka [slaves](#slave)) communicate with the controller using the esp-now protocol. They report
-their status and listen for commands. They can also report events.
+The non-controller nodes (aka [slaves](#slave)) communicate with the controller using the esp-now protocol. They report their status and listen for commands. They can also report events.
 
-The controller is responsible for communication to the outside world over standard WiFi. Therefore the controller must
-be connected to an accesspoint or router connected to the home network and maybe the internet. The controller normally
+The controller is responsible for communication to the outside world over standard WiFi. Therefore the controller must be connected to an accesspoint or router connected to the home network and maybe the internet. The controller normally
 is also playing a slave role.
 
-Which device is the controller doesn't matter, since there is no hardware difference. All nodes are ESP32/ESP8266 based,
-and therefore they are all capable of communicating with a wireless network. The controller role is dynamically assigned
-(see [Controller selection](#controller-selection)) among the available nodes, and as soon the node player the
-controller role is offline, a new controller is chosen.
+Which device is the controller doesn't matter, since there is no hardware difference. All nodes are ESP32/ESP8266 based, and therefore they are all capable of communicating with a wireless network. The controller role is dynamically assigned (see [Controller selection](#controller-selection)) among the available nodes, and as soon the node player the controller role is offline, a new controller is chosen.
 
 ### Network ID
 
 ### Node category
 
-There are several node categories. These categories describe in a nutshell what a node can and or does. They are based
-on the device types as defined in the [Home Assistant MQTT Discovery](https://www.home-assistant.io/docs/mqtt/discovery)
-documentation. This category can then be used by third party software to determine how to categorize the new node.
+There are several node categories. These categories describe in a nutshell what a node can and or does. They are based on the device types as defined in the [Home Assistant MQTT Discovery](https://www.home-assistant.io/docs/mqtt/discovery) documentation. This category can then be used by third party software to determine how to categorize the new node.
 
 Available categories are:
 
@@ -121,29 +114,15 @@ Available categories are:
 
 ## Slave
 
-When a slave is turned on, it will send an [introduction message](#introduction-message) to the broadcast (MAC)address
-`FF:FF:FF:FF:FF:FF`. The introduction message contains the MAC address of the slave and name for easy recognition. It
-also contains a unique ID of the network it wants to connect to. For now this ID is hard coded, so it will have to be
-included at compile time for all nodes intended for the same network.  
-The running controller will check the network ID, and if it matches its own network id it will respond with a [welcome
-message](#welcome-message) containing its mac address and register the slave as new node. The slave now knows who the
-controller is and will from now on address all communication to the controller directly using its MAC address.  
-If there is no response from a running controller node, the new node will take on the role of controller (see
-[Controller initialization](#controller-initialization)) by connecting to the wifi network and wait for other nodes to
-come online as slaves.
+When a slave is turned on, it will send an [introduction message](#introduction-message) to the broadcast (MAC)address `FF:FF:FF:FF:FF:FF`. The introduction message contains the MAC address of the slave and name for easy recognition. It also contains a unique ID of the network it wants to connect to. For now this ID is hard coded, so it will have to be included at compile time for all nodes intended for the same network. The running controller will check the network ID, and if it matches its own network id it will respond with a [welcome message](#welcome-message) containing its mac address and register the slave as new node. The slave now knows who the controller is and will from now on address all communication to the controller directly using its MAC address. If there is no response from a running controller node, the new node will take on the role of controller (see [Controller initialization](#controller-initialization)) by connecting to the wifi network and wait for other nodes to come online as slaves.
 
-The slave can be anything from a simple lightbulb switch, a complete weatherstation, smart plug or anything else you
-have in your smart-home.
+The slave can be anything from a simple lightbulb switch, a complete weatherstation, smart plug or anything else you have in your smart-home.
 
 ## Controller
 
-The controller is the central accesspoint to the whole MQTTNow network. Together with the [MQTT client](#mqtt-client)
-it acts as a gateway between the MQTTNow network and the home wifi, so that you can access these nodes with normal wifi
-enabled devices like a smartphone, computer or smart-home central like [Domoticz](https://www.domoticz.com/) or [Home
-Assistant](https://www.home-assistant.io).
+The controller is the central accesspoint to the whole MQTTNow network. Together with the [MQTT client](#mqtt-client) it acts as a gateway between the MQTTNow network and the home wifi, so that you can access these nodes with normal wifi enabled devices like a smartphone, computer or smart-home central like [Domoticz](https://www.domoticz.com/) or [Home Assistant](https://www.home-assistant.io).
 
-Using this WiFi connection the controller will also connect if available to an [MQTT broker](#mqtt) for mqtt
-communication.
+Using this WiFi connection the controller will also connect if available to an [MQTT broker](#mqtt) for mqtt communication.
 
 ### Dedicated controller
 
@@ -153,27 +132,20 @@ communication.
 
 ## Protocol
 
-The protocol used for communication between the nodes is based on
-[esp-now](https://www.espressif.com/en/products/software/esp-now/overview). A low-power communication protocol using the
-same 2.4 Ghz radio that is used for wifi, but without the need for a central router. The nodes can communicate with
-eachother peer-to-peer.  
-Since the nodes are not connected to the home network, there is no way to access them directly. Therefore the controller
-connects to the MQTTNow network, as well as to the home WiFi network and acts as a gateway.  
-This way, only one IP address on the home network is needed for the whole esp=now network. For the outside world
-(everything not in the MQTTNow network) the network is available as one device.
+The protocol used for communication between the nodes is based on [esp-now](https://www.espressif.com/en/products/software/esp-now/overview). A low-power communication protocol using the same 2.4 Ghz radio that is used for wifi, but without the need for a central router. The nodes can communicate with eachother peer-to-peer.  
+Since the nodes are not connected to the home network, there is no way to access them directly. Therefore the controller connects to the MQTTNow network, as well as to the home WiFi network and acts as a gateway. This way, only one IP address on the home network is needed for the whole esp=now network. For the outside world (everything not in the MQTTNow network) the network is available as one device.
 
 ### Controller selection
 
-When a node is turned on, and there is no controller present (eg, there is no [welcome message](#welcome-message) as a
-response to the [introduction message](#introduction-message)), this node shall become the controller. This is the most
-simple and mmost common scenario.
+When a node (with controller capability) is turned on, and there is no controller present (eg, there is no [welcome message](#welcome-message) as a response to the [introduction message](#introduction-message)), this node shall become the controller. This is the most simple and most common scenario.
+
+If in an existing network the active controller goes down, another will take over assuming that there is another one with controller capability. If there are multiple candidates, the one with the strongest wifi signal is selected.
 
 ### Controller initialization
 
 ## MQTT
 
-The MQTT communication with [Home Assistant](https://www.home-assistant.io) (or any other application communicating with
-this network) goes over a couple of topics. These topics are subtopics of one [root topic](#root-topic).
+The MQTT communication with [Home Assistant](https://www.home-assistant.io) (or any other application communicating with this network) goes over a couple of topics. These topics are subtopics of one [root topic](#root-topic).
 
     Root -+- \CMD -+-
           |        |--- node1
@@ -190,78 +162,57 @@ this network) goes over a couple of topics. These topics are subtopics of one [r
                            |--- node1
                            |--- node2
 
-All topics should have the `Retained` flag set to make sure a node can return to the last known correct state after
-reconnect or power cycle.
+All topics should have the `Retained` flag set to make sure a node can return to the last known correct state after reconnect or power cycle.
 
 ### Root topic
 
 The root topic is where all other communication is organized. The root topic itself contains no payload, only subtopics.
 General subtopics are a [command](#command-topic) topic and a [status](#status-topic) topic.
-`LWT`  information is contained in the status topic, and shows wether or not the whole network is online. In other
-words, if the controller is connected to the MQTT broker. It can be either `online` or `offline`.
-A third mandatory (sub)topic is the [Discovery topic](#discovery-topic). This topic holds all information needed for any
-client to identify all nodes and their abilities. It can also be used to add a node to a client automatically if it
-joins an MQTTNow network.
+`LWT`  information is contained in the status topic, and shows wether or not the whole network is online. In other words, if the controller is connected to the MQTT broker. It can be either `online` or `offline`.
+A third mandatory (sub)topic is the [Discovery topic](#discovery-topic). This topic holds all information needed for any client to identify all nodes and their abilities. It can also be used to add a node to a client automatically if it joins an MQTTNow network.
 
 ### Discovery topic
 
 `\discovery`
 
-The discovery topic can be used to automatically add nodes to 3rd party controlling software like
-[Home Assistant](https://www.home-assistant.io). Since the main idea of this project is to create a new protocol to be
-used by Home Assistant please refer to [HASS MQTT Discovery](https://www.home-assistant.io/docs/mqtt/discovery) for the
-exact registration payload. This (sub)topic can be configured without the prepending slash (/). This is usefull if the
-client has his own discovery topic, like Home Asisstant. In that case the discovery topic should be configured like
-`homeassistant`.
+The discovery topic can be used to automatically add nodes to 3rd party controlling software like [Home Assistant](https://www.home-assistant.io). Since the main idea of this project is to create a new protocol to be used by Home Assistant please refer to [HASS MQTT Discovery](https://www.home-assistant.io/docs/mqtt/discovery) for the exact registration payload. This (sub)topic can be configured without the prepending slash (/). This is usefull if the client has his own discovery topic, like Home Asisstant. In that case the discovery topic should be configured like `homeassistant`.
 
 ### Command topic
 
 `\CMD`
 
-The command topic can be used to send commands to the network as a whole. This can be something like ... This is
-typically set by 3rd party software.  
-This topic also contains a subtopic for each node, identified by the node-id (see
-[Node Command Topic](#node-command-topic)).  
+The command topic can be used to send commands to the network as a whole. This can be something like ... This is typically set by 3rd party software. This topic also contains a subtopic for each node, identified by the node-id (see [Node Command Topic](#node-command-topic)).  
 The controller subscribes to this topic to receive commands for either the whole network or for a specific node.
 
 ### Status topic
 
 `\stat`
 
-The Status topic is used by the controller to publish network status. It shows its online status in the `\LWT` subtopic
-and other information like controller name, network status information, IP address etc. For each node (and meaybe even
-for the controller itself if it also has a node role) there is a [subtopic](#node-status-topic) containing status
-information for that node.
+The Status topic is used by the controller to publish network status. It shows its online status in the `\LWT` subtopic and other information like controller name, network status information, IP address etc. For each node (and meaybe even
+for the controller itself if it also has a node role) there is a [subtopic](#node-status-topic) containing status information for that node.
 
 ### Node Command topic
 
 `\CMD\<node-id>`
 
-Any device that wants to control a specific node, can publish a message to the node command topic. The full topic will
-be `root-topic\CMD\<node-id>`. What these commands can be is made available by the node.
+Any device that wants to control a specific node, can publish a message to the node command topic. The full topic will be `root-topic\CMD\<node-id>`. What these commands can be is made available by the node.
 
 ### Node Status topic
 
 `\stat\<node-id>`
 
-The node status topic is used as feedback to the controller. The controller can see if the last command was successfully
-executed. Also, because it has the 'retained' flag set, the node can check what the last know status was in case of a
-powercycle or reconnect and go back to that state.
+The node status topic is used as feedback to the controller. The controller can see if the last command was successfully executed. Also, because it has the 'retained' flag set, the node can check what the last know status was in case of a powercycle or reconnect and go back to that state.
 
 ## Messages
 
-ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta
-data to make sure enough room is left for actual data. The only default metadata send with each message is the message
-type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one
-byte (`int8`) code. The Four character code is used as enumeration in the code.  
+ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta data to make sure enough room is left for actual data. The only default metadata send with each message is the message type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one byte (`int8`) code. The Four character code is used as enumeration in the sourcecode.  
 All `char[x]` fields **may** be shortened using a NULL termination. If no NULL byte occurs, the full length is used.
 
 ### Introduction message
 
 (`intr - 1`)
 
-The Introdction message is send when a node is powered up. It kinda says "Hello everybody. My name is John, this is
-what I do and who is the boss?". The message contains the following data:
+The Introdction message is send when a node is powered up. It kinda says "Hello everybody. My name is John, this is what I do and who is the boss?". The message contains the following data:
 
 | name | type | data | description |
 |-|-|-|-|
@@ -290,8 +241,7 @@ what I do and who is the boss?". The message contains the following data:
 
 (`welc - 2`)
 
-The Welcome message is the response of the controller to an [Introcuction message](#introduction-message). Is basically
-says "Hi John, welcome. I'll write you down as a new member if this network, and from now on you only talk to me."
+The Welcome message is the response of the controller to an [Introduction message](#introduction-message). Is basically says "Hi John, welcome. I'll write you down as a new member if this network, and from now on you only talk to me."
 
 | name | type | data | description |
 |-|-|-|-|
@@ -373,6 +323,18 @@ take over the role of controller. Being wifi and mqtt credentials.
      0 1  2-241 
                                 
     (total 242 bytes)
+
+### Error message
+
+(`eror - 6`)
+
+Is send as a response if an error occurs as a result of a request. For example when a node tries to join a network with an invalid network uuid.
+
+| name | type | data | description |
+|-|-|-|-|
+| Message type | int8 | 5 | Code for messagetype |
+| Error code | int8 | 1 | Error code  |
+| Error message | char[240] | whatever | The error message |
 
 &nbsp;
 &nbsp;

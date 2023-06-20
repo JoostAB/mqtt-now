@@ -85,6 +85,10 @@ String MqttNowBase::getName() {
   return _name;
 }
 
+void MqttNowBase::getMac(uint8_t *macaddr) {
+  getmac(macaddr);
+}
+
 ComponentType MqttNowBase::getType() {
   return _type;
 }

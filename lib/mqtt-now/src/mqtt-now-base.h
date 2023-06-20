@@ -92,7 +92,8 @@ class MqttNowBase {
 
     void
       setName(char* name),
-      setType(ComponentType type);
+      setType(ComponentType type),
+      getMac(uint8_t *macaddr);
 
     ComponentType getType();
     

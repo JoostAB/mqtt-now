@@ -1,7 +1,7 @@
 /**
  * @file mqtt-now-client.h
  * @author Joost Bloemsma (joost.a@bloemsma.net)
- * @brief 
+ * @brief MQTT endpoint of the esp-now network.
  * @version 0.1
  * @date 2022-02-28
  * 

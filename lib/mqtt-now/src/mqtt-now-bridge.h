@@ -1,7 +1,7 @@
 /**
  * @file mqtt-now-bridge.h
  * @author Joost Bloemsma (joost.a@bloemsma.net)
- * @brief 
+ * @brief Defines the serial protocol between mqtt-client and controller
  * @version 0.1
  * @date 2022-04-12
  * 

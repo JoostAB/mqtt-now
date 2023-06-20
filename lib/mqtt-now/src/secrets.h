@@ -24,4 +24,9 @@
 #define WIFI_SSID "myssid_name"
 #define WIFI_PW "myssid_pw"
 
+#ifndef __UUID_SET__
+#define __UUID_SET__ 1
+const uint8_t network_uuid[16] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+#endif
+
 #endif // __SECRETS_H__
