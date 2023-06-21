@@ -128,10 +128,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add5e83722adfdc5a2a2b4d990446db0a inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4da73e319bca8c4b42cdacc231d42857 inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a4da73e319bca8c4b42cdacc231d42857">setType</a> (<a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0">ComponentType</a> type)</td></tr>
 <tr class="separator:a4da73e319bca8c4b42cdacc231d42857 inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac89b9c1209b137f3d01cc66066d6c127 inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#ac89b9c1209b137f3d01cc66066d6c127">getMac</a> (uint8_t *macaddr)</td></tr>
+<tr class="separator:ac89b9c1209b137f3d01cc66066d6c127 inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98586362b44c12a839e9b914b343d2bf inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0">ComponentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a98586362b44c12a839e9b914b343d2bf">getType</a> ()</td></tr>
 <tr class="separator:a98586362b44c12a839e9b914b343d2bf inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a327940bdc8cb24a841c57e1a828efbbe inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a327940bdc8cb24a841c57e1a828efbbe">getName</a> ()</td></tr>
-<tr class="separator:a327940bdc8cb24a841c57e1a828efbbe inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84ff3f29c74167d217226301d196fea0 inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a84ff3f29c74167d217226301d196fea0">getName</a> ()</td></tr>
+<tr class="separator:a84ff3f29c74167d217226301d196fea0 inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ecdf7ae6f352ae8a9a67fc95c9c3e22 inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a6ecdf7ae6f352ae8a9a67fc95c9c3e22">getNodeId</a> ()</td></tr>
 <tr class="separator:a6ecdf7ae6f352ae8a9a67fc95c9c3e22 inherit pub_methods_class_mqtt_now_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a9977ce37f748fcf41613e02ce149d2 inherit pub_methods_class_mqtt_now_base"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a4a9977ce37f748fcf41613e02ce149d2">begin</a> ()</td></tr>
@@ -145,8 +147,18 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a3129e2c326b33d1a8305f53da601456a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1792ef5733929a5b4b1a7abee70d66b3"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a1792ef5733929a5b4b1a7abee70d66b3">addPeer</a> (esp_now_peer_info_t *peer)</td></tr>
 <tr class="separator:a1792ef5733929a5b4b1a7abee70d66b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2881a66dc6c8925647e05622f41de189"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a2881a66dc6c8925647e05622f41de189">sendMessage</a> (uint8_t type, <a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg, uint8_t *macReceive)</td></tr>
-<tr class="separator:a2881a66dc6c8925647e05622f41de189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac46d10cf626a447751d98dcf7ac3576c"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#ac46d10cf626a447751d98dcf7ac3576c">sendMessage</a> (uint8_t type, <a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg, const uint8_t *macReceive)</td></tr>
+<tr class="separator:ac46d10cf626a447751d98dcf7ac3576c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfe36144e82ae7b6458e6db4b1c2faba"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#adfe36144e82ae7b6458e6db4b1c2faba">sendMessage</a> (<a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg, const uint8_t *macReceive)</td></tr>
+<tr class="separator:adfe36144e82ae7b6458e6db4b1c2faba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1389b4486c74a6370092eaf9aa7f7e37"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a1389b4486c74a6370092eaf9aa7f7e37">sendIntroMessage</a> (uint8_t category, char friendlyName[30], const uint8_t *macReceiver)</td></tr>
+<tr class="separator:a1389b4486c74a6370092eaf9aa7f7e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4c929c0498c36e93d729efbae2ed897"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#ad4c929c0498c36e93d729efbae2ed897">sendWelcomeMessage</a> (const uint8_t *macReceiver)</td></tr>
+<tr class="separator:ad4c929c0498c36e93d729efbae2ed897"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ff688a6f1d227668934ff4ef3424cb"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#ae0ff688a6f1d227668934ff4ef3424cb">sendReqCfgMessage</a> (const uint8_t *macReceiver)</td></tr>
+<tr class="separator:ae0ff688a6f1d227668934ff4ef3424cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5c0529e1b7c6541dbbfbc155a5817f"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#aeb5c0529e1b7c6541dbbfbc155a5817f">sendErrorMessage</a> (uint8_t error_code, const char error_msg[240], const uint8_t *macReceiver)</td></tr>
+<tr class="separator:aeb5c0529e1b7c6541dbbfbc155a5817f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4001bafa5ee5bddd820c695f3eba099f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a4001bafa5ee5bddd820c695f3eba099f">getMessageStruct</a> (uint8_t type, <a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg)</td></tr>
 <tr class="separator:a4001bafa5ee5bddd820c695f3eba099f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_mqtt_now_base"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_mqtt_now_base')"><img src="../../closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a></td></tr>
@@ -168,7 +180,7 @@ Protected Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Callback prototypes </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d2/de5/mqtt-now-node_8h_source.html#l00096">96</a> of file <a class="el" href="../../d2/de5/mqtt-now-node_8h_source.html">mqtt-now-node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d2/de5/mqtt-now-node_8h_source.html#l00104">104</a> of file <a class="el" href="../../d2/de5/mqtt-now-node_8h_source.html">mqtt-now-node.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a252a527b1f66cbf944007203574433d0" name="a252a527b1f66cbf944007203574433d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a252a527b1f66cbf944007203574433d0">&#9670;&#160;</a></span>MqttNowNode()</h2>
@@ -327,7 +339,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00149">149</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00190">190</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -381,8 +393,134 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2881a66dc6c8925647e05622f41de189" name="a2881a66dc6c8925647e05622f41de189"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2881a66dc6c8925647e05622f41de189">&#9670;&#160;</a></span>sendMessage()</h2>
+<a id="aeb5c0529e1b7c6541dbbfbc155a5817f" name="aeb5c0529e1b7c6541dbbfbc155a5817f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5c0529e1b7c6541dbbfbc155a5817f">&#9670;&#160;</a></span>sendErrorMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t MqttNowNode::sendErrorMessage </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>error_code</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>error_msg</em>[240], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>macReceiver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00158">158</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1389b4486c74a6370092eaf9aa7f7e37" name="a1389b4486c74a6370092eaf9aa7f7e37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1389b4486c74a6370092eaf9aa7f7e37">&#9670;&#160;</a></span>sendIntroMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t MqttNowNode::sendIntroMessage </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>friendlyName</em>[30], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>macReceiver</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00136">136</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+
+</div>
+</div>
+<a id="adfe36144e82ae7b6458e6db4b1c2faba" name="adfe36144e82ae7b6458e6db4b1c2faba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfe36144e82ae7b6458e6db4b1c2faba">&#9670;&#160;</a></span>sendMessage() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t MqttNowNode::sendMessage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>macReceive</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00166">166</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac46d10cf626a447751d98dcf7ac3576c" name="ac46d10cf626a447751d98dcf7ac3576c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac46d10cf626a447751d98dcf7ac3576c">&#9670;&#160;</a></span>sendMessage() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -405,7 +543,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
           <td class="paramname"><em>macReceive</em>&#160;</td>
         </tr>
         <tr>
@@ -421,7 +559,63 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00136">136</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00174">174</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae0ff688a6f1d227668934ff4ef3424cb" name="ae0ff688a6f1d227668934ff4ef3424cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0ff688a6f1d227668934ff4ef3424cb">&#9670;&#160;</a></span>sendReqCfgMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t MqttNowNode::sendReqCfgMessage </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>macReceiver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00151">151</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad4c929c0498c36e93d729efbae2ed897" name="ad4c929c0498c36e93d729efbae2ed897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4c929c0498c36e93d729efbae2ed897">&#9670;&#160;</a></span>sendWelcomeMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">esp_err_t MqttNowNode::sendWelcomeMessage </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>macReceiver</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00144">144</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>

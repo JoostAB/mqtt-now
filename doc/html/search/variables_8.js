@@ -11,7 +11,8 @@ var searchData=
   ['msgtype_8',['msgType',['../d6/d15/structstruct__msg.html#aba543b5b71d2bb064ce1a68c09a81d2d',1,'struct_msg']]],
   ['msgtypeconfig_9',['msgTypeConfig',['../d2/de5/mqtt-now-node_8h.html#a92236a5ba025527cfc460babe357ec3a',1,'mqtt-now-node.h']]],
   ['msgtypedata_10',['msgTypeData',['../d2/de5/mqtt-now-node_8h.html#afca57b8756c035fdae4cb12d88be614e',1,'mqtt-now-node.h']]],
-  ['msgtypeintro_11',['msgTypeIntro',['../d2/de5/mqtt-now-node_8h.html#aee7aedccccfcb1a83e38571083d6714f',1,'mqtt-now-node.h']]],
-  ['msgtypereqconfig_12',['msgTypeReqConfig',['../d2/de5/mqtt-now-node_8h.html#ae0421e7c3b8f864ab56fdd856c7a649f',1,'mqtt-now-node.h']]],
-  ['msgtypewelcome_13',['msgTypeWelcome',['../d2/de5/mqtt-now-node_8h.html#a5489187d5a133082de7979dfac63e682',1,'mqtt-now-node.h']]]
+  ['msgtypeerror_11',['msgTypeError',['../d2/de5/mqtt-now-node_8h.html#a8e632266c3e07888ed89b9fdb54f9767',1,'mqtt-now-node.h']]],
+  ['msgtypeintro_12',['msgTypeIntro',['../d2/de5/mqtt-now-node_8h.html#aee7aedccccfcb1a83e38571083d6714f',1,'mqtt-now-node.h']]],
+  ['msgtypereqconfig_13',['msgTypeReqConfig',['../d2/de5/mqtt-now-node_8h.html#ae0421e7c3b8f864ab56fdd856c7a649f',1,'mqtt-now-node.h']]],
+  ['msgtypewelcome_14',['msgTypeWelcome',['../d2/de5/mqtt-now-node_8h.html#a5489187d5a133082de7979dfac63e682',1,'mqtt-now-node.h']]]
 ];

@@ -2,7 +2,8 @@ var class_mqtt_now_base =
 [
     [ "MqttNowBase", "da/dc7/class_mqtt_now_base.html#af6bfbb204b3a991f13234da36ed060c5", null ],
     [ "begin", "da/dc7/class_mqtt_now_base.html#a4a9977ce37f748fcf41613e02ce149d2", null ],
-    [ "getName", "da/dc7/class_mqtt_now_base.html#a327940bdc8cb24a841c57e1a828efbbe", null ],
+    [ "getMac", "da/dc7/class_mqtt_now_base.html#ac89b9c1209b137f3d01cc66066d6c127", null ],
+    [ "getName", "da/dc7/class_mqtt_now_base.html#a84ff3f29c74167d217226301d196fea0", null ],
     [ "getNodeId", "da/dc7/class_mqtt_now_base.html#a6ecdf7ae6f352ae8a9a67fc95c9c3e22", null ],
     [ "getNodeStruct", "da/dc7/class_mqtt_now_base.html#ab9a66a80793645be746982053c05cc80", null ],
     [ "getType", "da/dc7/class_mqtt_now_base.html#a98586362b44c12a839e9b914b343d2bf", null ],
