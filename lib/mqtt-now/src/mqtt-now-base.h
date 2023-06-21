@@ -28,6 +28,13 @@ extern WServer server;
 extern bool stopWifiAfterOta; 
 // extern bool serverRunning ;
 
+/**
+ * @brief Enumeration of possible component types.
+ * 
+ * Can be used by a clientapplication like HomeAssistant to define some basic
+ * properties like capabilities or icon.
+ * 
+ */
 enum ComponentType {
   noneType,
   controllerType,
@@ -86,6 +93,12 @@ struct Node {
   String id;
 } ;
 
+/**
+ * @brief Base class for all MqttNow classes
+ * 
+ * Defines basic functionalities.
+ * 
+ */
 class MqttNowBase {
   public:
     MqttNowBase();

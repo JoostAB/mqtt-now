@@ -26,8 +26,10 @@
   #include <WiFi.h>
 #endif
 
+typedef uint8_t msgType;
+
 typedef struct msg_base {
-  uint8_t id;
+  msgType msgtype;
 } msg_base;
 
 typedef struct msg_intro:msg_base {
@@ -66,7 +68,8 @@ typedef struct msg_error:msg_base {
 } msg_error;
 
 /**
- * Wrapper structure. 
+ * @brief Message Wrapper structure. 
+ * 
  * The actual message that is being send and contains the message
  * type and the message structure.
  * Type can be one of:
@@ -76,25 +79,40 @@ typedef struct msg_error:msg_base {
  * - 4: Config message
  * - 5: Data message
  * - 6: Error message
- **/
+ * 
+ */
 typedef struct struct_msg {
-  uint8_t msgType;
+  msgType type;
   uint8_t msgSize;
   msg_base* contents;
 } struct_msg;
 
-const uint8_t msgTypeIntro     = 1;
-const uint8_t msgTypeWelcome   = 2;
-const uint8_t msgTypeReqConfig = 3;
-const uint8_t msgTypeConfig    = 4;
-const uint8_t msgTypeData      = 5;
-const uint8_t msgTypeError     = 6;
+const msgType msgTypeIntro     = 1;
+const msgType msgTypeWelcome   = 2;
+const msgType msgTypeReqConfig = 3;
+const msgType msgTypeConfig    = 4;
+const msgType msgTypeData      = 5;
+const msgType msgTypeError     = 6;
 
-/*************************/
-/** Callback prototypes **/
-/*************************/
+/*************************
+ *  Callback prototypes  * 
+ *************************/
 #if defined(ESP32)
+  /**
+   * @brief Is called whenever esp-now data is sent
+   * 
+   * @param mac_addr Mac address of the receiver
+   * @param status One of esp_now_send_status_t
+   */
   void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status);
+
+  /**
+   * @brief Is called whenever esp-now data is received
+   * 
+   * @param mac MAC address of the sender
+   * @param incomingData Array of bytes containing the incoming data
+   * @param len Nr of bytes of data
+   */
   void onDataReceiver(const uint8_t * mac, const uint8_t *incomingData, int len);
 #elif defined(ESP8266)
   void OnDataSent(uint8_t *mac_addr, uint8_t status);
@@ -106,18 +124,37 @@ class MqttNowNode : public MqttNowBase {
     MqttNowNode();
 
     void
+      /**
+       * @brief To be called from main setup
+       * 
+       */
       begin(),
+
+      /**
+       * @brief To be called as often as possible from main loop
+       * 
+       */
       update();
 
     virtual void 
-      messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) = 0;
+      /**
+       * @brief Is triggered whenever a message is received over the esp-now network from another MqttNowNode.
+       * 
+       * To be implemented in concrete sub-classes
+       * 
+       * @param macFrom Origin MAC address
+       * @param type Type of message (one of msgType)
+       * @param msg 
+       * @param len 
+       */
+      messageReceived(const uint8_t *macFrom, msgType type, msg_base *msg, uint8_t len) = 0;
     
   
   protected:
     esp_err_t 
       addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false),
       addPeer(esp_now_peer_info_t *peer),
-      sendMessage(uint8_t type, msg_base *msg, const uint8_t *macReceive),
+      sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive),
       sendMessage(msg_base *msg, const uint8_t *macReceive),
       sendIntroMessage(uint8_t category, char friendlyName[30], const uint8_t *macReceiver),
       sendWelcomeMessage(const uint8_t *macReceiver),
@@ -126,7 +163,7 @@ class MqttNowNode : public MqttNowBase {
 
 
     
-    result_t getMessageStruct(uint8_t type, msg_base *msg);
+    result_t getMessageStruct(msgType type, msg_base *msg);
   
 };
 

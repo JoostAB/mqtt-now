@@ -21,6 +21,14 @@ class MqttNowSlave : public MqttNowNode {
     MqttNowSlave();
 
     void
+    /**
+       * @brief Is triggered whenever a message is received over the esp-now network from an MqttNowNode.
+       * 
+       * @param macFrom Origin MAC address
+       * @param type Type of message (one of msgType)
+       * @param msg 
+       * @param len 
+       */
       messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len),
       begin(),
       update(); 

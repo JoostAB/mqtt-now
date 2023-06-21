@@ -24,12 +24,26 @@
 
 using namespace std;
 
+/**
+ * @brief Controller of the MqttNow network. 
+ * 
+ * Relays all messages between the MqttNowClient and the MqttNowNode's in the esp-now network.
+ * 
+ */
 class MqttNowController : public MqttNowNode {
   public:
     MqttNowController();
 
     void
-      messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len),
+      /**
+       * @brief Is triggered whenever a message is received over the esp-now network from an MqttNowNode.
+       * 
+       * @param macFrom Origin MAC address
+       * @param type Type of message (one of msgType)
+       * @param msg 
+       * @param len 
+       */
+      messageReceived(const uint8_t *macFrom, msgType type, msg_base *msg, uint8_t len),
       begin(),
       update(); 
   
