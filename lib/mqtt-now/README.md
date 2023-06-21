@@ -355,6 +355,9 @@ None yet
 
 ### Compilation
 
+Best to build this in a PIO environment, since all configuration is done.
+In platformio.ini just select the envoironment you want to build, or extend one to add/modify flags.
+
 # Wishlist
 
 - Dynamic esp-now channel
