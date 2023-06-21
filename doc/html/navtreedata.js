@@ -94,7 +94,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"df/d94/class_mqtt_now_node.html#ae0ff688a6f1d227668934ff4ef3424cb"
+"df/d94/class_mqtt_now_node.html#adfe36144e82ae7b6458e6db4b1c2faba"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -72,9 +72,6 @@ esp_now_peer_info_t peerInfo;
   node->messageReceived(mac, wrapper.type, wrapper.contents, wrapper.msgSize);
 }
 
-MqttNowNode::MqttNowNode() : MqttNowBase() {
-  me = this;
-};
 
 void MqttNowNode::begin() {
   node = this;

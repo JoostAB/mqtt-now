@@ -7,5 +7,6 @@ var searchData=
   ['msg_5ferror_4',['msg_error',['../d2/de5/mqtt-now-node_8h.html#ae26ac9602e314815b1ea834d5edd17d6',1,'mqtt-now-node.h']]],
   ['msg_5fintro_5',['msg_intro',['../d2/de5/mqtt-now-node_8h.html#a35b0331119d99459a01108d750140b0a',1,'mqtt-now-node.h']]],
   ['msg_5freqconfig_6',['msg_reqconfig',['../d2/de5/mqtt-now-node_8h.html#ad1a6bac9b55cdcd624df9dc63ce07468',1,'mqtt-now-node.h']]],
-  ['msg_5fwelcome_7',['msg_welcome',['../d2/de5/mqtt-now-node_8h.html#af77f4c0baeb891b10730be97a2359624',1,'mqtt-now-node.h']]]
+  ['msg_5fwelcome_7',['msg_welcome',['../d2/de5/mqtt-now-node_8h.html#af77f4c0baeb891b10730be97a2359624',1,'mqtt-now-node.h']]],
+  ['msgtype_8',['msgType',['../d2/de5/mqtt-now-node_8h.html#ad8afe79a550b1963f208de0ca109e853',1,'mqtt-now-node.h']]]
 ];
