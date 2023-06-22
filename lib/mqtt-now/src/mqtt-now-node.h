@@ -28,7 +28,10 @@
 
 typedef uint8_t msgType;
 
+typedef uint8_t msgType;
+
 typedef struct msg_base {
+  msgType msgtype;
   msgType msgtype;
 } msg_base;
 
@@ -137,6 +140,16 @@ class MqttNowNode : public MqttNowBase {
       update();
 
     virtual void 
+      /**
+       * @brief Is triggered whenever a message is received over the esp-now network from another MqttNowNode.
+       * 
+       * To be implemented in concrete sub-classes
+       * 
+       * @param macFrom Origin MAC address
+       * @param type Type of message (one of msgType)
+       * @param msg 
+       * @param len 
+       */
       messageReceived(const uint8_t *macFrom, msgType type, msg_base *msg, uint8_t len) = 0;
     
   

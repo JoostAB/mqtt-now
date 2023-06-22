@@ -105,8 +105,8 @@ Inheritance diagram for MqttNowNode:</div>
  <div class="center">
   <img src="../../df/d94/class_mqtt_now_node.png" usemap="#MqttNowNode_map" alt=""/>
   <map id="MqttNowNode_map" name="MqttNowNode_map">
-<area href="../../da/dc7/class_mqtt_now_base.html" title="Base class for all MqttNow classes." alt="MqttNowBase" shape="rect" coords="63,0,179,24"/>
-<area href="../../d1/d50/class_mqtt_now_controller.html" title="Controller of the MqttNow network." alt="MqttNowController" shape="rect" coords="0,112,116,136"/>
+<area href="../../da/dc7/class_mqtt_now_base.html" alt="MqttNowBase" shape="rect" coords="63,0,179,24"/>
+<area href="../../d1/d50/class_mqtt_now_controller.html" alt="MqttNowController" shape="rect" coords="0,112,116,136"/>
 <area href="../../d9/d16/class_mqtt_now_slave.html" alt="MqttNowSlave" shape="rect" coords="126,112,242,136"/>
   </map>
 </div></div>
@@ -116,8 +116,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a252a527b1f66cbf944007203574433d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a252a527b1f66cbf944007203574433d0">MqttNowNode</a> ()</td></tr>
 <tr class="separator:a252a527b1f66cbf944007203574433d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8841ba481c5bfe43a46de01b6d746342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">begin</a> ()</td></tr>
+<tr class="memdesc:a8841ba481c5bfe43a46de01b6d746342"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be called from main setup.  <a href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">More...</a><br /></td></tr>
 <tr class="separator:a8841ba481c5bfe43a46de01b6d746342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a451947f37060386e61993c31ff817f1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a451947f37060386e61993c31ff817f1c">update</a> ()</td></tr>
+<tr class="memdesc:a451947f37060386e61993c31ff817f1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be called as often as possible from main loop.  <a href="../../df/d94/class_mqtt_now_node.html#a451947f37060386e61993c31ff817f1c">More...</a><br /></td></tr>
 <tr class="separator:a451947f37060386e61993c31ff817f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32214ec1c26164df1ed7c6207c8ee7b0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a32214ec1c26164df1ed7c6207c8ee7b0">messageReceived</a> (const uint8_t *macFrom, <a class="el" href="../../d2/de5/mqtt-now-node_8h.html#ad8afe79a550b1963f208de0ca109e853">msgType</a> type, <a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg, uint8_t len)=0</td></tr>
 <tr class="separator:a32214ec1c26164df1ed7c6207c8ee7b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,8 +198,6 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00075">75</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -225,7 +225,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00104">104</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00103">103</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -269,7 +269,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00116">116</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00115">115</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,11 +296,13 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>To be called from main setup. </p>
+
 <p>Reimplemented from <a class="el" href="../../da/dc7/class_mqtt_now_base.html#a4a9977ce37f748fcf41613e02ce149d2">MqttNowBase</a>.</p>
 
 <p>Reimplemented in <a class="el" href="../../d9/d16/class_mqtt_now_slave.html#adfaf0c8c20c1505ab9cfd2f053e9f851">MqttNowSlave</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00077">77</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00076">76</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -338,7 +340,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00190">190</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00189">189</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -432,7 +434,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00158">158</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00157">157</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -476,7 +478,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00136">136</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00135">135</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -514,7 +516,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00166">166</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00165">165</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -558,7 +560,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00174">174</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00173">173</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -586,7 +588,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00151">151</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00150">150</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -614,7 +616,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00144">144</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00143">143</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +635,9 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00096">96</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
+<p>To be called as often as possible from main loop. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html#l00095">95</a> of file <a class="el" href="../../db/d76/mqtt-now-node_8cpp_source.html">mqtt-now-node.cpp</a>.</p>
 
 </div>
 </div>

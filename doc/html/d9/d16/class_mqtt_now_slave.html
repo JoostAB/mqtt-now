@@ -105,7 +105,7 @@ Inheritance diagram for MqttNowSlave:</div>
   <img src="../../d9/d16/class_mqtt_now_slave.png" usemap="#MqttNowSlave_map" alt=""/>
   <map id="MqttNowSlave_map" name="MqttNowSlave_map">
 <area href="../../df/d94/class_mqtt_now_node.html" alt="MqttNowNode" shape="rect" coords="0,56,92,80"/>
-<area href="../../da/dc7/class_mqtt_now_base.html" title="Base class for all MqttNow classes." alt="MqttNowBase" shape="rect" coords="0,0,92,24"/>
+<area href="../../da/dc7/class_mqtt_now_base.html" alt="MqttNowBase" shape="rect" coords="0,0,92,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -114,8 +114,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9fb608794ae1d47e69bc7179716590e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/class_mqtt_now_slave.html#a9fb608794ae1d47e69bc7179716590e1">MqttNowSlave</a> ()</td></tr>
 <tr class="separator:a9fb608794ae1d47e69bc7179716590e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bc05ade9f780e8157b4b61fc4d3d34f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/class_mqtt_now_slave.html#a7bc05ade9f780e8157b4b61fc4d3d34f">messageReceived</a> (const uint8_t *macFrom, uint8_t type, <a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg, uint8_t len)</td></tr>
+<tr class="memdesc:a7bc05ade9f780e8157b4b61fc4d3d34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is triggered whenever a message is received over the esp-now network from an <a class="el" href="../../df/d94/class_mqtt_now_node.html">MqttNowNode</a>.  <a href="../../d9/d16/class_mqtt_now_slave.html#a7bc05ade9f780e8157b4b61fc4d3d34f">More...</a><br /></td></tr>
 <tr class="separator:a7bc05ade9f780e8157b4b61fc4d3d34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfaf0c8c20c1505ab9cfd2f053e9f851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/class_mqtt_now_slave.html#adfaf0c8c20c1505ab9cfd2f053e9f851">begin</a> ()</td></tr>
+<tr class="memdesc:adfaf0c8c20c1505ab9cfd2f053e9f851"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be called from main setup.  <a href="../../d9/d16/class_mqtt_now_slave.html#adfaf0c8c20c1505ab9cfd2f053e9f851">More...</a><br /></td></tr>
 <tr class="separator:adfaf0c8c20c1505ab9cfd2f053e9f851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a043c98eb09515fc0cc4cb67e9ea0df9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d16/class_mqtt_now_slave.html#a043c98eb09515fc0cc4cb67e9ea0df9d">update</a> ()</td></tr>
 <tr class="separator:a043c98eb09515fc0cc4cb67e9ea0df9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,8 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a252a527b1f66cbf944007203574433d0 inherit pub_methods_class_mqtt_now_node"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a252a527b1f66cbf944007203574433d0">MqttNowNode</a> ()</td></tr>
 <tr class="separator:a252a527b1f66cbf944007203574433d0 inherit pub_methods_class_mqtt_now_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8841ba481c5bfe43a46de01b6d746342 inherit pub_methods_class_mqtt_now_node"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">begin</a> ()</td></tr>
+<tr class="memdesc:a8841ba481c5bfe43a46de01b6d746342 inherit pub_methods_class_mqtt_now_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be called from main setup.  <a href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">More...</a><br /></td></tr>
 <tr class="separator:a8841ba481c5bfe43a46de01b6d746342 inherit pub_methods_class_mqtt_now_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a451947f37060386e61993c31ff817f1c inherit pub_methods_class_mqtt_now_node"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a451947f37060386e61993c31ff817f1c">update</a> ()</td></tr>
+<tr class="memdesc:a451947f37060386e61993c31ff817f1c inherit pub_methods_class_mqtt_now_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be called as often as possible from main loop.  <a href="../../df/d94/class_mqtt_now_node.html#a451947f37060386e61993c31ff817f1c">More...</a><br /></td></tr>
 <tr class="separator:a451947f37060386e61993c31ff817f1c inherit pub_methods_class_mqtt_now_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32214ec1c26164df1ed7c6207c8ee7b0 inherit pub_methods_class_mqtt_now_node"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d94/class_mqtt_now_node.html#a32214ec1c26164df1ed7c6207c8ee7b0">messageReceived</a> (const uint8_t *macFrom, <a class="el" href="../../d2/de5/mqtt-now-node_8h.html#ad8afe79a550b1963f208de0ca109e853">msgType</a> type, <a class="el" href="../../db/d5c/structmsg__base.html">msg_base</a> *msg, uint8_t len)=0</td></tr>
 <tr class="separator:a32214ec1c26164df1ed7c6207c8ee7b0 inherit pub_methods_class_mqtt_now_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,6 +235,8 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>To be called from main setup. </p>
 
 <p>Reimplemented from <a class="el" href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">MqttNowNode</a>.</p>
 
