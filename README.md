@@ -4,4 +4,4 @@
 
 ## Overview
 
-Reference implementation of the MQTT-Now library (see ./lib)
+Reference implementation of the MQTT-Now library (see [./lib/mqtt-now](tree/master/lib/mqtt-now/))

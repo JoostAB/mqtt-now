@@ -99,7 +99,10 @@ MqttNowClient::MqttNowClient(
   stopWifiAfterOta = false;
 }
 
-/** To be called from void setup() **/
+/**
+ * @brief To be called from main setup
+ * 
+ */
 void MqttNowClient::begin() {
   MqttNowBase::begin();
 
@@ -154,7 +157,10 @@ void MqttNowClient::_setupWifi() {
   // PRINTLNSA(WiFi.macAddress());
 }
 
-/** To be called from void loop() **/
+/**
+ * @brief To be called from main loop
+ * 
+ */
 void MqttNowClient::update() {
   MqttNowBase::update();
 

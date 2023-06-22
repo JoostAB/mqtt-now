@@ -35,7 +35,13 @@
 #define MQTT_HOST "none"
 #endif
 
+/**
+ * @brief MQTT topic used for auto discovery
+ * 
+ */
+#ifndef HA_DISCOVERY_TOPIC
 #define HA_DISCOVERY_TOPIC "homeassistant"
+#endif
 
 #if !defined(COM)
 #define COM Serial
@@ -44,6 +50,12 @@
 // Callback
 void mqttMsgReceived(char* topic, byte* payload, unsigned int length);
 
+/**
+ * @brief The MQTT client that connects to an MQTT broker over HTTP.
+ * 
+ * Is the bridge between the MQTT broker (over HTTP) and the MQTT-Now controller (over serial)
+ * 
+ */
 class MqttNowClient : public MqttNowBase {
   public:
     MqttNowClient(
@@ -65,7 +77,16 @@ class MqttNowClient : public MqttNowBase {
       handleCommand();
 
     void
+      /**
+       * @brief To be called from main setup
+       * 
+       */
       begin(),
+
+      /**
+       * @brief To be called from main loop
+       * 
+       */
       update(),
       setRootTopic(String rootTopic),
       setCmdTopic(String cmdTopic),

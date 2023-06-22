@@ -59,17 +59,17 @@ esp_now_peer_info_t peerInfo;
   PRINTLNS("Message received.");
   memcpy(&wrapper, incomingData, len);
   #ifndef MQTT_NOW_CONTROLLER
-    if (wrapper.msgType == msgTypeIntro || wrapper.msgType == msgTypeReqConfig) {
+    if (wrapper.type == msgTypeIntro || wrapper.type == msgTypeReqConfig) {
       // These messages are only intended for the controller, so ignore them
       return;
     }
   #else
-    if (wrapper.msgType == msgTypeConfig || wrapper.msgType == msgTypeWelcome) {
+    if (wrapper.type == msgTypeConfig || wrapper.type == msgTypeWelcome) {
       // These messages are NOT intended for the controller
       return;
     }
   #endif
-  node->messageReceived(mac, wrapper.msgType, wrapper.contents, wrapper.msgSize);
+  node->messageReceived(mac, wrapper.type, wrapper.contents, wrapper.msgSize);
 }
 
 MqttNowNode::MqttNowNode() : MqttNowBase() {};
@@ -165,13 +165,13 @@ esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg
 
 esp_err_t MqttNowNode::sendMessage(msg_base *msg, const uint8_t *macReceive) {
   struct_msg wrapper;
-  wrapper.msgType = msg->id;
+  wrapper.type = msg->msgtype;
   wrapper.msgSize = sizeof(&msg);
   memcpy(wrapper.contents, msg, wrapper.msgSize);
   return esp_now_send(macReceive, (uint8_t *) &wrapper, sizeof(wrapper));
 }
 
-esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, const uint8_t *macReceive) {
+esp_err_t MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive) {
   struct_msg wrapper;
   
   // wrapper.contents will be initialized in getMessageStruct, so ignore warnings
@@ -181,13 +181,13 @@ esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, const uint8_t *m
   if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
   #pragma GCC diagnostic pop
 
-  wrapper.msgType = type;
+  wrapper.type = type;
   wrapper.msgSize = sizeof(&msg);
   memcpy(wrapper.contents, msg, wrapper.msgSize);
   return esp_now_send(macReceive, (uint8_t *) &wrapper, sizeof(wrapper));
 }
 
-result_t MqttNowNode::getMessageStruct(uint8_t type, msg_base *msg) {
+result_t MqttNowNode::getMessageStruct(msgType type, msg_base *msg) {
   switch (type) {
     case msgTypeIntro:
       msg = new msg_intro;
@@ -210,7 +210,7 @@ result_t MqttNowNode::getMessageStruct(uint8_t type, msg_base *msg) {
     default:
       return result_error;
   }
-  msg->id = type;
+  msg->msgtype = type;
   return result_success;
 }
 
