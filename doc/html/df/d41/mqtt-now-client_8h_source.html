@@ -130,92 +130,92 @@ $(document).ready(function(){initNavTree('df/d41/mqtt-now-client_8h_source.html'
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">// Callback</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../df/d41/mqtt-now-client_8h.html#a1d40224fd8106163ff7e54bc66a4d808">mqttMsgReceived</a>(<span class="keywordtype">char</span>* topic, <span class="keywordtype">byte</span>* payload, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> length);</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html">   47</a></span><span class="keyword">class </span><a class="code hl_class" href="../../da/ddc/class_mqtt_now_client.html">MqttNowClient</a> : <span class="keyword">public</span> <a class="code hl_class" href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a> {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="../../da/ddc/class_mqtt_now_client.html">MqttNowClient</a>(</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      String host = <a class="code hl_define" href="../../df/d41/mqtt-now-client_8h.html#a0b26496e970e561304bd542f701fe223">MQTT_HOST</a>, </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      uint16_t mqttPort = <a class="code hl_define" href="../../df/d41/mqtt-now-client_8h.html#aa8632baff6bbb5004385998918f1e6bd">MQTT_PORT</a>,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      String rootTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0d02ab9c916ff57c25541d7bcf2fdf14">MQTT_ROOT_TOPIC</a>, </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>      String cmdTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a2bd50ecf18bbb3a8ea9e7588403d0a14">MQTT_CMD_TOPIC</a>, </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      String statusTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a56a2aaf2bf5e6cab81fc94e1d34612fa">MQTT_STATUS_TOPIC</a>, </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      String lwtTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#abde5de4d7217bb1f3528e905c9dfdc10">MQTT_LWT_TOPIC</a>, </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      String devTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#ab381ea40cfa7b7631963ceedd49e559d">MQTT_DEV_TOPIC</a>, </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      String onCmd = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a38ea3ab00b6236e094538032edd7de9e">MQTT_ON_CMD</a>, </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      String offCmd = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a128bd1e225d05aca26faeba460c1b0dd">MQTT_OFF_CMD</a>, </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      String onlineLwt = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#abb870a0ec38b4df693569e202332b9f1">MQTT_ONLINE_LWT</a>,</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      String offlineLwt = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#aebb331d86dce98515e6443f5e1f65ecb">MQTT_OFFLINE_LWT</a>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">static</span> <span class="keywordtype">void</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html#a92e97bd616dbf47407a789b0fc1f4184">   63</a></span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a92e97bd616dbf47407a789b0fc1f4184">handleUpdate</a>(),</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html#af77926bf88b6bcc780388b91864a3d5f">   64</a></span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#af77926bf88b6bcc780388b91864a3d5f">handleNotFound</a>(),</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html#ad2aae265192855abe0491bafc0bab6b2">   65</a></span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ad2aae265192855abe0491bafc0bab6b2">handleCommand</a>();</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a5c2c383ea95ab4374030ab9bf2f3da04">begin</a>(),</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ab5c09e4f6d6226e7b0ecad3e89a16948">update</a>(),</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a36f1296f00f83a1830710b2e87311db1">setRootTopic</a>(String rootTopic),</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a944067085bc3d176d952109e7e958dbf">setCmdTopic</a>(String cmdTopic),</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a5bafc4b36f85a4156be63fb09db7d9e4">setstatusTopic</a>(String statusTopic),</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a6a93304446aba66c893c79ae7550b5be">setLwtTopic</a>(String lwtTopic),</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#acbdaa1ff142f709bbab711261f41c30b">setDiscoveryTopic</a>(String discoveryTopic),</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a6778851b8cda4086f0e98661e2e18cf1">setDevicesTopic</a>(String devTopic),</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a7a6330675fcfc7d78fac786e7af286cc">setOnCmd</a>(String onCmd),</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ab71c08c2c50d3eab5fee858a10242921">setOffCmd</a>(String offCmd),</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a1497bc44a6dbd66dd9bbfc0f88f5a964">setOnlineLwt</a>(String onlineLwt),</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a0e64f08a8f51685016b448cf7de2fffc">setOfflineLwt</a>(String offlineLwt);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_typedef" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ac918645cbcf1f5638baac152b4d72813">publishStatus</a>(String status),</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#af9cecac805cc4c2855d0acea83a71ffe">publishCmd</a>(String cmd),</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a81aa194048dfb77e814d5e35286079f9">publish</a>(String topic, String payload, <span class="keywordtype">bool</span> retain = <span class="keyword">false</span>, uint8_t qos = (uint8_t)1U),</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#aa35a044eae7062dc6b7d1417d32cfdf5">makeDiscoverable</a>(),</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#aa35a044eae7062dc6b7d1417d32cfdf5">makeDiscoverable</a>(<a class="code hl_struct" href="../../db/d8b/struct_node.html">Node</a> <a class="code hl_variable" href="../../db/d76/mqtt-now-node_8cpp.html#a8274a9e4ad8300a700a38a5d7eab857c">node</a>);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      _setupWifi(),</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      _callback(<span class="keywordtype">char</span>* topic, <span class="keywordtype">byte</span>* payload, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> length),</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      _reconnect();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html">   53</a></span><span class="keyword">class </span><a class="code hl_class" href="../../da/ddc/class_mqtt_now_client.html">MqttNowClient</a> : <span class="keyword">public</span> <a class="code hl_class" href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a> {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="../../da/ddc/class_mqtt_now_client.html">MqttNowClient</a>(</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      String host = <a class="code hl_define" href="../../df/d41/mqtt-now-client_8h.html#a0b26496e970e561304bd542f701fe223">MQTT_HOST</a>, </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>      uint16_t mqttPort = <a class="code hl_define" href="../../df/d41/mqtt-now-client_8h.html#aa8632baff6bbb5004385998918f1e6bd">MQTT_PORT</a>,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>      String rootTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0d02ab9c916ff57c25541d7bcf2fdf14">MQTT_ROOT_TOPIC</a>, </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>      String cmdTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a2bd50ecf18bbb3a8ea9e7588403d0a14">MQTT_CMD_TOPIC</a>, </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      String statusTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a56a2aaf2bf5e6cab81fc94e1d34612fa">MQTT_STATUS_TOPIC</a>, </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      String lwtTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#abde5de4d7217bb1f3528e905c9dfdc10">MQTT_LWT_TOPIC</a>, </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      String devTopic = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#ab381ea40cfa7b7631963ceedd49e559d">MQTT_DEV_TOPIC</a>, </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      String onCmd = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a38ea3ab00b6236e094538032edd7de9e">MQTT_ON_CMD</a>, </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>      String offCmd = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#a128bd1e225d05aca26faeba460c1b0dd">MQTT_OFF_CMD</a>, </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      String onlineLwt = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#abb870a0ec38b4df693569e202332b9f1">MQTT_ONLINE_LWT</a>,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      String offlineLwt = <a class="code hl_define" href="../../d2/d0b/mqtt-now-bridge_8h.html#aebb331d86dce98515e6443f5e1f65ecb">MQTT_OFFLINE_LWT</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">static</span> <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html#a92e97bd616dbf47407a789b0fc1f4184">   69</a></span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a92e97bd616dbf47407a789b0fc1f4184">handleUpdate</a>(),</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html#af77926bf88b6bcc780388b91864a3d5f">   70</a></span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#af77926bf88b6bcc780388b91864a3d5f">handleNotFound</a>(),</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="../../da/ddc/class_mqtt_now_client.html#ad2aae265192855abe0491bafc0bab6b2">   71</a></span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ad2aae265192855abe0491bafc0bab6b2">handleCommand</a>();</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a5c2c383ea95ab4374030ab9bf2f3da04">begin</a>(),</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ab5c09e4f6d6226e7b0ecad3e89a16948">update</a>(),</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a36f1296f00f83a1830710b2e87311db1">setRootTopic</a>(String rootTopic),</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a944067085bc3d176d952109e7e958dbf">setCmdTopic</a>(String cmdTopic),</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a5bafc4b36f85a4156be63fb09db7d9e4">setstatusTopic</a>(String statusTopic),</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a6a93304446aba66c893c79ae7550b5be">setLwtTopic</a>(String lwtTopic),</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#acbdaa1ff142f709bbab711261f41c30b">setDiscoveryTopic</a>(String discoveryTopic),</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a6778851b8cda4086f0e98661e2e18cf1">setDevicesTopic</a>(String devTopic),</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a7a6330675fcfc7d78fac786e7af286cc">setOnCmd</a>(String onCmd),</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ab71c08c2c50d3eab5fee858a10242921">setOffCmd</a>(String offCmd),</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a1497bc44a6dbd66dd9bbfc0f88f5a964">setOnlineLwt</a>(String onlineLwt),</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a0e64f08a8f51685016b448cf7de2fffc">setOfflineLwt</a>(String offlineLwt);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_typedef" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#ac918645cbcf1f5638baac152b4d72813">publishStatus</a>(String status),</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#af9cecac805cc4c2855d0acea83a71ffe">publishCmd</a>(String cmd),</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#a81aa194048dfb77e814d5e35286079f9">publish</a>(String topic, String payload, <span class="keywordtype">bool</span> retain = <span class="keyword">false</span>, uint8_t qos = (uint8_t)1U),</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#aa35a044eae7062dc6b7d1417d32cfdf5">makeDiscoverable</a>(),</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <a class="code hl_function" href="../../da/ddc/class_mqtt_now_client.html#aa35a044eae7062dc6b7d1417d32cfdf5">makeDiscoverable</a>(<a class="code hl_struct" href="../../db/d8b/struct_node.html">Node</a> <a class="code hl_variable" href="../../db/d76/mqtt-now-node_8cpp.html#a8274a9e4ad8300a700a38a5d7eab857c">node</a>);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>      </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    uint16_t _mqttPort = <a class="code hl_define" href="../../df/d41/mqtt-now-client_8h.html#aa8632baff6bbb5004385998918f1e6bd">MQTT_PORT</a>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    uint32_t _timeout = 5000;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_typedef" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      _sendMsgToController(),</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      _handleComm(),</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      _handleSubscribe(),</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      _handleUnsubscribe(),</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      _handleCommand(),</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      _handlePublish(String com = String(<span class="stringliteral">&quot;&quot;</span>));</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    String _modTopic(String topic),</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>           _getFullDiscoveryPath(<a class="code hl_struct" href="../../db/d8b/struct_node.html">Node</a> <a class="code hl_variable" href="../../db/d76/mqtt-now-node_8cpp.html#a8274a9e4ad8300a700a38a5d7eab857c">node</a>);</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    String </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      _comBuff,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>      _host,</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      _rootTopic,</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      _cmdTopic,</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      _statusTopic,</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      _lwtTopic,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      _devTopic,</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      _discoveryTopic = <span class="stringliteral">&quot;homeassistant&quot;</span>,</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      _onCmd,</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      _offCmd,</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      _onlineLwt,</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      _offlineLwt,</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      _mqttId,</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      _mqttUser,</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      _mqttPwd;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    WiFiClient* _wifiClient;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    PubSubClient* _mqttClient;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>};</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif </span><span class="comment">// __MQTT_NOW_CLIENT_H__</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="preprocessor">#endif </span><span class="comment">// MQTT_NOW_CLIENT</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      _setupWifi(),</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      _callback(<span class="keywordtype">char</span>* topic, <span class="keywordtype">byte</span>* payload, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> length),</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      _reconnect();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    uint16_t _mqttPort = <a class="code hl_define" href="../../df/d41/mqtt-now-client_8h.html#aa8632baff6bbb5004385998918f1e6bd">MQTT_PORT</a>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    uint32_t _timeout = 5000;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_typedef" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      _sendMsgToController(),</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      _handleComm(),</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      _handleSubscribe(),</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      _handleUnsubscribe(),</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      _handleCommand(),</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>      _handlePublish(String com = String(<span class="stringliteral">&quot;&quot;</span>));</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    String _modTopic(String topic),</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>           _getFullDiscoveryPath(<a class="code hl_struct" href="../../db/d8b/struct_node.html">Node</a> <a class="code hl_variable" href="../../db/d76/mqtt-now-node_8cpp.html#a8274a9e4ad8300a700a38a5d7eab857c">node</a>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    String </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      _comBuff,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      _host,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      _rootTopic,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      _cmdTopic,</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      _statusTopic,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      _lwtTopic,</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      _devTopic,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      _discoveryTopic = <span class="stringliteral">&quot;homeassistant&quot;</span>,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      _onCmd,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>      _offCmd,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>      _onlineLwt,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      _offlineLwt,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>      _mqttId,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>      _mqttUser,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>      _mqttPwd;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    WiFiClient* _wifiClient;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    PubSubClient* _mqttClient;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>};</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="preprocessor">#endif </span><span class="comment">// __MQTT_NOW_CLIENT_H__</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="preprocessor">#endif </span><span class="comment">// MQTT_NOW_CLIENT</span></div>
 <div class="ttc" id="abaseinclude_8h_html"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html">baseinclude.h</a></div></div>
-<div class="ttc" id="aclass_mqtt_now_base_html"><div class="ttname"><a href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d1b/mqtt-now-base_8h_source.html#l00089">mqtt-now-base.h:89</a></div></div>
-<div class="ttc" id="aclass_mqtt_now_client_html"><div class="ttname"><a href="../../da/ddc/class_mqtt_now_client.html">MqttNowClient</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d41/mqtt-now-client_8h_source.html#l00047">mqtt-now-client.h:47</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_base_html"><div class="ttname"><a href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a></div><div class="ttdoc">Base class for all MqttNow classes.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d1b/mqtt-now-base_8h_source.html#l00102">mqtt-now-base.h:102</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_client_html"><div class="ttname"><a href="../../da/ddc/class_mqtt_now_client.html">MqttNowClient</a></div><div class="ttdoc">The MQTT client that connects to an MQTT broker over HTTP.</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d41/mqtt-now-client_8h_source.html#l00053">mqtt-now-client.h:53</a></div></div>
 <div class="ttc" id="aclass_mqtt_now_client_html_a0e64f08a8f51685016b448cf7de2fffc"><div class="ttname"><a href="../../da/ddc/class_mqtt_now_client.html#a0e64f08a8f51685016b448cf7de2fffc">MqttNowClient::setOfflineLwt</a></div><div class="ttdeci">void setOfflineLwt(String offlineLwt)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d94/mqtt-now-client_8cpp_source.html#l00425">mqtt-now-client.cpp:425</a></div></div>
 <div class="ttc" id="aclass_mqtt_now_client_html_a1497bc44a6dbd66dd9bbfc0f88f5a964"><div class="ttname"><a href="../../da/ddc/class_mqtt_now_client.html#a1497bc44a6dbd66dd9bbfc0f88f5a964">MqttNowClient::setOnlineLwt</a></div><div class="ttdeci">void setOnlineLwt(String onlineLwt)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d94/mqtt-now-client_8cpp_source.html#l00420">mqtt-now-client.cpp:420</a></div></div>
 <div class="ttc" id="aclass_mqtt_now_client_html_a36f1296f00f83a1830710b2e87311db1"><div class="ttname"><a href="../../da/ddc/class_mqtt_now_client.html#a36f1296f00f83a1830710b2e87311db1">MqttNowClient::setRootTopic</a></div><div class="ttdeci">void setRootTopic(String rootTopic)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d94/mqtt-now-client_8cpp_source.html#l00385">mqtt-now-client.cpp:385</a></div></div>
@@ -251,7 +251,7 @@ $(document).ready(function(){initNavTree('df/d41/mqtt-now-client_8h_source.html'
 <div class="ttc" id="amqtt-now-client_8h_html_a1d40224fd8106163ff7e54bc66a4d808"><div class="ttname"><a href="../../df/d41/mqtt-now-client_8h.html#a1d40224fd8106163ff7e54bc66a4d808">mqttMsgReceived</a></div><div class="ttdeci">void mqttMsgReceived(char *topic, byte *payload, unsigned int length)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d94/mqtt-now-client_8cpp_source.html#l00018">mqtt-now-client.cpp:18</a></div></div>
 <div class="ttc" id="amqtt-now-client_8h_html_aa8632baff6bbb5004385998918f1e6bd"><div class="ttname"><a href="../../df/d41/mqtt-now-client_8h.html#aa8632baff6bbb5004385998918f1e6bd">MQTT_PORT</a></div><div class="ttdeci">#define MQTT_PORT</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d41/mqtt-now-client_8h_source.html#l00030">mqtt-now-client.h:30</a></div></div>
 <div class="ttc" id="amqtt-now-node_8cpp_html_a8274a9e4ad8300a700a38a5d7eab857c"><div class="ttname"><a href="../../db/d76/mqtt-now-node_8cpp.html#a8274a9e4ad8300a700a38a5d7eab857c">node</a></div><div class="ttdeci">MqttNowNode * node</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d76/mqtt-now-node_8cpp_source.html#l00026">mqtt-now-node.cpp:26</a></div></div>
-<div class="ttc" id="astruct_node_html"><div class="ttname"><a href="../../db/d8b/struct_node.html">Node</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d1b/mqtt-now-base_8h_source.html#l00083">mqtt-now-base.h:83</a></div></div>
+<div class="ttc" id="astruct_node_html"><div class="ttname"><a href="../../db/d8b/struct_node.html">Node</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d1b/mqtt-now-base_8h_source.html#l00090">mqtt-now-base.h:90</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

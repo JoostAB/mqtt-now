@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"df/d94/class_mqtt_now_node.html#adfe36144e82ae7b6458e6db4b1c2faba":[1,0,3,8],
 "df/d94/class_mqtt_now_node.html#ae0ff688a6f1d227668934ff4ef3424cb":[1,0,3,10],
 "df/d94/class_mqtt_now_node.html#aeb5c0529e1b7c6541dbbfbc155a5817f":[1,0,3,6],
 "dir_0810d8b69ead29f3fb410d4d3a1a1135.html":[2,0,0,0,0],
@@ -20,8 +21,8 @@ var NAVTREEINDEX1 =
 "globals_type.html":[2,1,3],
 "globals_vars.html":[2,1,2],
 "hierarchy.html":[1,2],
-"index.html":[0],
 "index.html":[],
+"index.html":[0],
 "index.html#autotoc_md1":[0,0],
 "index.html#autotoc_md10":[0,4,1],
 "index.html#autotoc_md11":[0,4,2],

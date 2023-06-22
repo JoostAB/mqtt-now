@@ -17,11 +17,12 @@ var mqtt_now_node_8h =
     [ "msg_intro", "d2/de5/mqtt-now-node_8h.html#a35b0331119d99459a01108d750140b0a", null ],
     [ "msg_reqconfig", "d2/de5/mqtt-now-node_8h.html#ad1a6bac9b55cdcd624df9dc63ce07468", null ],
     [ "msg_welcome", "d2/de5/mqtt-now-node_8h.html#af77f4c0baeb891b10730be97a2359624", null ],
+    [ "msgType", "d2/de5/mqtt-now-node_8h.html#ad8afe79a550b1963f208de0ca109e853", null ],
     [ "struct_msg", "d2/de5/mqtt-now-node_8h.html#ae7894be652915fcf46f7f5cc9c89f653", null ],
-    [ "msgTypeConfig", "d2/de5/mqtt-now-node_8h.html#a92236a5ba025527cfc460babe357ec3a", null ],
-    [ "msgTypeData", "d2/de5/mqtt-now-node_8h.html#afca57b8756c035fdae4cb12d88be614e", null ],
-    [ "msgTypeError", "d2/de5/mqtt-now-node_8h.html#a8e632266c3e07888ed89b9fdb54f9767", null ],
-    [ "msgTypeIntro", "d2/de5/mqtt-now-node_8h.html#aee7aedccccfcb1a83e38571083d6714f", null ],
-    [ "msgTypeReqConfig", "d2/de5/mqtt-now-node_8h.html#ae0421e7c3b8f864ab56fdd856c7a649f", null ],
-    [ "msgTypeWelcome", "d2/de5/mqtt-now-node_8h.html#a5489187d5a133082de7979dfac63e682", null ]
+    [ "msgTypeConfig", "d2/de5/mqtt-now-node_8h.html#add108f9272e712a72f885859576bda8d", null ],
+    [ "msgTypeData", "d2/de5/mqtt-now-node_8h.html#a3e1bba7e773efb7ddb708a3031bc3afa", null ],
+    [ "msgTypeError", "d2/de5/mqtt-now-node_8h.html#a3d9dec91a52f942e7a46b568b95a4e45", null ],
+    [ "msgTypeIntro", "d2/de5/mqtt-now-node_8h.html#ae61e2ccc92c279b959986626eaba0f3f", null ],
+    [ "msgTypeReqConfig", "d2/de5/mqtt-now-node_8h.html#ad83f4c5ca3565207259aa4bc7555e863", null ],
+    [ "msgTypeWelcome", "d2/de5/mqtt-now-node_8h.html#acd7d90936f1a8494bec4c5b90be3e427", null ]
 ];
