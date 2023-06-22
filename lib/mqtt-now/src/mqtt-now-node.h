@@ -28,10 +28,7 @@
 
 typedef uint8_t msgType;
 
-typedef uint8_t msgType;
-
 typedef struct msg_base {
-  msgType msgtype;
   msgType msgtype;
 } msg_base;
 
