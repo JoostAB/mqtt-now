@@ -101,32 +101,110 @@ struct Node {
  */
 class MqttNowBase {
   public:
+    /**
+     * @brief Construct a new Mqtt Now Base object
+     * 
+     */
     MqttNowBase();
 
     void
+      /**
+       * @brief Set the name for this node
+       * 
+       * @param name 
+       */
       setName(char* name),
+
+      /**
+       * @brief Set the type of component
+       * 
+       * @param type One of ComponentType
+       */
       setType(ComponentType type),
+
+      /**
+       * @brief Get the Mac Address of this node
+       * 
+       * @param macaddr 
+       */
       getMac(uint8_t *macaddr);
 
     ComponentType getType();
     
     String
+      /**
+       * @brief Returns the name
+       * 
+       */
       getName(),  
+
+      /**
+       * @brief Generates and returns an identifier for this node
+       * 
+       * For now this is the formatted MAC address as String
+       * 
+       */
       getNodeId();
 
     virtual void
+      /**
+       * @brief Initializes the node
+       * 
+       * To be called once from the main setup.
+       */
       begin(),
+
+      /**
+       * @brief Running loop of the node
+       * 
+       * To be called as often as possible from main loop
+       */
       update();
   
   protected:
     void 
+
+      /**
+       * @brief Start WiFi radio and connect to SSID
+       * 
+       */
       startWifi(),
+
+      /**
+       * @brief Stop the wifi radio
+       * 
+       */
       stopWifi(),
+
+      /**
+       * @brief Start the webserver
+       * 
+       */
       startServer(),
+
+      /**
+       * @brief Stop the webserver
+       * 
+       */
       stopServer(),
+
+      /**
+       * @brief Start listening to OTA packages
+       * 
+       */
       startOTA(),
+
+      /**
+       * @brief Stop listening to OTA packages
+       * 
+       */
       stopOTA();
 
+    /**
+     * @brief Generate and return a Node structure
+     * 
+     * @return Node 
+     */
     Node  getNodeStruct();
 
   private:

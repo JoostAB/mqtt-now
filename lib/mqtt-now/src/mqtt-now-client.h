@@ -58,6 +58,21 @@ void mqttMsgReceived(char* topic, byte* payload, unsigned int length);
  */
 class MqttNowClient : public MqttNowBase {
   public:
+    /**
+     * @brief Construct a new MqttNowClient object
+     * 
+     * @param host Hostname or IP address of the MQTT broker
+     * @param mqttPort Port the MQTT broker is listening to
+     * @param rootTopic MQTT root topic for MqttNow messages 
+     * @param cmdTopic Device sub-topic for commands
+     * @param statusTopic 
+     * @param lwtTopic 
+     * @param devTopic 
+     * @param onCmd 
+     * @param offCmd 
+     * @param onlineLwt 
+     * @param offlineLwt 
+     */
     MqttNowClient(
       String host = MQTT_HOST, 
       uint16_t mqttPort = MQTT_PORT,
