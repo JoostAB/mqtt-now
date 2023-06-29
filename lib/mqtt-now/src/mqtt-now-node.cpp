@@ -163,6 +163,26 @@ esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg
   return sendMessage(msg, macReceiver);
 }
 
+esp_err_t MqttNowNode::sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[4], const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver) {
+  msg_config *msg;
+  getMessageStruct(msgTypeConfig, msg);
+  strcpy(msg->wifi_ssid, wifi_ssid);
+  strcpy(msg->wifi_key, wifi_key);
+  memcpy(msg->mqtt_ip, mqtt_ip, sizeof(mqtt_ip));
+  msg->mqtt_port = mqtt_port;
+  strcpy(msg->mqtt_user, mqtt_user);
+  strcpy(msg->mqtt_pw, mqtt_pw);
+  return sendMessage(msg, macReceiver);
+}
+
+esp_err_t MqttNowNode::sendDataMessage(uint8_t data_type, const char *data, const uint8_t *macReceiver) {
+  msg_data *msg;
+  getMessageStruct(msgTypeData, msg);
+  memcpy(msg->data, data, sizeof(msg->data));
+  return sendMessage(msg, macReceiver);
+}
+      
+
 esp_err_t MqttNowNode::sendMessage(msg_base *msg, const uint8_t *macReceive) {
   struct_msg wrapper;
   wrapper.type = msg->msgtype;

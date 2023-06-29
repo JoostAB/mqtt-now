@@ -159,10 +159,11 @@ class MqttNowNode : public MqttNowBase {
       sendIntroMessage(uint8_t category, char friendlyName[30], const uint8_t *macReceiver),
       sendWelcomeMessage(const uint8_t *macReceiver),
       sendReqCfgMessage(const uint8_t *macReceiver),
+      sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[4], 
+                     const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver),
+      sendDataMessage(uint8_t data_type, const char *data, const uint8_t *macReceiver),
       sendErrorMessage(uint8_t error_code, const char error_msg[240], const uint8_t *macReceiver);
 
-
-    
     result_t getMessageStruct(msgType type, msg_base *msg);
   
 };
