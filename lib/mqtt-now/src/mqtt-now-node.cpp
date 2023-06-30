@@ -116,7 +116,7 @@ esp_err_t MqttNowNode::addPeer(esp_now_peer_info_t *peer) {
 esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
   #ifdef ESP32
     esp_now_peer_info_t info;
-    memcpy(info.peer_addr, mac_addr, 6);
+    memcpy(info.peer_addr, mac_addr, SIZE_MAC);
     info.channel = channel;
     info.encrypt = encrypt;
     if (encrypt == true) {
@@ -133,11 +133,11 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
   #endif
 }
 
-esp_err_t MqttNowNode::sendIntroMessage(uint8_t category, char friendlyName[30], const uint8_t *macReceiver) {
+esp_err_t MqttNowNode::sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver) {
   msg_intro *msg;
   getMessageStruct(msgTypeIntro, msg);
   msg->device_category = category;
-  memcpy(msg->friendly_name, friendlyName, 30);
+  memcpy(msg->friendly_name, friendlyName, SIZE_FRIENDNAME);
   return sendMessage(msg, macReceiver);
 }
 
@@ -155,7 +155,7 @@ esp_err_t MqttNowNode::sendReqCfgMessage(const uint8_t *macReceiver) {
   return sendMessage(msg, macReceiver);
 }
 
-esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg[240], const uint8_t *macReceiver) {
+esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg[SIZE_ERRMSG], const uint8_t *macReceiver) {
   msg_error *msg;
   getMessageStruct(msgTypeError, msg);
   msg->error_code = error_code;
@@ -163,22 +163,22 @@ esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg
   return sendMessage(msg, macReceiver);
 }
 
-esp_err_t MqttNowNode::sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[4], const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver) {
+esp_err_t MqttNowNode::sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[SIZE_IP], const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver) {
   msg_config *msg;
   getMessageStruct(msgTypeConfig, msg);
   strcpy(msg->wifi_ssid, wifi_ssid);
   strcpy(msg->wifi_key, wifi_key);
-  memcpy(msg->mqtt_ip, mqtt_ip, sizeof(mqtt_ip));
+  memcpy(msg->mqtt_ip, mqtt_ip, SIZE_IP);
   msg->mqtt_port = mqtt_port;
   strcpy(msg->mqtt_user, mqtt_user);
   strcpy(msg->mqtt_pw, mqtt_pw);
   return sendMessage(msg, macReceiver);
 }
 
-esp_err_t MqttNowNode::sendDataMessage(uint8_t data_type, const char *data, const uint8_t *macReceiver) {
+esp_err_t MqttNowNode::sendDataMessage(uint8_t data_type, const int8_t *data, const uint8_t *macReceiver) {
   msg_data *msg;
   getMessageStruct(msgTypeData, msg);
-  memcpy(msg->data, data, sizeof(msg->data));
+  memcpy(msg->data, data, SIZE_DATA);
   return sendMessage(msg, macReceiver);
 }
       

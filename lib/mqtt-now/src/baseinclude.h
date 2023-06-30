@@ -24,6 +24,12 @@
   //typedef WebServer WServer;
 #endif
 
+
+#ifdef M5STACK_FIRE
+  #include <Wire.h> 
+  #include <M5Stack.h> 
+#endif
+
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
 
@@ -32,3 +38,6 @@ typedef AsyncWebServer WServer;
 #if !defined(SERIALBAUDRATE)
 #define SERIALBAUDRATE 115200
 #endif
+
+#define SIZE_IP 4
+#define SIZE_MAC 6
