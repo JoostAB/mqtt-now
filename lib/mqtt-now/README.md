@@ -83,6 +83,10 @@ Which device is the controller doesn't matter, since there is no hardware differ
 
 ### Network ID
 
+The Network ID is an UUID of 16 bytes. This ID is used to make sure no 'foreign' nodes can connect to this network. Currently this ID is set compile-time, so once a node is flashed, it can only connect to a certain network.
+Also, this ID is sent each time a node boots up if not connected to a network to see if a network for it's ID is alive. Others couls pretend to be a controller, steal the ID and use it to connect to your home network. So this is not a safe algorithm yet, but the basic is there and it is now possible to run multiple MQTT-Now networks alongside eachother without any issues.
+In the future there has to be some kind of encryption, with MAC address for example to make the ID unique for each node, but recognisable for the controller.
+
 ### Node category
 
 There are several node categories. These categories describe in a nutshell what a node can and or does. They are based on the device types as defined in the [Home Assistant MQTT Discovery](https://www.home-assistant.io/docs/mqtt/discovery) documentation. This category can then be used by third party software to determine how to categorize the new node.
@@ -365,4 +369,5 @@ In platformio.ini just select the envoironment you want to build, or extend one 
 - Web interface for gateway incl OTA
 - Gateway as HASS device with entities for management and monitoring
 - OTA for nodes
+- Safer Network ID validation algorithm
 
