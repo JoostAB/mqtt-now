@@ -1,7 +1,5 @@
 # MQTTNow
 
-![Build](https://github.com/JoostAB/mqtt-now/actions/workflows/main.yml/badge.svg)
-
 ## Overview
 
 An implementation of the ESP-Now protocol in combination with MQTT.
@@ -16,7 +14,7 @@ Since I use all different kinds of hardware for my devices (different kinds of E
 be so portable as possible.
 Different build definitions are included in the platformio*.ini files.
 
-The following borads have been defined:
+The following boards have been defined:
 
 | Board               | Environment                | Chip     | Controller         | MQTTClient/Webint  |
 |---------------------|----------------------------|----------|--------------------|--------------------|
@@ -39,33 +37,63 @@ The following borads have been defined:
 
 ## Table Of Contents
 
-**[Topology](#topology)**</br>
-**[Network ID](#network-id)**</br>
-**[Node Category](#node-category)**</br>
-**[Slave](#slave)**</br>
-**[Controller](#controller)**</br>
-**[Dedicated controller](#dedicated-controller)**</br>
-**[MQTT client](#mqtt-client)**</br>
-**[Serial protocol](#serial-protocol)**</br>
-**[Protocol](#protocol)**</br>
-**[Controller selection](#controller-selection)**</br>
-**[MQTT](#mqtt)**</br>
-*[Root topic](#root-topic)*</br>
-*[Discovery topic](#discovery-topic)*</br>
-*[Command topic](#command-topic)*</br>
-*[Status topic](#status-topic)*</br>
-*[Node Command topic](#node-command-topic)*</br>
-**[Messages](#messages)**</br>
-*[Introduction message](#introduction-message)*</br>
-*[Welcome message](#welcome-message)*</br>
-*[Request config message](#request-config-message)*</br>
-*[Configuration message](#configuration-message)*</br>
-*[Data message](#data-message)*</br>
-**[Library usage](#library-usage)**</br>
-*[Includes](#includes)*</br>
-*[Defines](#defines)*</br>
-*[Examples](#examples)*</br>
-*[Compilation](#compilation)*</br>
+[TOC]
+
+
+**[Topology](#topology)**
+
+**[Network ID](#network-id)**
+
+**[Node Category](#node-category)**
+
+**[Slave](#slave)**
+
+**[Controller](#controller)**
+
+**[Dedicated controller](#dedicated-controller)**
+
+**[MQTT client](#mqtt-client)**
+
+**[Serial protocol](#serial-protocol)**
+
+**[Protocol](#protocol)**
+
+**[Controller selection](#controller-selection)**
+
+**[MQTT](#mqtt)**
+
+*[Root topic](#root-topic)*
+
+*[Discovery topic](#discovery-topic)*
+
+*[Command topic](#command-topic)*
+
+*[Status topic](#status-topic)*
+
+*[Node Command topic](#node-command-topic)*
+
+**[Messages](#messages)**
+
+*[Introduction message](#introduction-message)*
+
+*[Welcome message](#welcome-message)*
+
+*[Request config message](#request-config-message)*
+
+*[Configuration message](#configuration-message)*
+
+*[Data message](#data-message)*
+
+**[Library usage](#library-usage)**
+
+*[Includes](#includes)*
+
+*[Defines](#defines)*
+
+*[Examples](#examples)*
+
+*[Compilation](#compilation)*
+
 
 &nbsp;
 &nbsp;
