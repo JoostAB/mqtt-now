@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('da/dc7/class_mqtt_now_base.html','../.
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../da/de0/class_mqtt_now_base-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MqttNowBase Class Reference</div></div>
 </div><!--header-->
@@ -111,7 +112,7 @@ Inheritance diagram for MqttNowBase:</div>
 <area href="../../da/ddc/class_mqtt_now_client.html" title="The MQTT client that connects to an MQTT broker over HTTP." alt="MqttNowClient" shape="rect" coords="0,56,116,80"/>
 <area href="../../df/d94/class_mqtt_now_node.html" alt="MqttNowNode" shape="rect" coords="126,56,242,80"/>
 <area href="../../d1/d50/class_mqtt_now_controller.html" title="Controller of the MqttNow network." alt="MqttNowController" shape="rect" coords="63,112,179,136"/>
-<area href="../../d9/d16/class_mqtt_now_slave.html" alt="MqttNowSlave" shape="rect" coords="189,112,305,136"/>
+<area href="../../d9/d16/class_mqtt_now_slave.html" title="Base for the end-device." alt="MqttNowSlave" shape="rect" coords="189,112,305,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -167,6 +168,17 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab9a66a80793645be746982053c05cc80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../db/d8b/struct_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#ab9a66a80793645be746982053c05cc80">getNodeStruct</a> ()</td></tr>
 <tr class="memdesc:ab9a66a80793645be746982053c05cc80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate and return a <a class="el" href="../../db/d8b/struct_node.html">Node</a> structure.  <a href="../../da/dc7/class_mqtt_now_base.html#ab9a66a80793645be746982053c05cc80">More...</a><br /></td></tr>
 <tr class="separator:ab9a66a80793645be746982053c05cc80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a0ff03fdbaa741439454df6db592ba452"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a0ff03fdbaa741439454df6db592ba452">_name</a></td></tr>
+<tr class="separator:a0ff03fdbaa741439454df6db592ba452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa98e228ad2ac0ce3e9b0f5b9d5753f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0">ComponentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#aa98e228ad2ac0ce3e9b0f5b9d5753f06">_type</a> = <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a032c13375b9b84cd23b70f832e0b389b">noneType</a></td></tr>
+<tr class="separator:aa98e228ad2ac0ce3e9b0f5b9d5753f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afebb79b7fe94dad6f5c204661afa236b"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#afebb79b7fe94dad6f5c204661afa236b">_id</a> [15]</td></tr>
+<tr class="separator:afebb79b7fe94dad6f5c204661afa236b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d86b754c7aaaafca38028a24f031b4e"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc7/class_mqtt_now_base.html#a4d86b754c7aaaafca38028a24f031b4e">_esp_now_id</a></td></tr>
+<tr class="separator:a4d86b754c7aaaafca38028a24f031b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Base class for all MqttNow classes. </p>
@@ -597,6 +609,103 @@ Protected Member Functions</h2></td></tr>
 <p >To be called as often as possible from main loop </p>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00070">70</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4d86b754c7aaaafca38028a24f031b4e" name="a4d86b754c7aaaafca38028a24f031b4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d86b754c7aaaafca38028a24f031b4e">&#9670;&#160;</a></span>_esp_now_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t* MqttNowBase::_esp_now_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00214">214</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+
+</div>
+</div>
+<a id="afebb79b7fe94dad6f5c204661afa236b" name="afebb79b7fe94dad6f5c204661afa236b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afebb79b7fe94dad6f5c204661afa236b">&#9670;&#160;</a></span>_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char MqttNowBase::_id[15]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00213">213</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+
+</div>
+</div>
+<a id="a0ff03fdbaa741439454df6db592ba452" name="a0ff03fdbaa741439454df6db592ba452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff03fdbaa741439454df6db592ba452">&#9670;&#160;</a></span>_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">String MqttNowBase::_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00211">211</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+
+</div>
+</div>
+<a id="aa98e228ad2ac0ce3e9b0f5b9d5753f06" name="aa98e228ad2ac0ce3e9b0f5b9d5753f06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa98e228ad2ac0ce3e9b0f5b9d5753f06">&#9670;&#160;</a></span>_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0">ComponentType</a> MqttNowBase::_type = <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a032c13375b9b84cd23b70f832e0b389b">noneType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00212">212</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>

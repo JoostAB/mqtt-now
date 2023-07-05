@@ -15,5 +15,9 @@ var class_mqtt_now_base =
     [ "stopOTA", "da/dc7/class_mqtt_now_base.html#a1098218f3ef9e9c7da4fc3dffe914cb2", null ],
     [ "stopServer", "da/dc7/class_mqtt_now_base.html#a820cb10281df49b6975170c0d32fda44", null ],
     [ "stopWifi", "da/dc7/class_mqtt_now_base.html#acbace1f7c080ad3e97c3a2202f57f35a", null ],
-    [ "update", "da/dc7/class_mqtt_now_base.html#a8a26ed7887e578be54d429cc4f54d6aa", null ]
+    [ "update", "da/dc7/class_mqtt_now_base.html#a8a26ed7887e578be54d429cc4f54d6aa", null ],
+    [ "_esp_now_id", "da/dc7/class_mqtt_now_base.html#a4d86b754c7aaaafca38028a24f031b4e", null ],
+    [ "_id", "da/dc7/class_mqtt_now_base.html#afebb79b7fe94dad6f5c204661afa236b", null ],
+    [ "_name", "da/dc7/class_mqtt_now_base.html#a0ff03fdbaa741439454df6db592ba452", null ],
+    [ "_type", "da/dc7/class_mqtt_now_base.html#aa98e228ad2ac0ce3e9b0f5b9d5753f06", null ]
 ];

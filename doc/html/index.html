@@ -93,13 +93,55 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">MQTTNow </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="md_lib_mqtt_now_README"></a> <img src="https://github.com/JoostAB/mqtt-now/actions/workflows/main.yml/badge.svg" alt="Build" style="pointer-events: none;" class="inline"/></p>
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="#autotoc_md1">Overview</a></li>
+<li class="level1"><a href="#autotoc_md3">Table Of Contents</a></li>
+<li class="level1"><a href="#autotoc_md4">Topology</a><ul><li class="level2"><a href="#autotoc_md5">Network ID</a></li>
+<li class="level2"><a href="#autotoc_md6">Node category</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md7">Slave</a></li>
+<li class="level1"><a href="#autotoc_md8">Controller</a><ul><li class="level2"><a href="#autotoc_md9">Dedicated controller</a></li>
+<li class="level2"><a href="#autotoc_md10">MQTT client</a></li>
+<li class="level2"><a href="#autotoc_md11">Serial protocol</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md12">Protocol</a><ul><li class="level2"><a href="#autotoc_md13">Controller selection</a></li>
+<li class="level2"><a href="#autotoc_md14">Controller initialization</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md15">MQTT</a><ul><li class="level2"><a href="#autotoc_md16">Root topic</a></li>
+<li class="level2"><a href="#autotoc_md17">Discovery topic</a></li>
+<li class="level2"><a href="#autotoc_md18">Command topic</a></li>
+<li class="level2"><a href="#autotoc_md19">Status topic</a></li>
+<li class="level2"><a href="#autotoc_md20">Node Command topic</a></li>
+<li class="level2"><a href="#autotoc_md21">Node Status topic</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md22">Messages</a><ul><li class="level2"><a href="#autotoc_md23">Introduction message</a></li>
+<li class="level2"><a href="#autotoc_md24">Welcome message</a></li>
+<li class="level2"><a href="#autotoc_md25">Request config message</a></li>
+<li class="level2"><a href="#autotoc_md26">Configuration message</a></li>
+<li class="level2"><a href="#autotoc_md27">Data message</a></li>
+<li class="level2"><a href="#autotoc_md28">Error message</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md29">Library usage</a><ul><li class="level2"><a href="#autotoc_md30">Includes</a></li>
+<li class="level2"><a href="#autotoc_md31">Defines</a></li>
+<li class="level2"><a href="#autotoc_md32">Examples</a></li>
+<li class="level2"><a href="#autotoc_md33">Compilation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#autotoc_md34">Wishlist</a></li>
+</ul>
+</div>
+<div class="textblock"><p ><a class="anchor" id="md_lib_mqtt_now_README"></a> </p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Overview</h1>
 <p >An implementation of the ESP-Now protocol in combination with MQTT.</p>
 <p >The idea is to use this protocol for several IOT devices in my smart home setup. One node will be the bridge to my <a href="https://www.home-assistant.io">Home Assistant</a> using MQTT. All others communicate to this bridge using ESP-Now. The advantage is that there is only one node connected to my WiFi network, reducing used IP addresses and workload for router and Access points.</p>
 <p >Since I use all different kinds of hardware for my devices (different kinds of ESP32/ESP8266 boards), the code has to be so portable as possible. Different build definitions are included in the platformio*.ini files.</p>
-<p >The following borads have been defined:</p>
+<p >The following boards have been defined:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Board   </th><th class="markdownTableHeadNone">Environment   </th><th class="markdownTableHeadNone">Chip   </th><th class="markdownTableHeadNone">Controller   </th><th class="markdownTableHeadNone">MQTTClient/Webint    </th></tr>
@@ -127,7 +169,33 @@ Overview</h1>
 <p >&#160; &#160;</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Table Of Contents</h1>
-<p ><b>Topology</b> <b>Network ID</b> <b>Node Category</b> <b>Slave</b> <b>Controller</b> <b>Dedicated controller</b> <b>MQTT client</b> <b>Serial protocol</b> <b>Protocol</b> <b>Controller selection</b> <b>MQTT</b> <em>Root topic</em> <em>Discovery topic</em> <em>Command topic</em> <em>Status topic</em> <em>Node Command topic</em> <b>Messages</b> <em>Introduction message</em> <em>Welcome message</em> <em>Request config message</em> <em>Configuration message</em> <em>Data message</em> <b>Library usage</b> <em>Includes</em> <em>Defines</em> <em>Examples</em> <em>Compilation</em></p>
+<p ><b>Topology</b></p>
+<p ><b>Network ID</b></p>
+<p ><b>Node Category</b></p>
+<p ><b>Slave</b></p>
+<p ><b>Controller</b></p>
+<p ><b>Dedicated controller</b></p>
+<p ><b>MQTT client</b></p>
+<p ><b>Serial protocol</b></p>
+<p ><b>Protocol</b></p>
+<p ><b>Controller selection</b></p>
+<p ><b>MQTT</b></p>
+<p ><em>Root topic</em></p>
+<p ><em>Discovery topic</em></p>
+<p ><em>Command topic</em></p>
+<p ><em>Status topic</em></p>
+<p ><em>Node Command topic</em></p>
+<p ><b>Messages</b></p>
+<p ><em>Introduction message</em></p>
+<p ><em>Welcome message</em></p>
+<p ><em>Request config message</em></p>
+<p ><em>Configuration message</em></p>
+<p ><em>Data message</em></p>
+<p ><b>Library usage</b></p>
+<p ><em>Includes</em></p>
+<p ><em>Defines</em></p>
+<p ><em>Examples</em></p>
+<p ><em>Compilation</em></p>
 <p >&#160; &#160;</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Topology</h1>
@@ -137,6 +205,7 @@ Topology</h1>
 <p >Which device is the controller doesn't matter, since there is no hardware difference. All nodes are ESP32/ESP8266 based, and therefore they are all capable of communicating with a wireless network. The controller role is dynamically assigned (see Controller selection) among the available nodes, and as soon the node player the controller role is offline, a new controller is chosen.</p>
 <h2><a class="anchor" id="autotoc_md5"></a>
 Network ID</h2>
+<p >The Network ID is an UUID of 16 bytes. This ID is used to make sure no 'foreign' nodes can connect to this network. Currently this ID is set compile-time, so once a node is flashed, it can only connect to a certain network. Also, this ID is sent each time a node boots up if not connected to a network to see if a network for it's ID is alive. Others couls pretend to be a controller, steal the ID and use it to connect to your home network. So this is not a safe algorithm yet, but the basic is there and it is now possible to run multiple MQTT-Now networks alongside eachother without any issues. In the future there has to be some kind of encryption, with MAC address for example to make the ID unique for each node, but recognisable for the controller.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Node category</h2>
 <p >There are several node categories. These categories describe in a nutshell what a node can and or does. They are based on the device types as defined in the <a href="https://www.home-assistant.io/docs/mqtt/discovery">Home Assistant MQTT Discovery</a> documentation. This category can then be used by third party software to determine how to categorize the new node.</p>
@@ -393,7 +462,8 @@ Wishlist</h1>
 <li>Include wifi manager</li>
 <li>Web interface for gateway incl OTA</li>
 <li>Gateway as HASS device with entities for management and monitoring</li>
-<li>OTA for nodes </li>
+<li>OTA for nodes</li>
+<li>Safer Network ID validation algorithm </li>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
