@@ -16,8 +16,16 @@
 #include <baseinclude.h>
 #include <mqtt-now-node.h>
 
+/**
+ * @brief Base for the end-device.
+ * 
+ * Use this as a base class for the implementation of sensors, actuators, lights etc.
+ */
 class MqttNowSlave : public MqttNowNode {
   public:
+    /**
+     * @brief  Constructs a new MQTT-Now slave
+     */
     MqttNowSlave();
 
     void
@@ -30,7 +38,15 @@ class MqttNowSlave : public MqttNowNode {
        * @param len 
        */
       messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len),
+
+      /**
+       * @brief To be called once at startup. 
+       */
       begin(),
+
+      /**
+       * @brief To be called as often as possible from main loop
+       */
       update(); 
 };
 

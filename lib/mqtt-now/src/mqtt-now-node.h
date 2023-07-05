@@ -184,46 +184,43 @@ class MqttNowNode : public MqttNowBase {
   public:
     MqttNowNode();
 
-    void
-      /**
-       * @brief To be called from main setup
-       * 
-       */
-      begin(),
+    /**
+     * @brief To be called from main setup
+     * 
+     */
+    void begin();
 
-      /**
-       * @brief To be called as often as possible from main loop
-       * 
-       */
-      update();
+    /**
+     * @brief To be called as often as possible from main loop
+     * 
+     */
+    void update();
 
-    virtual void 
-      /**
-       * @brief Is triggered whenever a message is received over the esp-now network from another MqttNowNode.
-       * 
-       * To be implemented in concrete sub-classes
-       * 
-       * @param macFrom Origin MAC address
-       * @param type Type of message (one of msgType)
-       * @param msg 
-       * @param len 
-       */
-      messageReceived(const uint8_t *macFrom, msgType type, msg_base *msg, uint8_t len) = 0;
+    /**
+     * @brief Is triggered whenever a message is received over the esp-now network from another MqttNowNode.
+     * 
+     * To be implemented in concrete sub-classes
+     * 
+     * @param macFrom Origin MAC address
+     * @param type Type of message (one of msgType)
+     * @param msg 
+     * @param len 
+     */
+    virtual void messageReceived(const uint8_t *macFrom, msgType type, msg_base *msg, uint8_t len) = 0;
     
   
   protected:
-    esp_err_t 
-      addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false),
-      addPeer(esp_now_peer_info_t *peer),
-      sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive),
-      sendMessage(msg_base *msg, const uint8_t *macReceive),
-      sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver),
-      sendWelcomeMessage(const uint8_t *macReceiver),
-      sendReqCfgMessage(const uint8_t *macReceiver),
-      sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[SIZE_IP], 
-                     const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver),
-      sendDataMessage(uint8_t data_type, const int8_t *data, const uint8_t *macReceiver),
-      sendErrorMessage(uint8_t error_code, const char error_msg[SIZE_ERRMSG], const uint8_t *macReceiver);
+    esp_err_t addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false);
+    esp_err_t addPeer(esp_now_peer_info_t *peer);
+    esp_err_t sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive);
+    esp_err_t sendMessage(msg_base *msg, const uint8_t *macReceive);
+    esp_err_t sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver);
+    esp_err_t sendWelcomeMessage(const uint8_t *macReceiver);
+    esp_err_t sendReqCfgMessage(const uint8_t *macReceiver);
+    esp_err_t sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[SIZE_IP], 
+                     const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver);
+    esp_err_t sendDataMessage(uint8_t data_type, const int8_t *data, const uint8_t *macReceiver);
+    esp_err_t sendErrorMessage(uint8_t error_code, const char error_msg[SIZE_ERRMSG], const uint8_t *macReceiver);
 
     result_t getMessageStruct(msgType type, msg_base *msg);
   
