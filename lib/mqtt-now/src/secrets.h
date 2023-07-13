@@ -15,6 +15,8 @@
 #ifndef __SECRETS_H__
 #define __SECRETS_H__
 
+#include <Arduino.h>
+
 #define MQTT_HOST "10.0.1.1"
 #define MQTT_PORT 1883
 #define MQTT_ID "mqtt_now"
