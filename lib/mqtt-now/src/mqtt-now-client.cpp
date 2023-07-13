@@ -83,21 +83,26 @@ MqttNowClient::MqttNowClient(
   _mqttPwd = MQTT_PW;
 
   if (rootTopic.length() > 0) {
-    setRootTopic(rootTopic);
-    setCmdTopic(_rootTopic + PATHSEP + cmdTopic);
-    setstatusTopic(_rootTopic + PATHSEP + statusTopic);
-    setLwtTopic(_rootTopic + PATHSEP + lwtTopic);
-    setDevicesTopic(_rootTopic + PATHSEP + devTopic);
-    setOnCmd(onCmd);
-    setOffCmd(offCmd);
-    setOnlineLwt(onlineLwt);
-    setOfflineLwt(offlineLwt);
+    _rootTopic = rootTopic; 
+    _cmdTopic = _rootTopic + PATHSEP + cmdTopic;
+    _statusTopic = _rootTopic + PATHSEP + statusTopic;
+    _lwtTopic = _rootTopic + PATHSEP + lwtTopic;
+    _devTopic = _rootTopic + PATHSEP + devTopic;
+    _onCmd = onCmd;
+    _offCmd = offCmd;
+    _onlineLwt = onlineLwt;
+    _offlineLwt = offlineLwt;
   }
+
+  Serial.println("Topics set");
 
   stopWifiAfterOta = false;
 }
 
-/** To be called from void setup() **/
+/**
+ * @brief To be called from main setup
+ * 
+ */
 void MqttNowClient::begin() {
   MqttNowBase::begin();
 
@@ -152,7 +157,10 @@ void MqttNowClient::_setupWifi() {
   // PRINTLNSA(WiFi.macAddress());
 }
 
-/** To be called from void loop() **/
+/**
+ * @brief To be called from main loop
+ * 
+ */
 void MqttNowClient::update() {
   MqttNowBase::update();
 
@@ -175,17 +183,21 @@ void MqttNowClient::update() {
 
   // Now check if a message was received from the broker
   if (mqttReceived) {
-    PRINTLNS("Yup, got something");
     if (lastReceivedTopic.equals(_cmdTopic)) {
+      // A message on the command topic is meant for the client itself
       _handleCommand();
     } else {
-      _sendMsgToController();
+      // All other messages are for a node in the ESP-NOW network, 
+      // so let the controller handle that
+      _sendMqttMsgToController();
     }
     mqttReceived = false;
   }
 
   // Handle MQTT stuff
-  if (!client.loop()) {
+  if (client.connected()) {
+    client.loop();
+  } else {
     _reconnect();
   }
 };
@@ -219,6 +231,9 @@ result_t MqttNowClient::_handleComm() {
     case MSG_ACTIONPUB:
       PRINTLNS("Publish command received");
       return _handlePublish();
+    case MSG_ACTIONRBT:
+      PRINTLNS("Reboot command received");
+      return _handleReboot();
     default:
       PRINTLNS("Unknown command received");
       return result_error;
@@ -229,7 +244,7 @@ result_t MqttNowClient::_handleSubscribe() {
   // Everything after action tag is the topic to subscribe to
   char qos = _comBuff.charAt(4);
   String topic = _modTopic(_comBuff.substring(5));
-  PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos);
+  PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos) PRINTLF;
   if (!client.subscribe(topic.c_str(), qos - '0')) {
     PRINTLNS("Error during subscribing");
     return result_error;
@@ -321,23 +336,59 @@ result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8
   return client.publish(topic.c_str(), payload.c_str(), retain);
 }
 
+result_t MqttNowClient::makeDiscoverable() {
+  return makeDiscoverable(getNodeStruct());
+}
+
+result_t MqttNowClient::makeDiscoverable(Node node) {
+  return result_error;
+}
+
 result_t MqttNowClient::_handleCommand() {
   PRINTLN("Performing command: ", lastReceivedPayload);
-  if (lastReceivedPayload.equals(OTA_START)) {
+  if (lastReceivedPayload.equals(CMD_OTA_START)) {
     startOTA();
     return result_success;
   }
 
-  if (lastReceivedPayload.equals(OTA_STOP)) {
+  if (lastReceivedPayload.equals(CMD_OTA_STOP)) {
     stopOTA();
     return result_success;
   }
   
+  if (lastReceivedPayload.equals(CMD_CTRL_REBOOT)) {
+    return _sendStringToController("###B");
+  }
+
+  if (lastReceivedPayload.equals(CMD_CLIENT_REBOOT)) {
+    return _handleReboot();
+  }
+
   // Unknown command
   return result_error;
 }
 
-result_t MqttNowClient::_sendMsgToController() {
+result_t MqttNowClient::_handleReboot() {
+  delay(500);
+  ESP.restart();
+  return result_success;
+}
+
+result_t MqttNowClient::_sendStringToController(const char* msg) {
+  if (!COM) {
+    COM.begin(SERIALBAUDRATE);
+    yield();
+  }
+  PRINTS("Sending to controller: ");
+  PRINTLNSA(msg);
+  size_t send = 0;
+  send += COM.print(msg);
+  COM.print("\n");
+  PRINTLN("Nr of bytes send to controller: ", send);
+  return (send > 0)?result_success:result_error;
+}
+
+result_t MqttNowClient::_sendMqttMsgToController() {
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
     yield();
@@ -348,7 +399,8 @@ result_t MqttNowClient::_sendMsgToController() {
   PRINTDS(MSG_ACTIONREC);
   PRINTDS(lastReceivedTopic);
   PRINTS(MSG_PAYLOAD);
-  PRINTDS(lastReceivedPayload);
+  PRINTLNSA(lastReceivedPayload);
+  
 
   size_t send = 0;
   send += COM.print(MSG_START);
@@ -361,6 +413,11 @@ result_t MqttNowClient::_sendMsgToController() {
 }
 
 /** Simple setters **/
+
+void MqttNowClient::setDiscoveryTopic(String discoveryTopic) { 
+  _discoveryTopic = discoveryTopic; 
+  PRINTLN("Discovery topic set to ", _discoveryTopic);
+}
 
 void MqttNowClient::setRootTopic(String rootTopic) { 
   _rootTopic = rootTopic; 
@@ -427,16 +484,24 @@ void MqttNowClient::setOfflineLwt(String offlineLwt) {
 //     server.send(404, "text/plain", "404: File Not Found");
 // }
 
+String MqttNowClient::_getFullDiscoveryPath(Node node) {
+  return _discoveryTopic + "/" + node.component + "/" + node.id + "/config";
+}
+
 /** Utilities **/
 String MqttNowClient::_modTopic(String topic) {
-  
+  String ret;
   switch (topic.charAt(0)) {
     case '/':
-      return _devTopic + PATHSEP + topic.substring(1);
+      ret = _devTopic + PATHSEP + topic.substring(1);
+      break;
     case '@':
-      return _rootTopic + PATHSEP + topic.substring(1);
+      ret = _rootTopic + PATHSEP + topic.substring(1);
+      break;
     default:
-      return topic;
+      ret = topic;
+      break;
   }
+  return ret;
 }
 #endif // MQTT_NOW_CLIENT

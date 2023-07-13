@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.stp": "sql",
+			"*.tbl": "sql",
+			"*.trg": "sql",
+			"*.rul": "sql",
+			"*.tcc": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp"
+		}
+	}
+}

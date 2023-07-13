@@ -59,17 +59,17 @@ esp_now_peer_info_t peerInfo;
   PRINTLNS("Message received.");
   memcpy(&wrapper, incomingData, len);
   #ifndef MQTT_NOW_CONTROLLER
-    if (wrapper.msgType == msgTypeIntro || wrapper.msgType == msgTypeReqConfig) {
+    if (wrapper.type == msgTypeIntro || wrapper.type == msgTypeReqConfig) {
       // These messages are only intended for the controller, so ignore them
       return;
     }
   #else
-    if (wrapper.msgType == msgTypeConfig || wrapper.msgType == msgTypeWelcome) {
+    if (wrapper.type == msgTypeConfig || wrapper.type == msgTypeWelcome) {
       // These messages are NOT intended for the controller
       return;
     }
   #endif
-  node->messageReceived(mac, wrapper.msgType, wrapper.contents, wrapper.msgSize);
+  node->messageReceived(mac, wrapper.type, wrapper.contents, wrapper.msgSize);
 }
 
 MqttNowNode::MqttNowNode() : MqttNowBase() {};
@@ -116,7 +116,7 @@ esp_err_t MqttNowNode::addPeer(esp_now_peer_info_t *peer) {
 esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt) {
   #ifdef ESP32
     esp_now_peer_info_t info;
-    memcpy(info.peer_addr, mac_addr, 6);
+    memcpy(info.peer_addr, mac_addr, SIZE_MAC);
     info.channel = channel;
     info.encrypt = encrypt;
     if (encrypt == true) {
@@ -133,20 +133,110 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
   #endif
 }
 
-esp_err_t MqttNowNode::sendMessage(uint8_t type, msg_base *msg, uint8_t *macReceive) {
-  struct_msg wrapper;
-  
-  // wrapper.contents will be initialized in getMessageStruct, so ignore warning
-  #pragma GCC diagnostic ignored "-Wuninitialized"
-  if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
-  
-  wrapper.msgType = type;
-  wrapper.msgSize = sizeof(&msg);
-  memcpy(wrapper.contents, msg, wrapper.msgSize);
-  return esp_now_send(macReceive, (uint8_t *) &wrapper, sizeof(wrapper));
+esp_err_t MqttNowNode::sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver) {
+  // msg_intro *msg;
+  // getMessageStruct(msgTypeIntro, msg);
+  // msg->device_category = category;
+  // memcpy(msg->friendly_name, friendlyName, SIZE_FRIENDNAME);
+  // return sendMessage(msg, macReceiver);
+  msg_intro msg;
+  msg.device_category = category;
+  memcpy(msg.friendly_name, friendlyName, SIZE_FRIENDNAME);
+  return sendMessage(&msg, sizeof(msg), macReceiver);
 }
 
-result_t MqttNowNode::getMessageStruct(uint8_t type, msg_base *msg) {
+esp_err_t MqttNowNode::sendWelcomeMessage(const uint8_t *macReceiver) {
+  // msg_welcome *msg;
+  // getMessageStruct(msgTypeWelcome, msg);
+  // getMac(msg->mac_address);
+  // return sendMessage(msg, macReceiver);
+  msg_welcome msg;
+  getMac(msg.mac_address);
+  return sendMessage(&msg, sizeof(msg), macReceiver);
+}
+
+esp_err_t MqttNowNode::sendReqCfgMessage(const uint8_t *macReceiver) {
+  // msg_welcome *msg;
+  // getMessageStruct(msgTypeWelcome, msg);
+  // getMac(msg->mac_address);
+  // return sendMessage(msg, macReceiver);
+  msg_welcome msg;
+  getMac(msg.mac_address);
+  return sendMessage(&msg, sizeof(msg), macReceiver);
+}
+
+esp_err_t MqttNowNode::sendErrorMessage(uint8_t error_code, const char error_msg[SIZE_ERRMSG], const uint8_t *macReceiver) {
+  // msg_error *msg;
+  // getMessageStruct(msgTypeError, msg);
+  // msg->error_code = error_code;
+  // strcpy(msg->error_msg, error_msg);
+  // return sendMessage(msg, macReceiver);
+  msg_error msg;
+  msg.error_code = error_code;
+  strcpy(msg.error_msg, error_msg);
+  return sendMessage(&msg, sizeof(msg), macReceiver);
+}
+
+esp_err_t MqttNowNode::sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[SIZE_IP], const uint16_t mqtt_port, const char *mqtt_user, const char *mqtt_pw, const uint8_t *macReceiver) {
+  // msg_config *msg;
+  // getMessageStruct(msgTypeConfig, msg);
+  // strcpy(msg->wifi_ssid, wifi_ssid);
+  // strcpy(msg->wifi_key, wifi_key);
+  // memcpy(msg->mqtt_ip, mqtt_ip, SIZE_IP);
+  // msg->mqtt_port = mqtt_port;
+  // strcpy(msg->mqtt_user, mqtt_user);
+  // strcpy(msg->mqtt_pw, mqtt_pw);
+  // return sendMessage(msg, macReceiver);
+  msg_config msg;
+  strcpy(msg.wifi_ssid, wifi_ssid);
+  strcpy(msg.wifi_key, wifi_key);
+  memcpy(msg.mqtt_ip, mqtt_ip, SIZE_IP);
+  msg.mqtt_port = mqtt_port;
+  strcpy(msg.mqtt_user, mqtt_user);
+  strcpy(msg.mqtt_pw, mqtt_pw);
+  return sendMessage(&msg, sizeof(msg), macReceiver);
+}
+
+esp_err_t MqttNowNode::sendDataMessage(uint8_t data_type, const int8_t *data, const uint8_t *macReceiver) {
+  // msg_data *msg;
+  // getMessageStruct(msgTypeData, msg);
+  // memcpy(msg->data, data, SIZE_DATA);
+  // return sendMessage(msg, macReceiver);
+  msg_data msg;
+  memcpy(msg.data, data, SIZE_DATA);
+  return sendMessage(&msg, sizeof(msg), macReceiver);
+}
+      
+
+esp_err_t MqttNowNode::sendMessage(msg_base *msg, size_t msgSize, const uint8_t *macReceive) {
+  struct_msg wrapper;
+  uint8_t mac[SIZE_MAC];
+  memcpy(mac, macReceive, SIZE_MAC);
+  wrapper.contents = (msg_base*) malloc(msgSize);
+  wrapper.type = msg->msgtype;
+  wrapper.msgSize = msgSize;
+  memcpy(wrapper.contents, msg, wrapper.msgSize);
+  return esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper) + msgSize);
+}
+
+// esp_err_t MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive) {
+//   struct_msg wrapper;
+//   uint8_t mac[SIZE_MAC];
+//   memcpy(mac, macReceive, SIZE_MAC);
+//   // wrapper.contents will be initialized in getMessageStruct, so ignore warnings
+//   #pragma GCC diagnostic push
+//   #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+//   #pragma GCC diagnostic ignored "-Wuninitialized"
+//   if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
+//   #pragma GCC diagnostic pop
+
+//   wrapper.type = type;
+//   wrapper.msgSize = sizeof(&msg);
+//   memcpy(wrapper.contents, msg, wrapper.msgSize);
+//   return esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper));
+// }
+
+result_t MqttNowNode::getMessageStruct(msgType type, msg_base *msg) {
   switch (type) {
     case msgTypeIntro:
       msg = new msg_intro;
@@ -163,9 +253,13 @@ result_t MqttNowNode::getMessageStruct(uint8_t type, msg_base *msg) {
     case msgTypeData:
       msg = new msg_data;
       break;
+    case msgTypeError:
+      msg = new msg_error;
+      break;
     default:
       return result_error;
   }
+  msg->msgtype = type;
   return result_success;
 }
 

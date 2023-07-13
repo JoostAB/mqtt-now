@@ -1,7 +1,7 @@
 /**
  * @file mqtt-now-client.h
  * @author Joost Bloemsma (joost.a@bloemsma.net)
- * @brief 
+ * @brief MQTT endpoint of the esp-now network.
  * @version 0.1
  * @date 2022-02-28
  * 
@@ -35,6 +35,14 @@
 #define MQTT_HOST "none"
 #endif
 
+/**
+ * @brief MQTT topic used for auto discovery
+ * 
+ */
+#ifndef HA_DISCOVERY_TOPIC
+#define HA_DISCOVERY_TOPIC "homeassistant"
+#endif
+
 #if !defined(COM)
 #define COM Serial
 #endif
@@ -42,8 +50,29 @@
 // Callback
 void mqttMsgReceived(char* topic, byte* payload, unsigned int length);
 
+/**
+ * @brief The MQTT client that connects to an MQTT broker over HTTP.
+ * 
+ * Is the bridge between the MQTT broker (over HTTP) and the MQTT-Now controller (over serial)
+ * 
+ */
 class MqttNowClient : public MqttNowBase {
   public:
+    /**
+     * @brief Construct a new MqttNowClient object
+     * 
+     * @param host Hostname or IP address of the MQTT broker
+     * @param mqttPort Port the MQTT broker is listening to
+     * @param rootTopic MQTT root topic for MqttNow messages 
+     * @param cmdTopic Device sub-topic for commands
+     * @param statusTopic 
+     * @param lwtTopic 
+     * @param devTopic 
+     * @param onCmd 
+     * @param offCmd 
+     * @param onlineLwt 
+     * @param offlineLwt 
+     */
     MqttNowClient(
       String host = MQTT_HOST, 
       uint16_t mqttPort = MQTT_PORT,
@@ -63,12 +92,22 @@ class MqttNowClient : public MqttNowBase {
       handleCommand();
 
     void
+      /**
+       * @brief To be called from main setup
+       * 
+       */
       begin(),
+
+      /**
+       * @brief To be called from main loop
+       * 
+       */
       update(),
       setRootTopic(String rootTopic),
       setCmdTopic(String cmdTopic),
       setstatusTopic(String statusTopic),
       setLwtTopic(String lwtTopic),
+      setDiscoveryTopic(String discoveryTopic),
       setDevicesTopic(String devTopic),
       setOnCmd(String onCmd),
       setOffCmd(String offCmd),
@@ -78,7 +117,9 @@ class MqttNowClient : public MqttNowBase {
     result_t
       publishStatus(String status),
       publishCmd(String cmd),
-      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U);
+      publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
+      makeDiscoverable(),
+      makeDiscoverable(Node node);
       
 
   private:
@@ -90,15 +131,18 @@ class MqttNowClient : public MqttNowBase {
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
     result_t 
-      _sendMsgToController(),
+      _sendStringToController(const char* msg),
+      _sendMqttMsgToController(),
       _handleComm(),
       _handleSubscribe(),
       _handleUnsubscribe(),
       _handleCommand(),
+      _handleReboot(),
       _handlePublish(String com = String(""));
 
-    String _modTopic(String topic);
-
+    String _modTopic(String topic),
+           _getFullDiscoveryPath(Node node);
+    
     String 
       _comBuff,
       _host,
@@ -107,6 +151,7 @@ class MqttNowClient : public MqttNowBase {
       _statusTopic,
       _lwtTopic,
       _devTopic,
+      _discoveryTopic = "homeassistant",
       _onCmd,
       _offCmd,
       _onlineLwt,

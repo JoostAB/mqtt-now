@@ -25,6 +25,19 @@ void MqttNowController::update() {
 };
 
 void MqttNowController::messageReceived(const uint8_t *macFrom, uint8_t type, msg_base *msg, uint8_t len) {
+  if (type == msgTypeIntro) {
+    msg_intro* _msg_intro = (msg_intro*)msg;
+    if (_msg_intro->network_uuid == network_uuid) {
+      // Correct Network ID. Add to network and respond with welcome
+    } else {
+      // Wrong Network ID. reject!
+      msg_error err;
+      getMessageStruct(msgTypeError, &err);
+      strcpy(err.error_msg, "Invalid network ID");
+      sendMessage(msgTypeError, &err, macFrom);
+      return;
+    }
+  }
 
 }
 
