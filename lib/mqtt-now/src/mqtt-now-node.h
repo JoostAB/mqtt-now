@@ -212,8 +212,7 @@ class MqttNowNode : public MqttNowBase {
   protected:
     esp_err_t addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt = false);
     esp_err_t addPeer(esp_now_peer_info_t *peer);
-    esp_err_t sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive);
-    esp_err_t sendMessage(msg_base *msg, const uint8_t *macReceive);
+    esp_err_t sendMessage(msg_base *msg, size_t msgSize, const uint8_t *macReceive);
     esp_err_t sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver);
     esp_err_t sendWelcomeMessage(const uint8_t *macReceiver);
     esp_err_t sendReqCfgMessage(const uint8_t *macReceiver);

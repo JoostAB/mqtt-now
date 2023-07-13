@@ -20,8 +20,11 @@ typedef int8_t result_t;
 const result_t result_success = 1;
 const result_t result_error = -1;
 
-#define OTA_START "STARTOTA"
-#define OTA_STOP "STOPOTA"
+#define CMD_OTA_START     "STARTOTA"
+#define CMD_OTA_STOP      "STOPOTA"
+#define CMD_CTRL_REBOOT   "REBOOTCTRL"
+#define CMD_CLIENT_REBOOT "REBOOTCLIENT"
+#define CMD_NODE_REBOOT   "REBOOT"
 
 // Reference to the webserver, needed for OTA
 extern WServer server;

@@ -43,7 +43,7 @@
 #define PRINTLNS(s)                  { Serial.println(F(s)); }
 #define PRINTLNSA(s)                 { Serial.println(s); }
 #define PRINTLN(s,v)                 { Serial.print(F(s)); Serial.println(v); }
-#define PRINTLF                      Serial.println()
+#define PRINTLF                      { Serial.println(); }
 
 #else
 // No debugging, replace all PRINT*** calls with nothing

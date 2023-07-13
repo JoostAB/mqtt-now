@@ -189,7 +189,7 @@ void MqttNowClient::update() {
     } else {
       // All other messages are for a node in the ESP-NOW network, 
       // so let the controller handle that
-      _sendMsgToController();
+      _sendMqttMsgToController();
     }
     mqttReceived = false;
   }
@@ -231,6 +231,9 @@ result_t MqttNowClient::_handleComm() {
     case MSG_ACTIONPUB:
       PRINTLNS("Publish command received");
       return _handlePublish();
+    case MSG_ACTIONRBT:
+      PRINTLNS("Reboot command received");
+      return _handleReboot();
     default:
       PRINTLNS("Unknown command received");
       return result_error;
@@ -241,7 +244,7 @@ result_t MqttNowClient::_handleSubscribe() {
   // Everything after action tag is the topic to subscribe to
   char qos = _comBuff.charAt(4);
   String topic = _modTopic(_comBuff.substring(5));
-  PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos);
+  PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos) PRINTLF;
   if (!client.subscribe(topic.c_str(), qos - '0')) {
     PRINTLNS("Error during subscribing");
     return result_error;
@@ -343,21 +346,49 @@ result_t MqttNowClient::makeDiscoverable(Node node) {
 
 result_t MqttNowClient::_handleCommand() {
   PRINTLN("Performing command: ", lastReceivedPayload);
-  if (lastReceivedPayload.equals(OTA_START)) {
+  if (lastReceivedPayload.equals(CMD_OTA_START)) {
     startOTA();
     return result_success;
   }
 
-  if (lastReceivedPayload.equals(OTA_STOP)) {
+  if (lastReceivedPayload.equals(CMD_OTA_STOP)) {
     stopOTA();
     return result_success;
   }
   
+  if (lastReceivedPayload.equals(CMD_CTRL_REBOOT)) {
+    return _sendStringToController("###B");
+  }
+
+  if (lastReceivedPayload.equals(CMD_CLIENT_REBOOT)) {
+    return _handleReboot();
+  }
+
   // Unknown command
   return result_error;
 }
 
-result_t MqttNowClient::_sendMsgToController() {
+result_t MqttNowClient::_handleReboot() {
+  delay(500);
+  ESP.restart();
+  return result_success;
+}
+
+result_t MqttNowClient::_sendStringToController(const char* msg) {
+  if (!COM) {
+    COM.begin(SERIALBAUDRATE);
+    yield();
+  }
+  PRINTS("Sending to controller: ");
+  PRINTLNSA(msg);
+  size_t send = 0;
+  send += COM.print(msg);
+  COM.print("\n");
+  PRINTLN("Nr of bytes send to controller: ", send);
+  return (send > 0)?result_success:result_error;
+}
+
+result_t MqttNowClient::_sendMqttMsgToController() {
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
     yield();

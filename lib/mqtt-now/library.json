@@ -29,9 +29,9 @@
         "version": "^1.0.4"
       },
       {
-        "owner": "Aircoookie",
+        "owner": "me-no-dev", 
         "name": "ESP Async WebServer",
-        "version": "https://github.com/Aircoookie/ESPAsyncWebServer.git"
+        "version": "^1.2.3"
       },
       {
         "name": "AsyncElegantOTA",
