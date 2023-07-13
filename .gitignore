@@ -9,4 +9,5 @@ platformio-device-monitor-*.log
 .vscode/extensions.json
 hardware/
 debug.log
+logs
 src/secrets.h

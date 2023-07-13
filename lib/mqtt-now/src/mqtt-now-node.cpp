@@ -219,22 +219,22 @@ esp_err_t MqttNowNode::sendMessage(msg_base *msg, size_t msgSize, const uint8_t 
   return esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper) + msgSize);
 }
 
-// esp_err_t MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive) {
-//   struct_msg wrapper;
-//   uint8_t mac[SIZE_MAC];
-//   memcpy(mac, macReceive, SIZE_MAC);
-//   // wrapper.contents will be initialized in getMessageStruct, so ignore warnings
-//   #pragma GCC diagnostic push
-//   #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-//   #pragma GCC diagnostic ignored "-Wuninitialized"
-//   if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
-//   #pragma GCC diagnostic pop
+esp_err_t MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive) {
+  struct_msg wrapper;
+  uint8_t mac[SIZE_MAC];
+  memcpy(mac, macReceive, SIZE_MAC);
+  // wrapper.contents will be initialized in getMessageStruct, so ignore warnings
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+  #pragma GCC diagnostic ignored "-Wuninitialized"
+  if (getMessageStruct(type, wrapper.contents) == result_error) return ESP_ERR_INVALID_ARG;
+  #pragma GCC diagnostic pop
 
-//   wrapper.type = type;
-//   wrapper.msgSize = sizeof(&msg);
-//   memcpy(wrapper.contents, msg, wrapper.msgSize);
-//   return esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper));
-// }
+  wrapper.type = type;
+  wrapper.msgSize = sizeof(&msg);
+  memcpy(wrapper.contents, msg, wrapper.msgSize);
+  return esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper));
+}
 
 result_t MqttNowNode::getMessageStruct(msgType type, msg_base *msg) {
   switch (type) {
