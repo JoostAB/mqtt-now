@@ -29,11 +29,12 @@
         "version": "^1.0.4"
       },
       {
-        "owner": "me-no-dev", 
+        "owner": "me-no-dev",
         "name": "ESP Async WebServer",
-        "version": "^1.2.3"
+        "version": "https://github.com/me-no-dev/ESPAsyncWebServer.git"
       },
       {
+        "owner": "JoostAB",
         "name": "AsyncElegantOTA",
         "version": "https://github.com/JoostAB/AsyncElegantOTA.git"
       }
