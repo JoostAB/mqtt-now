@@ -13,16 +13,13 @@
 #define MQTTNOW_DEBUG 1
 #include <jbdebug.h>
 #include <mqtt-now.h>
-//#include <test.h>
 
 MqttNow mqttNow;
 
 void setup() {
   mqttNow.begin();
-  //test_setup();
 }
 
 void loop() {
   mqttNow.update();
-  //test_loop();
 }

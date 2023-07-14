@@ -64,7 +64,7 @@ MqttNowBase::MqttNowBase() {
 };
 
 void MqttNowBase::begin() {
-  PRINTLNS("MqttNow started");
+  PRINTF("MqttNow %s started", FIRMWARE_VERSION);
 };
 
 void MqttNowBase::update() {
