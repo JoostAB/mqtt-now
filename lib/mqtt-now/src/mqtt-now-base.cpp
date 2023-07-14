@@ -64,13 +64,26 @@ MqttNowBase::MqttNowBase() {
 };
 
 void MqttNowBase::begin() {
-  PRINTF("MqttNow %s started", FIRMWARE_VERSION);
+  PRINTF("MqttNow %s started\n", FIRMWARE_VERSION);
+  #ifdef M5STACK_FIRE
+  M5.begin();
+  M5.Power.begin();
+  #endif
+  #ifdef HAS_DISPLAY
+  setupDisplay();
+  #endif
 };
 
 void MqttNowBase::update() {
   // if (serverRunning) {
   //   server.handleClient();
   // }
+  #ifdef M5STACK_FIRE
+  M5.update();
+  #endif
+  #ifdef HAS_DISPLAY
+  updateDisplay();
+  #endif
 };
 
 void MqttNowBase::setName(char* name) {
@@ -129,6 +142,10 @@ void MqttNowBase::startWifi() {
   PRINTLNSA(WiFi.localIP());
   PRINTS("MAC :");
   PRINTLNSA(WiFi.macAddress());
+  #ifdef HAS_DISPLAY
+  log2Display("Connected to WiFI");
+  log2Display(WiFi.localIP().toString().c_str());
+  #endif
 }
 
 void MqttNowBase::stopWifi() {

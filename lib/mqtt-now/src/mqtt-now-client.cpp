@@ -212,7 +212,9 @@ void MqttNowClient::update() {
  */
 result_t MqttNowClient::_handleComm() {
   PRINTLN("Communication received: ", _comBuff);
-
+  #ifdef HAS_DISPLAY
+  log2Display(("IN: "+_comBuff).c_str());
+  #endif
   if (!_comBuff.startsWith(MSG_START)) {
     PRINTLNS("Unknown communication");
     return result_error;
@@ -245,6 +247,11 @@ result_t MqttNowClient::_handleSubscribe() {
   char qos = _comBuff.charAt(4);
   String topic = _modTopic(_comBuff.substring(5));
   PRINTF2("Subscribing to topic: %s with QOS %c", topic.c_str(), qos) PRINTLF;
+
+  #ifdef HAS_DISPLAY
+  log2Display(("Subscribing to: " + topic).c_str());
+  #endif
+
   if (!client.subscribe(topic.c_str(), qos - '0')) {
     PRINTLNS("Error during subscribing");
     return result_error;
@@ -255,6 +262,11 @@ result_t MqttNowClient::_handleSubscribe() {
 result_t MqttNowClient::_handleUnsubscribe() {
   String topic = _modTopic(_comBuff.substring(4));
   PRINTLN("Unsubscribing from topic: ", topic.c_str());
+
+  #ifdef HAS_DISPLAY
+  log2Display(("Unsubscribing from: " + topic).c_str());
+  #endif
+
   if (!client.unsubscribe(topic.c_str())) {
     PRINTLNS("Error during un-subscribing");
     return result_error;
@@ -333,6 +345,9 @@ result_t MqttNowClient::publishCmd(String cmd) {
 result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8_t qos) {
   PRINTLN("Publishing to ", topic);
   PRINTLN("Payload: ", payload);
+  #ifdef HAS_DISPLAY
+  log2Display(("Publishing to: " + topic).c_str());
+  #endif
   return client.publish(topic.c_str(), payload.c_str(), retain);
 }
 
@@ -381,6 +396,10 @@ result_t MqttNowClient::_sendStringToController(const char* msg) {
   }
   PRINTS("Sending to controller: ");
   PRINTLNSA(msg);
+  #ifdef HAS_DISPLAY
+  log2Display("OUT:");
+  log2Display(msg);
+  #endif
   size_t send = 0;
   send += COM.print(msg);
   COM.print("\n");
