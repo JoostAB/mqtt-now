@@ -420,7 +420,12 @@ result_t MqttNowClient::_sendMqttMsgToController() {
   PRINTS(MSG_PAYLOAD);
   PRINTLNSA(lastReceivedPayload);
   
-
+  #ifdef HAS_DISPLAY
+  log2Display("OUT:");
+  log2Display(lastReceivedTopic.c_str());
+  log2Display(lastReceivedPayload.c_str());
+  #endif
+  
   size_t send = 0;
   send += COM.print(MSG_START);
   send += COM.print(MSG_ACTIONREC);

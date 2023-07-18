@@ -2,10 +2,10 @@
 #ifdef HAS_DISPLAY
 
 #define MAX_DISPL_LINES 10
-#define MAX_DISPL_LINE_LENGTH 30
+#define MAX_DISPL_LINE_LENGTH 25
 #define LINE_HEIGHT 20
 
-char lines[MAX_DISPL_LINES][MAX_DISPL_LINE_LENGTH];
+char lines[MAX_DISPL_LINES][MAX_DISPL_LINE_LENGTH+1];
 uint8_t lastline = 0;
 
 void setupDisplay() {
@@ -25,13 +25,19 @@ void log2Display(const char* txt) {
   } else {
     lastline ++;
   }
-  strcpy(lines[lastline], txt);
+  if (strlen(txt) > (MAX_DISPL_LINE_LENGTH - 1)) {
+    memcpy(lines[lastline], txt, MAX_DISPL_LINE_LENGTH);
+  } else {
+    strcpy(lines[lastline], txt);
+  }
+  lines[lastline][MAX_DISPL_LINE_LENGTH] = '\0';  
 
   M5.Lcd.clear();
 
   for (uint8_t i = 0; i <= lastline; i++) {
+    int16_t y = LINE_HEIGHT * (i+1);
     M5.Lcd.setCursor(10,(LINE_HEIGHT * (i+1)));
-    M5.Lcd.println(lines[i]);
+    M5.Lcd.print(lines[i]);
   }
 }
 
