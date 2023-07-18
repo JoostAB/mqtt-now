@@ -269,6 +269,7 @@ The Introdction message is send when a node is powered up. It kinda says "Hello 
 - **Category**: Identifies the kind of node and its capabilities. In HA this is used to determine the device type.
 - **Timeout**: Tells the controller when to mark this node dead. If there is no communication coming from this node for x minutes, the node is considered dead.
 - **Friendly name**: How to call this node in the human interface to easely identify it. For example 'light livingroom'.
+
 ### Welcome message
 
 (`welc - 2`)
@@ -407,7 +408,7 @@ Indicates that the node has a display, and this includes the `mqtt-now-display.h
 
 `-D MQTT_NOW_CLIENT=1`
 
-Setting the MQTT_NOW_CLIENT flag compiles the client version of the software. This includes a wifi connection, web server and MQTT client. 
+Setting the MQTT_NOW_CLIENT flag compiles the client version of the software. This includes a wifi connection, web server and MQTT client.
 
 ##### MQTT_NOW_CONTROLLER
 
@@ -426,11 +427,10 @@ None yet
 Best to build this in a PIO environment, since all configuration is done.
 In platformio.ini just select the envoironment you want to build, or extend one to add/modify flags.
 
-# Wishlist
+## Wishlist
 
 - Dynamic esp-now channel
 - Web interface for gateway incl OTA
 - Gateway as HASS device with entities for management and monitoring
 - OTA for nodes
 - Safer Network ID validation algorithm
-
