@@ -30,6 +30,10 @@
   #include <M5Stack.h> 
 #endif
 
+#ifdef HAS_DISPLAY
+  #include <mqtt-now-display.h>
+#endif
+
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
 
