@@ -94,7 +94,7 @@ MqttNowClient::MqttNowClient(
     _offlineLwt = offlineLwt;
   }
 
-  Serial.println("Topics set");
+  PRINTLNS("Topics set");
 
   stopWifiAfterOta = false;
 }
