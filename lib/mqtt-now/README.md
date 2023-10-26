@@ -60,7 +60,7 @@ The following boards have been defined:
 
 **[Controller selection](#controller-selection)**
 
-**[MQTT](#mqtt)**
+**[MQTT](docs/mqtt.md)**
 
 *[Root topic](#root-topic)*
 
