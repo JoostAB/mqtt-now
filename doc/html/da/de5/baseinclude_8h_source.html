@@ -116,19 +116,24 @@ $(document).ready(function(){initNavTree('da/de5/baseinclude_8h_source.html','..
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">  #include &lt;M5Stack.h&gt;</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;ESPAsyncWebServer.h&gt;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;AsyncElegantOTA.h&gt;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">   36</a></span><span class="keyword">typedef</span> AsyncWebServer <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#if !defined(SERIALBAUDRATE)</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a56c12268b04ea40f5b60990d30fb7546">   39</a></span><span class="preprocessor">#define SERIALBAUDRATE 115200</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#ifdef HAS_DISPLAY</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">  #include &lt;<a class="code" href="../../d7/df2/mqtt-now-display_8h.html">mqtt-now-display.h</a>&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;ESPAsyncWebServer.h&gt;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;AsyncElegantOTA.h&gt;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">   40</a></span><span class="keyword">typedef</span> AsyncWebServer <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a>;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a347bab05abec85d23b5207309a5223b8">   42</a></span><span class="preprocessor">#define SIZE_IP 4</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a00e730fcfbe11a9f6db66ee1f0bbc015">   43</a></span><span class="preprocessor">#define SIZE_MAC 6</span></div>
-<div class="ttc" id="abaseinclude_8h_html_a305c3ecf32381a4001db07b96a69b910"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a></div><div class="ttdeci">AsyncWebServer WServer</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00036">baseinclude.h:36</a></div></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#if !defined(SERIALBAUDRATE)</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a56c12268b04ea40f5b60990d30fb7546">   43</a></span><span class="preprocessor">#define SERIALBAUDRATE 115200</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a347bab05abec85d23b5207309a5223b8">   46</a></span><span class="preprocessor">#define SIZE_IP 4</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a00e730fcfbe11a9f6db66ee1f0bbc015">   47</a></span><span class="preprocessor">#define SIZE_MAC 6</span></div>
+<div class="ttc" id="abaseinclude_8h_html_a305c3ecf32381a4001db07b96a69b910"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a></div><div class="ttdeci">AsyncWebServer WServer</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00040">baseinclude.h:40</a></div></div>
 <div class="ttc" id="ajbdebug_8h_html"><div class="ttname"><a href="../../d3/d6f/jbdebug_8h.html">jbdebug.h</a></div></div>
+<div class="ttc" id="amqtt-now-display_8h_html"><div class="ttname"><a href="../../d7/df2/mqtt-now-display_8h.html">mqtt-now-display.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

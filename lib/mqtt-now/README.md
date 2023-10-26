@@ -40,8 +40,6 @@ The following boards have been defined:
 
 ## Table Of Contents
 
-[TOC]
-
 **[Topology](#topology)**
 
 **[Network ID](#network-id)**

@@ -1,6 +1,4 @@
-# MQTTNow
-
-## ESP-Now - Messages
+# ESP-Now - Messages
 
 ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta data to make sure enough room is left for actual data. The only default metadata send with each message is the message type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one byte (`int8`) code. The Four character code is used as enumeration in the sourcecode.  
 All `char[x]` fields **may** be shortened using a NULL termination. If no NULL byte occurs, the full length is used.
@@ -15,8 +13,8 @@ The Introdction message is send when a node is powered up. It kinda says "Hello 
 |-|-|-|-|
 | Message type | uint8 | 1 | Code for messagetype |
 | MAC address | byte[6] | A1:B2:C3:D4:E5:F6 | MAC address if this node |
-| Network UUID | byte[16] | 3d0bb7a9-f3e3-4fa5-86b7-b5f0aeca41ad | See [Network ID](#network-id) |
-| Category | uint8 | 1 | See [Node category](#node-category) |
+| Network UUID | byte[16] | 3d0bb7a9-f3e3-4fa5-86b7-b5f0aeca41ad | See [Network ID](../README.md#network-id) |
+| Category | uint8 | 1 | See [Node category](../README.md#node-category) |
 | Timeout | uint16 | 10 | Minutes before dead |
 | Friendly name | char[30] | "light livingroom" | Descriptive name |
 
@@ -61,7 +59,7 @@ The Welcome message is the response of the controller to an [Introduction messag
 When a new node has become a member of a network (eg, the controller has responded to the
 [Introduction Message](#introduction-message) with a [Welcome message](#welcome-message)), the node can ask for
 configuration data. This data is needed if this node wants to be a backup controller node (see
-[Controller Selection](#controller-selection)) in case the current controller goes down or loses wifi connectivity.
+[Controller Selection](../README.md#controller-selection)) in case the current controller goes down or loses wifi connectivity.
 
 | name | type | data | description |
 |-|-|-|-|

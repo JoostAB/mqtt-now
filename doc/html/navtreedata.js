@@ -26,46 +26,42 @@ var NAVTREE =
 [
   [ "MQTT-Now", "index.html", [
     [ "MQTTNow", "index.html", [
-      [ "Overview", "index.html#autotoc_md1", null ],
-      [ "Table Of Contents", "index.html#autotoc_md3", null ],
-      [ "Topology", "index.html#autotoc_md4", [
-        [ "Network ID", "index.html#autotoc_md5", null ],
-        [ "Node category", "index.html#autotoc_md6", null ]
+      [ "Overview", "index.html#autotoc_md19", null ],
+      [ "Table Of Contents", "index.html#autotoc_md21", null ],
+      [ "Topology", "index.html#autotoc_md22", [
+        [ "Network ID", "index.html#autotoc_md23", null ],
+        [ "Node category", "index.html#autotoc_md24", null ]
       ] ],
-      [ "Slave", "index.html#autotoc_md7", null ],
-      [ "Controller", "index.html#autotoc_md8", [
-        [ "Dedicated controller", "index.html#autotoc_md9", null ],
-        [ "MQTT client", "index.html#autotoc_md10", null ],
-        [ "Serial protocol", "index.html#autotoc_md11", null ]
+      [ "Slave", "index.html#autotoc_md25", null ],
+      [ "Controller", "index.html#autotoc_md26", [
+        [ "Dedicated controller", "index.html#autotoc_md27", null ],
+        [ "MQTT client", "index.html#autotoc_md28", null ]
       ] ],
-      [ "Protocol", "index.html#autotoc_md12", [
-        [ "Controller selection", "index.html#autotoc_md13", null ],
-        [ "Controller initialization", "index.html#autotoc_md14", null ]
+      [ "Protocol", "index.html#autotoc_md29", [
+        [ "Controller selection", "index.html#autotoc_md30", null ],
+        [ "Controller initialization", "index.html#autotoc_md31", null ]
       ] ],
-      [ "MQTT", "index.html#autotoc_md15", [
-        [ "Root topic", "index.html#autotoc_md16", null ],
-        [ "Discovery topic", "index.html#autotoc_md17", null ],
-        [ "Command topic", "index.html#autotoc_md18", null ],
-        [ "Status topic", "index.html#autotoc_md19", null ],
-        [ "Node Command topic", "index.html#autotoc_md20", null ],
-        [ "Node Status topic", "index.html#autotoc_md21", null ]
+      [ "Library usage", "index.html#autotoc_md32", [
+        [ "Includes", "index.html#autotoc_md33", null ],
+        [ "Defines", "index.html#autotoc_md34", [
+          [ "Build flags", "index.html#autotoc_md35", [
+            [ "DEBUGLOG", "index.html#autotoc_md36", null ],
+            [ "MQTTNOW_DEBUG", "index.html#autotoc_md37", null ],
+            [ "HAS_DISPLAY", "index.html#autotoc_md38", null ],
+            [ "COM", "index.html#autotoc_md39", null ],
+            [ "MQTT_NOW_CLIENT", "index.html#autotoc_md40", null ],
+            [ "MQTT_NOW_CONTROLLER", "index.html#autotoc_md41", null ]
+          ] ]
+        ] ],
+        [ "Examples", "index.html#autotoc_md42", null ],
+        [ "Compilation", "index.html#autotoc_md43", null ]
       ] ],
-      [ "Messages", "index.html#autotoc_md22", [
-        [ "Introduction message", "index.html#autotoc_md23", null ],
-        [ "Welcome message", "index.html#autotoc_md24", null ],
-        [ "Request config message", "index.html#autotoc_md25", null ],
-        [ "Configuration message", "index.html#autotoc_md26", null ],
-        [ "Data message", "index.html#autotoc_md27", null ],
-        [ "Error message", "index.html#autotoc_md28", null ]
-      ] ],
-      [ "Library usage", "index.html#autotoc_md29", [
-        [ "Includes", "index.html#autotoc_md30", null ],
-        [ "Defines", "index.html#autotoc_md31", null ],
-        [ "Examples", "index.html#autotoc_md32", null ],
-        [ "Compilation", "index.html#autotoc_md33", null ]
-      ] ],
-      [ "Wishlist", "index.html#autotoc_md34", null ]
+      [ "Wishlist", "index.html#autotoc_md44", null ]
     ] ],
+    [ "ESP-Now - Messages", "d1/dc6/md_lib_mqtt_now_docs_espnowcomms.html", null ],
+    [ "MQTT structure", "da/d82/md_lib_mqtt_now_docs_mqtt.html", null ],
+    [ "MQTTNow network", "da/dc7/md_lib_mqtt_now_docs_network.html", null ],
+    [ "Serial communication", "d9/d1c/md_lib_mqtt_now_docs_serialcomms.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -94,7 +90,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"db/d76/mqtt-now-node_8cpp.html#ab2101805b78893d683ea42f24a247372"
+"da/ddc/class_mqtt_now_client.html#af9cecac805cc4c2855d0acea83a71ffe"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

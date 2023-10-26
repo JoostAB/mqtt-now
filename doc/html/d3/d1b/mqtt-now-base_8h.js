@@ -3,8 +3,11 @@ var mqtt_now_base_8h =
     [ "Node", "db/d8b/struct_node.html", "db/d8b/struct_node" ],
     [ "MqttNowBase", "da/dc7/class_mqtt_now_base.html", "da/dc7/class_mqtt_now_base" ],
     [ "__MQTT_NOW_BASE_H__", "d3/d1b/mqtt-now-base_8h.html#a5a53af359f1985bb8eaa7fffb09460c1", null ],
-    [ "OTA_START", "d3/d1b/mqtt-now-base_8h.html#a1768951d1549744e7872bb94590985fb", null ],
-    [ "OTA_STOP", "d3/d1b/mqtt-now-base_8h.html#afe98a772df56984f1252d607c19cc5cd", null ],
+    [ "CMD_CLIENT_REBOOT", "d3/d1b/mqtt-now-base_8h.html#adee950f43e7397d1b9fc0e2c34972531", null ],
+    [ "CMD_CTRL_REBOOT", "d3/d1b/mqtt-now-base_8h.html#a7ec5915ca6b06e78bdfae1c1003045c3", null ],
+    [ "CMD_NODE_REBOOT", "d3/d1b/mqtt-now-base_8h.html#a0b6e9bd27602f2ad3dd70475d454e219", null ],
+    [ "CMD_OTA_START", "d3/d1b/mqtt-now-base_8h.html#a0e3ced450eff71950d2c80c95080c1ed", null ],
+    [ "CMD_OTA_STOP", "d3/d1b/mqtt-now-base_8h.html#a61a4f40310235a410c5eb2ba593f2170", null ],
     [ "result_t", "d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0", null ],
     [ "ComponentType", "d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0", [
       [ "noneType", "d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a032c13375b9b84cd23b70f832e0b389b", null ],

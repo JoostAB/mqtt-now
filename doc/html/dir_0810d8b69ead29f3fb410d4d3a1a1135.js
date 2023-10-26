@@ -9,6 +9,8 @@ var dir_0810d8b69ead29f3fb410d4d3a1a1135 =
     [ "mqtt-now-client.h", "df/d41/mqtt-now-client_8h.html", "df/d41/mqtt-now-client_8h" ],
     [ "mqtt-now-controller.cpp", "dc/dec/mqtt-now-controller_8cpp.html", null ],
     [ "mqtt-now-controller.h", "dd/d10/mqtt-now-controller_8h.html", "dd/d10/mqtt-now-controller_8h" ],
+    [ "mqtt-now-display.cpp", "d1/d8b/mqtt-now-display_8cpp.html", null ],
+    [ "mqtt-now-display.h", "d7/df2/mqtt-now-display_8h.html", "d7/df2/mqtt-now-display_8h" ],
     [ "mqtt-now-node.cpp", "db/d76/mqtt-now-node_8cpp.html", "db/d76/mqtt-now-node_8cpp" ],
     [ "mqtt-now-node.h", "d2/de5/mqtt-now-node_8h.html", "d2/de5/mqtt-now-node_8h" ],
     [ "mqtt-now-slave.cpp", "db/dc5/mqtt-now-slave_8cpp.html", null ],

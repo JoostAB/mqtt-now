@@ -11,6 +11,7 @@ var mqtt_now_bridge_8h =
     [ "MQTT_ROOT_TOPIC", "d2/d0b/mqtt-now-bridge_8h.html#a0d02ab9c916ff57c25541d7bcf2fdf14", null ],
     [ "MQTT_STATUS_TOPIC", "d2/d0b/mqtt-now-bridge_8h.html#a56a2aaf2bf5e6cab81fc94e1d34612fa", null ],
     [ "MSG_ACTIONPUB", "d2/d0b/mqtt-now-bridge_8h.html#a0888d20179c32932d009c92c5a86a092", null ],
+    [ "MSG_ACTIONRBT", "d2/d0b/mqtt-now-bridge_8h.html#a794189eff0ecca253bccd3870cc2cba9", null ],
     [ "MSG_ACTIONREC", "d2/d0b/mqtt-now-bridge_8h.html#a7686baf2664e44c0eaacbbda385e621f", null ],
     [ "MSG_ACTIONSUB", "d2/d0b/mqtt-now-bridge_8h.html#a9eda62e8d44d6fcc5bdc9ba34553dad0", null ],
     [ "MSG_ACTIONUNS", "d2/d0b/mqtt-now-bridge_8h.html#adaa780c2b26cf02f63d751ac29e8caa9", null ],

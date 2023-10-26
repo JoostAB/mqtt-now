@@ -1,6 +1,4 @@
-# MQTTNow
-
-## MQTT
+# MQTT structure
 
 The MQTT communication with [Home Assistant](https://www.home-assistant.io) (or any other application communicating with this network) goes over a couple of topics. These topics are subtopics of one [root topic](#root-topic).
 

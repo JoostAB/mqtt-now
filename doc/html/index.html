@@ -94,49 +94,41 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><li class="level1"><a href="#autotoc_md1">Overview</a></li>
-<li class="level1"><a href="#autotoc_md3">Table Of Contents</a></li>
-<li class="level1"><a href="#autotoc_md4">Topology</a><ul><li class="level2"><a href="#autotoc_md5">Network ID</a></li>
-<li class="level2"><a href="#autotoc_md6">Node category</a></li>
+<ul><li class="level1"><a href="#autotoc_md19">Overview</a></li>
+<li class="level1"><a href="#autotoc_md21">Table Of Contents</a></li>
+<li class="level1"><a href="#autotoc_md22">Topology</a><ul><li class="level2"><a href="#autotoc_md23">Network ID</a></li>
+<li class="level2"><a href="#autotoc_md24">Node category</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md7">Slave</a></li>
-<li class="level1"><a href="#autotoc_md8">Controller</a><ul><li class="level2"><a href="#autotoc_md9">Dedicated controller</a></li>
-<li class="level2"><a href="#autotoc_md10">MQTT client</a></li>
-<li class="level2"><a href="#autotoc_md11">Serial protocol</a></li>
+<li class="level1"><a href="#autotoc_md25">Slave</a></li>
+<li class="level1"><a href="#autotoc_md26">Controller</a><ul><li class="level2"><a href="#autotoc_md27">Dedicated controller</a></li>
+<li class="level2"><a href="#autotoc_md28">MQTT client</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md12">Protocol</a><ul><li class="level2"><a href="#autotoc_md13">Controller selection</a></li>
-<li class="level2"><a href="#autotoc_md14">Controller initialization</a></li>
+<li class="level1"><a href="#autotoc_md29">Protocol</a><ul><li class="level2"><a href="#autotoc_md30">Controller selection</a></li>
+<li class="level2"><a href="#autotoc_md31">Controller initialization</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md15">MQTT</a><ul><li class="level2"><a href="#autotoc_md16">Root topic</a></li>
-<li class="level2"><a href="#autotoc_md17">Discovery topic</a></li>
-<li class="level2"><a href="#autotoc_md18">Command topic</a></li>
-<li class="level2"><a href="#autotoc_md19">Status topic</a></li>
-<li class="level2"><a href="#autotoc_md20">Node Command topic</a></li>
-<li class="level2"><a href="#autotoc_md21">Node Status topic</a></li>
+<li class="level1"><a href="#autotoc_md32">Library usage</a><ul><li class="level2"><a href="#autotoc_md33">Includes</a></li>
+<li class="level2"><a href="#autotoc_md34">Defines</a><ul><li class="level3"><a href="#autotoc_md35">Build flags</a><ul><li class="level4"><a href="#autotoc_md36">DEBUGLOG</a></li>
+<li class="level4"><a href="#autotoc_md37">MQTTNOW_DEBUG</a></li>
+<li class="level4"><a href="#autotoc_md38">HAS_DISPLAY</a></li>
+<li class="level4"><a href="#autotoc_md39">COM</a></li>
+<li class="level4"><a href="#autotoc_md40">MQTT_NOW_CLIENT</a></li>
+<li class="level4"><a href="#autotoc_md41">MQTT_NOW_CONTROLLER</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md22">Messages</a><ul><li class="level2"><a href="#autotoc_md23">Introduction message</a></li>
-<li class="level2"><a href="#autotoc_md24">Welcome message</a></li>
-<li class="level2"><a href="#autotoc_md25">Request config message</a></li>
-<li class="level2"><a href="#autotoc_md26">Configuration message</a></li>
-<li class="level2"><a href="#autotoc_md27">Data message</a></li>
-<li class="level2"><a href="#autotoc_md28">Error message</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md29">Library usage</a><ul><li class="level2"><a href="#autotoc_md30">Includes</a></li>
-<li class="level2"><a href="#autotoc_md31">Defines</a></li>
-<li class="level2"><a href="#autotoc_md32">Examples</a></li>
-<li class="level2"><a href="#autotoc_md33">Compilation</a></li>
+<li class="level2"><a href="#autotoc_md42">Examples</a></li>
+<li class="level2"><a href="#autotoc_md43">Compilation</a></li>
 </ul>
 </li>
-<li class="level1"><a href="#autotoc_md34">Wishlist</a></li>
+<li class="level1"><a href="#autotoc_md44">Wishlist</a></li>
 </ul>
 </div>
 <div class="textblock"><p ><a class="anchor" id="md_lib_mqtt_now_README"></a> </p>
-<h1><a class="anchor" id="autotoc_md1"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 Overview</h1>
 <p >An implementation of the ESP-Now protocol in combination with MQTT.</p>
 <p >The idea is to use this protocol for several IOT devices in my smart home setup. One node will be the bridge to my <a href="https://www.home-assistant.io">Home Assistant</a> using MQTT. All others communicate to this bridge using ESP-Now. The advantage is that there is only one node connected to my WiFi network, reducing used IP addresses and workload for router and Access points.</p>
@@ -144,30 +136,36 @@ Overview</h1>
 <p >The following boards have been defined:</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Board   </th><th class="markdownTableHeadNone">Environment   </th><th class="markdownTableHeadNone">Chip   </th><th class="markdownTableHeadNone">Controller   </th><th class="markdownTableHeadNone">MQTTClient/Webint    </th></tr>
+<th class="markdownTableHeadNone">Board   </th><th class="markdownTableHeadNone">Environment   </th><th class="markdownTableHeadNone">Chip   </th><th class="markdownTableHeadNone">Controller   </th><th class="markdownTableHeadNone">MQTTClient/Webint   </th><th class="markdownTableHeadNone">Display    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><strike>ESP-01 512K</strike>   </td><td class="markdownTableBodyNone"><strike>esp01_512k</strike> (*)   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone"><strike>ESP-01 512K</strike>   </td><td class="markdownTableBodyNone"><strike>esp01_512k</strike> (*)   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><strike>ESP-01 512K</strike>   </td><td class="markdownTableBodyNone"><strike>esp01_512k_client</strike> (*)   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:    </td></tr>
+<td class="markdownTableBodyNone"><strike>ESP-01 512K</strike>   </td><td class="markdownTableBodyNone"><strike>esp01_512k_client</strike> (*)   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ESP-01 1MB   </td><td class="markdownTableBodyNone">esp01_1m   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">ESP-01 1MB   </td><td class="markdownTableBodyNone">esp01_1m   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">ESP-01 1MB   </td><td class="markdownTableBodyNone">esp01_1m_client   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:    </td></tr>
+<td class="markdownTableBodyNone">ESP-01 1MB   </td><td class="markdownTableBodyNone">esp01_1m_client   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Wemos D1 mini   </td><td class="markdownTableBodyNone">d1_mini_lite   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">Wemos D1 mini   </td><td class="markdownTableBodyNone">d1_mini_lite   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Heltec WifiKit 8   </td><td class="markdownTableBodyNone">heltec_wifi_kit_8   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">Heltec WifiKit 8   </td><td class="markdownTableBodyNone">heltec_wifi_kit_8   </td><td class="markdownTableBodyNone">ESP 8266   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Wemos D1 mini32   </td><td class="markdownTableBodyNone">wemos_d1_mini32   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">Wemos D1 mini32   </td><td class="markdownTableBodyNone">wemos_d1_mini32   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Wemos D1 mini32   </td><td class="markdownTableBodyNone">wemos_d1_mini32_control   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">Wemos D1 mini32   </td><td class="markdownTableBodyNone">wemos_d1_mini32_control   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Do-It Devkit 32   </td><td class="markdownTableBodyNone">esp32doit-devkit-v1   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">Do-It Devkit 32   </td><td class="markdownTableBodyNone">esp32doit-devkit-v1   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">M5-Stack Fire   </td><td class="markdownTableBodyNone">m5stack-fire   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">M5-Stack Fire   </td><td class="markdownTableBodyNone">m5stack-fire-control   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">M5-Stack Fire   </td><td class="markdownTableBodyNone">m5stack-fire-client   </td><td class="markdownTableBodyNone">ESP 32   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">:heavy_check_mark:   </td><td class="markdownTableBodyNone">:heavy_check_mark:   </td></tr>
 </table>
 <p >(*) ESP-01 512K is no longer supported... Simply ain't gonna cut it.</p>
 <hr  />
 <p >&#160; &#160;</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 Table Of Contents</h1>
 <p ><b>Topology</b></p>
 <p ><b>Network ID</b></p>
@@ -176,37 +174,28 @@ Table Of Contents</h1>
 <p ><b>Controller</b></p>
 <p ><b>Dedicated controller</b></p>
 <p ><b>MQTT client</b></p>
-<p ><b>Serial protocol</b></p>
 <p ><b>Protocol</b></p>
 <p ><b>Controller selection</b></p>
-<p ><b>MQTT</b></p>
-<p ><em>Root topic</em></p>
-<p ><em>Discovery topic</em></p>
-<p ><em>Command topic</em></p>
-<p ><em>Status topic</em></p>
-<p ><em>Node Command topic</em></p>
-<p ><b>Messages</b></p>
-<p ><em>Introduction message</em></p>
-<p ><em>Welcome message</em></p>
-<p ><em>Request config message</em></p>
-<p ><em>Configuration message</em></p>
-<p ><em>Data message</em></p>
+<p ><b><a class="el" href="da/d82/md_lib_mqtt_now_docs_mqtt.html">MQTT</a></b></p>
+<p ><b><a class="el" href="d1/dc6/md_lib_mqtt_now_docs_espnowcomms.html">ESP-Now messages</a></b></p>
+<p ><b><a class="el" href="d9/d1c/md_lib_mqtt_now_docs_serialcomms.html">Serial communication</a></b></p>
 <p ><b>Library usage</b></p>
 <p ><em>Includes</em></p>
 <p ><em>Defines</em></p>
+<p ><em>Build Flags</em></p>
 <p ><em>Examples</em></p>
 <p ><em>Compilation</em></p>
 <p >&#160; &#160;</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Topology</h1>
 <p >A network consists of several nodes, from which one has the role of controller.</p>
 <p >The non-controller nodes (aka slaves) communicate with the controller using the esp-now protocol. They report their status and listen for commands. They can also report events.</p>
 <p >The controller is responsible for communication to the outside world over standard WiFi. Therefore the controller must be connected to an accesspoint or router connected to the home network and maybe the internet. The controller normally is also playing a slave role.</p>
 <p >Which device is the controller doesn't matter, since there is no hardware difference. All nodes are ESP32/ESP8266 based, and therefore they are all capable of communicating with a wireless network. The controller role is dynamically assigned (see Controller selection) among the available nodes, and as soon the node player the controller role is offline, a new controller is chosen.</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Network ID</h2>
 <p >The Network ID is an UUID of 16 bytes. This ID is used to make sure no 'foreign' nodes can connect to this network. Currently this ID is set compile-time, so once a node is flashed, it can only connect to a certain network. Also, this ID is sent each time a node boots up if not connected to a network to see if a network for it's ID is alive. Others couls pretend to be a controller, steal the ID and use it to connect to your home network. So this is not a safe algorithm yet, but the basic is there and it is now possible to run multiple MQTT-Now networks alongside eachother without any issues. In the future there has to be some kind of encryption, with MAC address for example to make the ID unique for each node, but recognisable for the controller.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Node category</h2>
 <p >There are several node categories. These categories describe in a nutshell what a node can and or does. They are based on the device types as defined in the <a href="https://www.home-assistant.io/docs/mqtt/discovery">Home Assistant MQTT Discovery</a> documentation. This category can then be used by third party software to determine how to categorize the new node.</p>
 <p >Available categories are:</p>
@@ -233,233 +222,75 @@ Node category</h2>
 <li>vacuum (*)</li>
 </ul>
 <p ><sub>(*) = Not implemented yet</sub></p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Slave</h1>
 <p >When a slave is turned on, it will send an introduction message to the broadcast (MAC)address <code>FF:FF:FF:FF:FF:FF</code>. The introduction message contains the MAC address of the slave and name for easy recognition. It also contains a unique ID of the network it wants to connect to. For now this ID is hard coded, so it will have to be included at compile time for all nodes intended for the same network. The running controller will check the network ID, and if it matches its own network id it will respond with a welcome message containing its mac address and register the slave as new node. The slave now knows who the controller is and will from now on address all communication to the controller directly using its MAC address. If there is no response from a running controller node, the new node will take on the role of controller (see Controller initialization) by connecting to the wifi network and wait for other nodes to come online as slaves.</p>
 <p >The slave can be anything from a simple lightbulb switch, a complete weatherstation, smart plug or anything else you have in your smart-home. It will listen to esp-now messages and/or send messages.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Controller</h1>
 <p >The controller is the central accesspoint to the whole MQTTNow network. Together with the MQTT client it acts as a gateway between the MQTTNow network and the home wifi, so that you can access these nodes with normal wifi enabled devices like a smartphone, computer or smart-home central like <a href="https://www.domoticz.com/">Domoticz</a> or <a href="https://www.home-assistant.io">Home Assistant</a>.</p>
 <p >Using this WiFi connection the controller will also connect if available to an MQTT broker for mqtt communication.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Dedicated controller</h2>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md28"></a>
 MQTT client</h2>
-<h2><a class="anchor" id="autotoc_md11"></a>
-Serial protocol</h2>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 Protocol</h1>
 <p >The protocol used for communication between the nodes is based on <a href="https://www.espressif.com/en/products/software/esp-now/overview">esp-now</a>. A low-power communication protocol using the same 2.4 Ghz radio that is used for wifi, but without the need for a central router. The nodes can communicate with eachother peer-to-peer. <br  />
  Since the nodes are not connected to the home network, there is no way to access them directly. Therefore the controller connects to the MQTTNow network, as well as to the home WiFi network and acts as a gateway. This way, only one IP address on the home network is needed for the whole esp=now network. For the outside world (everything not in the MQTTNow network) the network is available as one device.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 Controller selection</h2>
 <p >When a node (with controller capability) is turned on, and there is no controller present (eg, there is no welcome message as a response to the introduction message), this node shall become the controller. This is the most simple and most common scenario.</p>
 <p >If in an existing network the active controller goes down, another will take over assuming that there is another one with controller capability. If there are multiple candidates, the one with the strongest wifi signal is selected.</p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 Controller initialization</h2>
-<h1><a class="anchor" id="autotoc_md15"></a>
-MQTT</h1>
-<p >The MQTT communication with <a href="https://www.home-assistant.io">Home Assistant</a> (or any other application communicating with this network) goes over a couple of topics. These topics are subtopics of one root topic. </p><pre class="fragment">Root -+- \CMD -+-
-      |        |--- node1
-      |        |--- node2
-      |
-      |--- \stat -+--- \LWT
-      |           |--- \state
-      |           |--- node1 -+--- \LWT
-      |           |           |--- \state
-      |           |--- node2 -+--- \LWT
-      |                       |--- \state
-      |
-      |--- \discovery -+-
-                       |--- node1
-                       |--- node2
-</pre><p> All topics should have the <code>Retained</code> flag set to make sure a node can return to the last known correct state after reconnect or power cycle.</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
-Root topic</h2>
-<p >The root topic is where all other communication is organized. The root topic itself contains no payload, only subtopics. General subtopics are a command topic and a status topic. <code>LWT</code> information is contained in the status topic, and shows wether or not the whole network is online. In other words, if the controller is connected to the MQTT broker. It can be either <code>online</code> or <code>offline</code>. A third mandatory (sub)topic is the Discovery topic. This topic holds all information needed for any client to identify all nodes and their abilities. It can also be used to add a node to a client automatically if it joins an MQTTNow network.</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
-Discovery topic</h2>
-<p ><code>\discovery</code></p>
-<p >The discovery topic can be used to automatically add nodes to 3rd party controlling software like <a href="https://www.home-assistant.io">Home Assistant</a>. Since the main idea of this project is to create a new protocol to be used by Home Assistant please refer to <a href="https://www.home-assistant.io/docs/mqtt/discovery">HASS MQTT Discovery</a> for the exact registration payload. This (sub)topic can be configured without the prepending slash (/). This is usefull if the client has his own discovery topic, like Home Asisstant. In that case the discovery topic should be configured like <code>homeassistant</code>.</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
-Command topic</h2>
-<p ><code>\CMD</code></p>
-<p >The command topic can be used to send commands to the network as a whole. This can be something like ... This is typically set by 3rd party software. This topic also contains a subtopic for each node, identified by the node-id (see Node Command Topic). <br  />
- The controller subscribes to this topic to receive commands for either the whole network or for a specific node.</p>
-<h2><a class="anchor" id="autotoc_md19"></a>
-Status topic</h2>
-<p ><code>\stat</code></p>
-<p >The Status topic is used by the controller to publish network status. It shows its online status in the <code>\LWT</code> subtopic and other information like controller name, network status information, IP address etc. For each node (and meaybe even for the controller itself if it also has a node role) there is a subtopic containing status information for that node.</p>
-<h2><a class="anchor" id="autotoc_md20"></a>
-Node Command topic</h2>
-<p ><code>\CMD\&lt;node-id&gt;</code></p>
-<p >Any device that wants to control a specific node, can publish a message to the node command topic. The full topic will be <code>root-topic\CMD\&lt;node-id&gt;</code>. What these commands can be is made available by the node.</p>
-<h2><a class="anchor" id="autotoc_md21"></a>
-Node Status topic</h2>
-<p ><code>\stat\&lt;node-id&gt;</code></p>
-<p >The node status topic is used as feedback to the controller. The controller can see if the last command was successfully executed. Also, because it has the 'retained' flag set, the node can check what the last know status was in case of a powercycle or reconnect and go back to that state.</p>
-<h1><a class="anchor" id="autotoc_md22"></a>
-Messages</h1>
-<p >ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta data to make sure enough room is left for actual data. The only default metadata send with each message is the message type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one byte (<code>int8</code>) code. The Four character code is used as enumeration in the sourcecode. <br  />
- All <code>char[x]</code> fields <b>may</b> be shortened using a NULL termination. If no NULL byte occurs, the full length is used.</p>
-<h2><a class="anchor" id="autotoc_md23"></a>
-Introduction message</h2>
-<p >(<code>intr - 1</code>)</p>
-<p >The Introdction message is send when a node is powered up. It kinda says "Hello everybody. My name is John, this is what I do and who is the boss?". The message contains the following data:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">data   </th><th class="markdownTableHeadNone">description    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Message type   </td><td class="markdownTableBodyNone">uint8   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">Code for messagetype    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">MAC address   </td><td class="markdownTableBodyNone">byte[6]   </td><td class="markdownTableBodyNone">A1:B2:C3:D4:E5:F6   </td><td class="markdownTableBodyNone">MAC address if this node    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Network UUID   </td><td class="markdownTableBodyNone">byte[16]   </td><td class="markdownTableBodyNone">3d0bb7a9-f3e3-4fa5-86b7-b5f0aeca41ad   </td><td class="markdownTableBodyNone">See Network ID    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Category   </td><td class="markdownTableBodyNone">uint8   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">See Node category    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Timeout   </td><td class="markdownTableBodyNone">uint16   </td><td class="markdownTableBodyNone">10   </td><td class="markdownTableBodyNone">Minutes before dead    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Friendly name   </td><td class="markdownTableBodyNone">char[30]   </td><td class="markdownTableBodyNone">"light livingroom"   </td><td class="markdownTableBodyNone">Descriptive name   </td></tr>
-</table>
-<pre class="fragment"> t
- y                  C
- p         Network  a
- e  MAC      UUID   t  Friendly name
-|-|------|---~~~---|--|-----~~~-----|
- 0  1-7    8-33     34   35-65 
-(total 66 bytes)
-</pre><ul>
-<li><b>Message type</b>: Enumerated type of message being send. <code>1</code></li>
-<li><b>MAC Address</b>: MAC address of node sending this message. Used as unique identifier of the node.</li>
-<li><b>Network UUID</b>: The unique ID of the network the node wants to connect to. Must be the same for all members of the network.</li>
-<li><b>Category</b>: Identifies the kind of node and its capabilities. In HA this is used to determine the device type.</li>
-<li><b>Timeout</b>: Tells the controller when to mark this node dead. If there is no communication coming from this node for x minutes, the node is considered dead.</li>
-<li><b>Friendly name</b>: How to call this node in the human interface to easely identify it. For example 'light livingroom'. </li>
-</ul>
-<h2><a class="anchor" id="autotoc_md24"></a>
-Welcome message</h2>
-<p >(<code>welc - 2</code>)</p>
-<p >The Welcome message is the response of the controller to an Introduction message. Is basically says "Hi John, welcome. I'll write you down as a new member if this network, and from now on you only talk to me."</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">data   </th><th class="markdownTableHeadNone">description    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Message type   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone">Code for messagetype    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">MAC address   </td><td class="markdownTableBodyNone">byte[6]   </td><td class="markdownTableBodyNone">A1:B2:C3:D4:E5:F6   </td><td class="markdownTableBodyNone">Mac address of the controller   </td></tr>
-</table>
-<pre class="fragment"> t
- y        
- p        
- e  MAC   
-|-|------|
- 0  1-7   
-(total 8 bytes)
-</pre> <h2><a class="anchor" id="autotoc_md25"></a>
-Request config message</h2>
-<p >(<code>rqcf - 3</code>)</p>
-<p >When a new node has become a member of a network (eg, the controller has responded to the Introduction Message with a Welcome message), the node can ask for configuration data. This data is needed if this node wants to be a backup controller node (see Controller Selection) in case the current controller goes down or loses wifi connectivity.</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">data   </th><th class="markdownTableHeadNone">description    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Message type   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">Code for messagetype   </td></tr>
-</table>
-<pre class="fragment"> t
- y        
- p        
- e  
-|-|
- 0 
-(total 1 byte)
-</pre> <h2><a class="anchor" id="autotoc_md26"></a>
-Configuration message</h2>
-<p >(<code>cnfg - 4</code>)</p>
-<p >The response to the Request Config Message. This message contains all data that is needed to take over the role of controller. Being wifi and mqtt credentials.</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">data   </th><th class="markdownTableHeadNone">description    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Message type   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">4   </td><td class="markdownTableBodyNone">Code for messagetype    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">WiFi SSID   </td><td class="markdownTableBodyNone">char[32]   </td><td class="markdownTableBodyNone">My-wifi   </td><td class="markdownTableBodyNone">SSID of your network    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">WiFi Key   </td><td class="markdownTableBodyNone">char[64]   </td><td class="markdownTableBodyNone">*****   </td><td class="markdownTableBodyNone">Authorization key for network    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">IP MQTT broker   </td><td class="markdownTableBodyNone">byte[6]   </td><td class="markdownTableBodyNone">A1:B2:C3:D4:E5:F6   </td><td class="markdownTableBodyNone">IP address of MQTT broker    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">MQTT port   </td><td class="markdownTableBodyNone">int16   </td><td class="markdownTableBodyNone">1883   </td><td class="markdownTableBodyNone">Port of MQTT broker    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">MQTT user   </td><td class="markdownTableBodyNone">char[20]   </td><td class="markdownTableBodyNone">user   </td><td class="markdownTableBodyNone">MQTT user (blank if none)    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">MQTT password   </td><td class="markdownTableBodyNone">char[20]   </td><td class="markdownTableBodyNone">*****   </td><td class="markdownTableBodyNone">MQTT password (blank if none)   </td></tr>
-</table>
-<pre class="fragment"> t                           P
- y                           o
- p                           r   MQTT    MQTT
- e  SSID   Key     IP MQTT   t   user    pwd
-|-|------|--~~~--|---------|---|--~~~--|--~~~--|
- 0  1-32   33-96   97-102   103 105-125 126-146
-                             -
-                            104
-(total 147 bytes)
-</pre> <h2><a class="anchor" id="autotoc_md27"></a>
-Data message</h2>
-<p >(<code>data - 5</code>)</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">data   </th><th class="markdownTableHeadNone">description    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Message type   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">Code for messagetype    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Data type   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">Code to describe type of data    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Data   </td><td class="markdownTableBodyNone">char[240]   </td><td class="markdownTableBodyNone">whatever   </td><td class="markdownTableBodyNone">The data itself   </td></tr>
-</table>
-<pre class="fragment"> M D
- t t         
- y y         
- p p         
- e e  Data   
-|-|-|--~~~--|
- 0 1  2-241 
-
-(total 242 bytes)
-</pre> <h2><a class="anchor" id="autotoc_md28"></a>
-Error message</h2>
-<p >(<code>eror - 6</code>)</p>
-<p >Is send as a response if an error occurs as a result of a request. For example when a node tries to join a network with an invalid network uuid.</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">name   </th><th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">data   </th><th class="markdownTableHeadNone">description    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Message type   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">5   </td><td class="markdownTableBodyNone">Code for messagetype    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Error code   </td><td class="markdownTableBodyNone">int8   </td><td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone">Error code    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Error message   </td><td class="markdownTableBodyNone">char[240]   </td><td class="markdownTableBodyNone">whatever   </td><td class="markdownTableBodyNone">The error message   </td></tr>
-</table>
 <p >&#160; &#160;</p>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 Library usage</h1>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Includes</h2>
 <p ><code><a class="el" href="d6/d03/mqtt-now_8h.html">mqtt-now.h</a></code></p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Defines</h2>
 <p >See <code>secrets.h</code>.</p>
-<h2><a class="anchor" id="autotoc_md32"></a>
+<h3><a class="anchor" id="autotoc_md35"></a>
+Build flags</h3>
+<p >If you define a new board for a specific situation, you can use the following build flags to customize the firmware:</p>
+<h4><a class="anchor" id="autotoc_md36"></a>
+DEBUGLOG</h4>
+<p ><code>-D DEBUGLOG=1</code></p>
+<p >If set, the DEBUGLOG flag enabled debug logging to the serial interface. Beware that you cannot use this in productio if you are running a client or controller firmware that uses the same serial port for communication. During development this is usefull for debugging, but also to send/receive the communication send between controller and client.</p>
+<h4><a class="anchor" id="autotoc_md37"></a>
+MQTTNOW_DEBUG</h4>
+<p ><code>-D MQTTNOW_DEBUG=1</code></p>
+<p >Not implemented yet.</p>
+<h4><a class="anchor" id="autotoc_md38"></a>
+HAS_DISPLAY</h4>
+<p ><code>-D HAS_DISPLAY=1</code></p>
+<p >Indicates that the node has a display, and this includes the <code><a class="el" href="d7/df2/mqtt-now-display_8h.html">mqtt-now-display.h</a></code> file. Currently the only implementation is for M5Stack devices.</p>
+<h4><a class="anchor" id="autotoc_md39"></a>
+COM</h4>
+<p ><code>-D COM=Serial</code></p>
+<p >This flag indicates the serial port that is to be used for serial communication between controller and client nodes.</p>
+<h4><a class="anchor" id="autotoc_md40"></a>
+MQTT_NOW_CLIENT</h4>
+<p ><code>-D MQTT_NOW_CLIENT=1</code></p>
+<p >Setting the MQTT_NOW_CLIENT flag compiles the client version of the software. This includes a wifi connection, web server and MQTT client.</p>
+<h4><a class="anchor" id="autotoc_md41"></a>
+MQTT_NOW_CONTROLLER</h4>
+<p ><code>-D MQTT_NOW_CONTROLLER=1</code></p>
+<p >This flag compiles the controller node. Implements everything a normal node has but also the management logic and serial communication with the client node.</p>
+<p >If neither the <code>MQTT_NOW_CLIENT</code> or <code>MQTT_NOW_CONTROLLER</code> are set, a standard slave node will be created.</p>
+<h2><a class="anchor" id="autotoc_md42"></a>
 Examples</h2>
 <p >None yet</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md43"></a>
 Compilation</h2>
 <p >Best to build this in a PIO environment, since all configuration is done. In platformio.ini just select the envoironment you want to build, or extend one to add/modify flags.</p>
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md44"></a>
 Wishlist</h1>
 <ul>
 <li>Dynamic esp-now channel</li>
-<li>Include wifi manager</li>
 <li>Web interface for gateway incl OTA</li>
 <li>Gateway as HASS device with entities for management and monitoring</li>
 <li>OTA for nodes</li>
