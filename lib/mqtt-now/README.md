@@ -53,8 +53,6 @@ The following boards have been defined:
 
 **[MQTT client](#mqtt-client)**
 
-**[Serial protocol](#serial-protocol)**
-
 **[Protocol](#protocol)**
 
 **[Controller selection](#controller-selection)**
@@ -71,7 +69,7 @@ The following boards have been defined:
 
 *[Node Command topic](#node-command-topic)*
 
-**[Messages](#messages)**
+*[Messages (ESP-Now)](#messages-esp-now)**
 
 *[Introduction message](#introduction-message)*
 
@@ -160,8 +158,6 @@ Using this WiFi connection the controller will also connect if available to an [
 
 ### MQTT client
 
-### Serial protocol
-
 ## Protocol
 
 The protocol used for communication between the nodes is based on [esp-now](https://www.espressif.com/en/products/software/esp-now/overview). A low-power communication protocol using the same 2.4 Ghz radio that is used for wifi, but without the need for a central router. The nodes can communicate with eachother peer-to-peer.  
@@ -235,7 +231,7 @@ Any device that wants to control a specific node, can publish a message to the n
 
 The node status topic is used as feedback to the controller. The controller can see if the last command was successfully executed. Also, because it has the 'retained' flag set, the node can check what the last know status was in case of a powercycle or reconnect and go back to that state.
 
-## Messages
+## Messages (ESP-Now)
 
 ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta data to make sure enough room is left for actual data. The only default metadata send with each message is the message type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one byte (`int8`) code. The Four character code is used as enumeration in the sourcecode.  
 All `char[x]` fields **may** be shortened using a NULL termination. If no NULL byte occurs, the full length is used.
@@ -372,6 +368,24 @@ Is send as a response if an error occurs as a result of a request. For example w
 &nbsp;
 &nbsp;
 
+## Serial communication
+
+The communication between the MQTT client and the controller is a simple serial communication, using either the hardware TX/RX connections or soft serial. This can be configured using the `-D COM=...` build flag. If this buildflag is not defined it will default to `Serial`. This is defined in `mqtt-now-controller.h` and `mqtt-now-client.h`.
+
+All serial messages are defined in `mqtt-now-bridge.h`.
+
+### Prefix
+
+`MSG_START "###"`
+
+All serial messages have to start with a MSG_START prefix. This way the controller or client node know that it is a valid message. If it does not start with a MSG_START prefix the message will be regarded as noise (or debug message) and will therefore be ignored.
+
+### Subscribe
+
+`MSG_ACTIONSUB 'S'`
+
+Following the MSG_START prefix, the action is defined.
+
 ## Library usage
 
 ### Includes
@@ -404,6 +418,12 @@ Not implemented yet.
 
 Indicates that the node has a display, and this includes the `mqtt-now-display.h` file. Currently the only implementation is for M5Stack devices.
 
+##### COM
+
+`-D COM=Serial`
+
+This flag indicates the serial port that is to be used for serial communication between [controller](#controller) and [client](#mqtt-client) nodes.
+
 ##### MQTT_NOW_CLIENT
 
 `-D MQTT_NOW_CLIENT=1`
@@ -425,7 +445,7 @@ None yet
 ### Compilation
 
 Best to build this in a PIO environment, since all configuration is done.
-In platformio.ini just select the envoironment you want to build, or extend one to add/modify flags.
+In platformio.ini just select the envoironment you want to build, or extend one to add/modify [flags](#build-flags).
 
 ## Wishlist
 
