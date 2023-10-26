@@ -1,13 +1,17 @@
 # ESP-Now - Messages
 
-ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta data to make sure enough room is left for actual data. The only default metadata send with each message is the message type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one byte (`int8`) code. The Four character code is used as enumeration in the sourcecode.  
+ESP-Now supports messages with a maximum payload of 250 bytes. Therefore we have to be very careful with default meta
+data to make sure enough room is left for actual data. The only default metadata send with each message is the message
+type. Initial plan was to use a four character code to make it human readable, but that is replaced with a single one
+byte (`int8`) code. The Four character code is used as enumeration in the sourcecode.  
 All `char[x]` fields **may** be shortened using a NULL termination. If no NULL byte occurs, the full length is used.
 
 ### Introduction message
 
 (`intr - 1`)
 
-The Introdction message is send when a node is powered up. It kinda says "Hello everybody. My name is John, this is what I do and who is the boss?". The message contains the following data:
+The Introdction message is send when a node is powered up. It kinda says "Hello everybody. My name is John, this is what
+I do and who is the boss?". The message contains the following data:
 
 | name | type | data | description |
 |-|-|-|-|
@@ -28,16 +32,19 @@ The Introdction message is send when a node is powered up. It kinda says "Hello 
 
 - **Message type**: Enumerated type of message being send. `1`
 - **MAC Address**: MAC address of node sending this message. Used as unique identifier of the node.
-- **Network UUID**: The unique ID of the network the node wants to connect to. Must be the same for all members of the network.
+- **Network UUID**: The unique ID of the network the node wants to connect to. Must be the same for all members of the
+network.
 - **Category**: Identifies the kind of node and its capabilities. In HA this is used to determine the device type.
-- **Timeout**: Tells the controller when to mark this node dead. If there is no communication coming from this node for x minutes, the node is considered dead.
+- **Timeout**: Tells the controller when to mark this node dead. If there is no communication coming from this node for
+x minutes, the node is considered dead.
 - **Friendly name**: How to call this node in the human interface to easely identify it. For example 'light livingroom'.
 
 ### Welcome message
 
 (`welc - 2`)
 
-The Welcome message is the response of the controller to an [Introduction message](#introduction-message). Is basically says "Hi John, welcome. I'll write you down as a new member if this network, and from now on you only talk to me."
+The Welcome message is the response of the controller to an [Introduction message](#introduction-message). Is basically
+says "Hi John, welcome. I'll write you down as a new member if this network, and from now on you only talk to me."
 
 | name | type | data | description |
 |-|-|-|-|
@@ -124,7 +131,8 @@ take over the role of controller. Being wifi and mqtt credentials.
 
 (`eror - 6`)
 
-Is send as a response if an error occurs as a result of a request. For example when a node tries to join a network with an invalid network uuid.
+Is send as a response if an error occurs as a result of a request. For example when a node tries to join a network with
+an invalid network uuid.
 
 | name | type | data | description |
 |-|-|-|-|
