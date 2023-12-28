@@ -9,6 +9,7 @@
  * 
  */
 #include <Arduino.h>
+#include <10star_esp32c3.h>
 #include <secrets.h>
 #define MQTTNOW_DEBUG 1
 #include <jbdebug.h>
