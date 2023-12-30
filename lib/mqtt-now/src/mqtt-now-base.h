@@ -15,10 +15,6 @@
 #include <baseinclude.h>
 
 
-typedef int8_t result_t;
-
-const result_t result_success = 1;
-const result_t result_error = -1;
 
 #define CMD_OTA_START     "STARTOTA"
 #define CMD_OTA_STOP      "STOPOTA"

@@ -13,6 +13,13 @@
 #ifndef __MQTT_NOW_BRIDGE__
 #define __MQTT_NOW_BRIDGE__
 
+#include <baseinclude.h>
+#include <mqtt-now-base.h>
+
+#if !defined(COM)
+#define COM Serial
+#endif
+
 #ifndef MQTT_ROOT_TOPIC
 #define MQTT_ROOT_TOPIC "mqtt-now"
 #endif
@@ -93,5 +100,32 @@
 
 #define RET_OK "OK"
 #define RET_ERROR "ERR"
+
+class MqttNowBridge : public MqttNowBase {
+  public:
+    MqttNowBridge();
+
+    void
+      /**
+       * @brief To be called from main setup
+       * 
+       */
+      begin(),
+
+      /**
+       * @brief To be called from main loop
+       * 
+       */
+      update();
+
+      virtual result_t _doAction(char act); 
+  private:
+    result_t _handleComm();
+
+    
+
+    String  _comBuff;
+};
+
 #endif // __MQTT_NOW_BRIDGE__
 #endif // MQTT_NOW_CLIENT | MQTT_NOW_CONTROLLER

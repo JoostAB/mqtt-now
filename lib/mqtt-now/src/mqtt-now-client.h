@@ -43,10 +43,6 @@
 #define HA_DISCOVERY_TOPIC "homeassistant"
 #endif
 
-#if !defined(COM)
-#define COM Serial
-#endif
-
 // Callback
 void mqttMsgReceived(char* topic, byte* payload, unsigned int length);
 
@@ -56,7 +52,7 @@ void mqttMsgReceived(char* topic, byte* payload, unsigned int length);
  * Is the bridge between the MQTT broker (over HTTP) and the MQTT-Now controller (over serial)
  * 
  */
-class MqttNowClient : public MqttNowBase {
+class MqttNowClient : public MqttNowBridge {
   public:
     /**
      * @brief Construct a new MqttNowClient object
@@ -119,7 +115,8 @@ class MqttNowClient : public MqttNowBase {
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
       makeDiscoverable(),
-      makeDiscoverable(Node node);
+      makeDiscoverable(Node node),
+      _doAction(char act);
       
 
   private:
@@ -133,7 +130,7 @@ class MqttNowClient : public MqttNowBase {
     result_t 
       _sendStringToController(const char* msg),
       _sendMqttMsgToController(),
-      _handleComm(),
+      //_handleComm(),
       _handleSubscribe(),
       _handleUnsubscribe(),
       _handleCommand(),
@@ -142,6 +139,7 @@ class MqttNowClient : public MqttNowBase {
 
     String _modTopic(String topic),
            _getFullDiscoveryPath(Node node);
+    
     
     String 
       _comBuff,
