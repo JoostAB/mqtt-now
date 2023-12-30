@@ -142,7 +142,6 @@ class MqttNowClient : public MqttNowBridge {
     
     
     String 
-      _comBuff,
       _host,
       _rootTopic,
       _cmdTopic,

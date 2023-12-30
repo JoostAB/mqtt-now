@@ -118,13 +118,20 @@ class MqttNowBridge : public MqttNowBase {
        */
       update();
 
+  protected:
+
       virtual result_t _doAction(char act); 
+      String  _comBuff;
+      #ifdef DEBUGLOG
+      String  _serBuff;
+      #endif
+  
   private:
     result_t _handleComm();
 
     
 
-    String  _comBuff;
+    void _readSerial(Stream& uart, String& buff);
 };
 
 #endif // __MQTT_NOW_BRIDGE__

@@ -24,20 +24,37 @@ void MqttNowBridge::begin() {
 void MqttNowBridge::update() {
   MqttNowBase::update();
 
+  _readSerial(COM, _comBuff);
+  #ifdef DEBUGLOG
+    _readSerial(Serial, _serBuff);
+  #endif
+}
+
+void MqttNowBridge::_readSerial(Stream& uart, String& buff) {
   // Store UART input in a local buffer, until
   // CR (13) or LF (10) is received
-  while (COM.available()) {
-    char c = COM.read();
+  while (uart.available()) {
+    char c = uart.read();
     if (c == 10 || c == 13) {
+      #ifdef DEBUGLOG
+      // If DEBUGLOG is enabled, check if passed Stream is the
+      // debug serial connection. If so, copy buffer to _commBuff
+      // so that the command can be handled
+      if (&uart != &COM) {
+        _comBuff = buff;
+      }
+      #endif
       if (_handleComm() == result_error) {
         PRINTLNS("Error handling command!");
-        COM.println(RET_ERROR);
+        uart.println(RET_ERROR);
       } else {
-        COM.println(RET_OK);
+        uart.println(RET_OK);
       }
-      _comBuff = "";
+      buff = "";
+      //_comBuff = "";
     } else {
-      _comBuff += c;
+      buff += c;
+      //_comBuff += c;
     }
   }
 }
