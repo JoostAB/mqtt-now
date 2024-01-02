@@ -8,7 +8,17 @@
  * @copyright Copyright (c) 2022
  * 
  */
+
 #include <Arduino.h>
+
+#ifndef __BASE_INCLUDE_H__
+#define __BASE_INCLUDE_H__
+
+typedef int8_t result_t;
+
+const result_t result_success = 1;
+const result_t result_error = -1;
+
 #include <jbdebug.h>
 #include <secrets.h>
 
@@ -45,3 +55,5 @@ typedef AsyncWebServer WServer;
 
 #define SIZE_IP 4
 #define SIZE_MAC 6
+
+#endif // __BASE_INCLUDE_H__

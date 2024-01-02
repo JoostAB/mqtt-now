@@ -74,7 +74,7 @@ MqttNowClient::MqttNowClient(
       String onCmd, 
       String offCmd, 
       String onlineLwt,
-      String offlineLwt) : MqttNowBase() {
+      String offlineLwt) : MqttNowBridge() {
   _host = MQTT_HOST;
   _mqttPort = mqttPort;
 
@@ -162,24 +162,10 @@ void MqttNowClient::_setupWifi() {
  * 
  */
 void MqttNowClient::update() {
-  MqttNowBase::update();
+  //MqttNowBase::update();
 
-  // Store UART input in a local buffer, until
-  // CR (13) or LF (10) is received
-  while (COM.available()) {
-    char c = COM.read();
-    if (c == 10 || c == 13) {
-      if (_handleComm() == result_error) {
-        PRINTLNS("Error handling command!");
-        COM.println(RET_ERROR);
-      } else {
-        COM.println(RET_OK);
-      }
-      _comBuff = "";
-    } else {
-      _comBuff += c;
-    }
-  }
+  // Listen to serial port
+  MqttNowBridge::update();
 
   // Now check if a message was received from the broker
   if (mqttReceived) {
@@ -210,19 +196,22 @@ void MqttNowClient::update() {
  * @param comm 
  * @return mqttnow_result 
  */
-result_t MqttNowClient::_handleComm() {
-  PRINTLN("Communication received: ", _comBuff);
-  #ifdef HAS_DISPLAY
-  log2Display(("IN: "+_comBuff).c_str());
-  #endif
-  if (!_comBuff.startsWith(MSG_START)) {
-    PRINTLNS("Unknown communication");
-    return result_error;
-  }
+// result_t MqttNowClient::_handleComm() {
+//   PRINTLN("Communication received: ", _comBuff);
+//   #ifdef HAS_DISPLAY
+//   log2Display(("IN: "+_comBuff).c_str());
+//   #endif
+//   if (!_comBuff.startsWith(MSG_START)) {
+//     PRINTLNS("Unknown communication");
+//     return result_error;
+//   }
 
-  // Get character after MSG_START (the action tag)
-  char act = _comBuff.charAt(3);
+//   // Get character after MSG_START (the action tag)
+//   char act = _comBuff.charAt(3);
+//   return _doAction(act);
+// }
 
+result_t MqttNowClient::_doAction(char act) {
   switch (act) {
     case MSG_ACTIONSUB:
       PRINTLNS("Subscribe command received");
