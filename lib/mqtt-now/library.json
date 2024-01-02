@@ -29,9 +29,9 @@
         "version": "^1.0.4"
       },
       {
-        "owner": "me-no-dev",
+        "owner": "JoostAB",
         "name": "ESP Async WebServer",
-        "version": "https://github.com/me-no-dev/ESPAsyncWebServer.git"
+        "version": "https://github.com/JoostAB/ESPAsyncWebServer.git"
       },
       {
         "owner": "JoostAB",
