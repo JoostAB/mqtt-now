@@ -351,12 +351,6 @@ result_t MqttNowClient::_handleCommand() {
   return result_error;
 }
 
-result_t MqttNowClient::_handleReboot() {
-  delay(500);
-  ESP.restart();
-  return result_success;
-}
-
 result_t MqttNowClient::_sendStringToController(const char* msg) {
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
@@ -480,20 +474,8 @@ String MqttNowClient::_getFullDiscoveryPath(Node node) {
   return _discoveryTopic + "/" + node.component + "/" + node.id + "/config";
 }
 
-/** Utilities **/
-String MqttNowClient::_modTopic(String topic) {
-  String ret;
-  switch (topic.charAt(0)) {
-    case '/':
-      ret = _devTopic + PATHSEP + topic.substring(1);
-      break;
-    case '@':
-      ret = _rootTopic + PATHSEP + topic.substring(1);
-      break;
-    default:
-      ret = topic;
-      break;
-  }
-  return ret;
+String MqttNowClient::_getConfigJson(Node node) {
+  return "";
 }
+
 #endif // MQTT_NOW_CLIENT

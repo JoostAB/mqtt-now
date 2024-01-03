@@ -181,22 +181,28 @@ If in an existing network the active controller goes down, another will take ove
 
 The MQTT communication with [Home Assistant](https://www.home-assistant.io) (or any other application communicating with this network) goes over a couple of topics. These topics are subtopics of one [root topic](#root-topic).
 
-    Root -+- \CMD -+-
-          |        |--- node1
-          |        |--- node2
-          |
-          |--- \stat -+--- \LWT
-          |           |--- \state
-          |           |--- node1 -+--- \LWT
-          |           |           |--- \state
-          |           |--- node2 -+--- \LWT
-          |                       |--- \state
-          |
-          |--- \discovery -+-
-                           |--- node1
-                           |--- node2
+        Root -+--- \CMD 
+            |
+            |--- \stat -+--- \LWT
+            |           |--- \state
+            |
+            |--- \nodes -+--- node1 -+--- \LWT
+            |            |           |--- \CMD
+            |            |           |--- \state
+            |            |
+            |            |--- node2 -+--- \LWT
+            |                        |--- \CMD
+            |                        |--- \state
+            |
 
-All topics should have the `Retained` flag set to make sure a node can return to the last known correct state after reconnect or power cycle.
+    Either 
+            |--- \discovery -+--- node1
+                             |--- node2
+    Or
+        discovery -+--- node1
+                   |--- node2
+
+Status and discovery topics should have the `Retained` flag set to make sure a node can return to the last known correct state after reconnect or power cycle. Command topic should NOT have the retained flag set to prevent commands being executed repeatedly.
 
 ### Root topic
 

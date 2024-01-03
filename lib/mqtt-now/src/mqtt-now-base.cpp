@@ -183,3 +183,9 @@ Node MqttNowBase::getNodeStruct() {
   me.name = getName();
   return me;
 }
+
+result_t MqttNowBase::_handleReboot() {
+  delay(500);
+  ESP.restart();
+  return result_success;
+}

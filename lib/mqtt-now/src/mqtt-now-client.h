@@ -134,23 +134,16 @@ class MqttNowClient : public MqttNowBridge {
       _handleSubscribe(),
       _handleUnsubscribe(),
       _handleCommand(),
-      _handleReboot(),
+      
       _handlePublish(String com = String(""));
 
-    String _modTopic(String topic),
-           _getFullDiscoveryPath(Node node);
+    String 
+      _getFullDiscoveryPath(Node node),
+      _getConfigJson(Node node);
     
     
     String 
       _host,
-      _rootTopic,
-      _cmdTopic,
-      _statusTopic,
-      _lwtTopic,
-      _devTopic,
-      _discoveryTopic = "homeassistant",
-      _onCmd,
-      _offCmd,
       _onlineLwt,
       _offlineLwt,
       _mqttId,

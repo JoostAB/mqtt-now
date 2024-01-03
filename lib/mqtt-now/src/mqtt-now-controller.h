@@ -30,7 +30,7 @@ using namespace std;
  * Relays all messages between the MqttNowClient and the MqttNow Node's in the esp-now network.
  * 
  */
-class MqttNowController : public MqttNowNode {
+class MqttNowController : public MqttNowBridge {
   public:
 
     /**
