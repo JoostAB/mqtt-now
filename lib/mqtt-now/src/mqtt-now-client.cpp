@@ -190,27 +190,6 @@ void MqttNowClient::update() {
 
 /** Serial communication **/
 
-/**
- * @brief Handle incomming serial communication
- * 
- * @param comm 
- * @return mqttnow_result 
- */
-// result_t MqttNowClient::_handleComm() {
-//   PRINTLN("Communication received: ", _comBuff);
-//   #ifdef HAS_DISPLAY
-//   log2Display(("IN: "+_comBuff).c_str());
-//   #endif
-//   if (!_comBuff.startsWith(MSG_START)) {
-//     PRINTLNS("Unknown communication");
-//     return result_error;
-//   }
-
-//   // Get character after MSG_START (the action tag)
-//   char act = _comBuff.charAt(3);
-//   return _doAction(act);
-// }
-
 result_t MqttNowClient::_doAction(char act) {
   switch (act) {
     case MSG_ACTIONSUB:

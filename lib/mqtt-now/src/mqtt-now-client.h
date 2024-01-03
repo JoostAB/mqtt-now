@@ -115,10 +115,11 @@ class MqttNowClient : public MqttNowBridge {
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
       makeDiscoverable(),
-      makeDiscoverable(Node node),
-      _doAction(char act);
+      makeDiscoverable(Node node);
       
-
+  protected:
+    result_t _doAction(char act);
+  
   private:
     void
       _setupWifi(),
@@ -130,7 +131,6 @@ class MqttNowClient : public MqttNowBridge {
     result_t 
       _sendStringToController(const char* msg),
       _sendMqttMsgToController(),
-      //_handleComm(),
       _handleSubscribe(),
       _handleUnsubscribe(),
       _handleCommand(),

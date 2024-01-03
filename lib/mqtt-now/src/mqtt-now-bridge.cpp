@@ -51,10 +51,8 @@ void MqttNowBridge::_readSerial(Stream& uart, String& buff) {
         uart.println(RET_OK);
       }
       buff = "";
-      //_comBuff = "";
     } else {
       buff += c;
-      //_comBuff += c;
     }
   }
 }
@@ -75,6 +73,7 @@ result_t MqttNowBridge::_handleComm() {
 }
 
 result_t MqttNowBridge::_doAction(char act) {
+  // To be implemented in descendant
   return result_error;
 }
 #endif

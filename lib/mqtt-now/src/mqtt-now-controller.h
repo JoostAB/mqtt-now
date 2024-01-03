@@ -59,7 +59,12 @@ class MqttNowController : public MqttNowNode {
      */
     void update(); 
   
+  protected:
+    result_t _doAction(char act);
+  
   private:
+    result_t _handleReceived();
+    result_t _addNode(msg_intro* msg);
     /**
      * @brief A list of registered esp-now clients
      */

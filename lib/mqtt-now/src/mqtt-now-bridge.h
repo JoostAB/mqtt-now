@@ -20,6 +20,7 @@
 #define COM Serial
 #endif
 
+// MQTT topics also defined here since controller needs them as well
 #ifndef MQTT_ROOT_TOPIC
 #define MQTT_ROOT_TOPIC "mqtt-now"
 #endif
