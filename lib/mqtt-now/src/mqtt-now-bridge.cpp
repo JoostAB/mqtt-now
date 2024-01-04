@@ -69,7 +69,16 @@ result_t MqttNowBridge::_handleComm() {
 
   // Get character after MSG_START (the action tag)
   char act = _comBuff.charAt(3);
+  
+  #ifdef DEBUGLOG
+  if (act == MSG_ACTIONINF) {
+    echoFirmwareInfo();
+    return result_success;
+  }
+  #endif
+  
   return _doAction(act);
+
 }
 
 result_t MqttNowBridge::_doAction(char act) {

@@ -78,9 +78,22 @@ void MqttNowBase::update() {
   // if (serverRunning) {
   //   server.handleClient();
   // }
+  #ifndef __MQTT_NOW_BRIDGE__
+  // Bridge has its own serial input handling
+    #ifdef DEBUGLOG
+      while (Serial.available()) {
+        char c = Serial.read();
+        if (c == 10 || c == 13) {
+          echoFirmwareInfo();
+        }
+      }
+    #endif
+  #endif
+
   #ifdef M5STACK_FIRE
   M5.update();
   #endif
+
   #ifdef HAS_DISPLAY
   updateDisplay();
   #endif
@@ -163,6 +176,27 @@ void MqttNowBase::startServer(){
 void MqttNowBase::stopServer(){
   serverRunning = false;
 }
+
+#ifdef DEBUGLOG
+void MqttNowBase::echoFirmwareInfo() {
+  PRINTF("Platform: %s", FIRMWARE_TARGET) PRINTLF;
+  PRINTF("Node ID: %s", getNodeId().c_str()) PRINTLF;
+  PRINTF2("Firmware: %s v%s", FIRMWARE_NAME, FIRMWARE_VERSION) PRINTLF;
+  PRINTLNS("Build flags:")
+  PRINTDS("MQTT_NOW_CLIENT: ")
+  #ifdef MQTT_NOW_CLIENT
+    PRINTLNS("true")
+  #else
+    PRINTLNS("false")
+  #endif
+  PRINTDS("MQTT_NOW_CONTROLLER: ")
+  #ifdef MQTT_NOW_CONTROLLER
+    PRINTLNS("true")
+  #else
+    PRINTLNS("false")
+  #endif
+}
+#endif
 
 String MqttNowBase::getNodeId() {
   char id[14];

@@ -87,6 +87,10 @@
 
 #define MSG_ACTIONRBT 'B' // Reboot the target device
 
+#ifdef DEBUGLOG
+#define MSG_ACTIONINF 'I' // Show firmware info on serial monitor
+#endif
+
 // In case of publish, topic and payload are seperated by MSG_PAYLOAD tag
 #define MSG_PAYLOAD "#P#"
 
