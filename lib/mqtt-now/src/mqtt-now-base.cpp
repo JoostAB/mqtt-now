@@ -162,7 +162,7 @@ void MqttNowBase::startWifi() {
   }
 
   PRINTLNS("Succeeded")
-  PRINTF("IP address: %s", WiFi.localIP().toString()) PRINTLF
+  PRINTF("IP address: %s", WiFi.localIP().toString().c_str()) PRINTLF
   PRINTF("MAC: %s", WiFi.macAddress().c_str()) PRINTLF
   #ifdef HAS_DISPLAY
   log2Display("Connected to WiFI");
