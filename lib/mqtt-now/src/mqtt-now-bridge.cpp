@@ -72,6 +72,7 @@ result_t MqttNowBridge::_handleComm() {
   
   #ifdef DEBUGLOG
   if (act == MSG_ACTIONINF) {
+    PRINTF("MqttNowBridge: act = %c", act) PRINTLF
     echoFirmwareInfo();
     return result_success;
   }

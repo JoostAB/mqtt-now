@@ -120,18 +120,17 @@ void MqttNowClient::begin() {
 void MqttNowClient::_reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    PRINTLNS("Attempting MQTT connection...");
+    PRINTS("Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_ID, MQTT_USER, MQTT_PW, _lwtTopic.c_str(), 1, true, _offlineLwt.c_str())) {
-      PRINTLNS("connected");
       // Once connected, LWT Online message...
       client.publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
       // ... and resubscribe to command topic
       client.subscribe(_cmdTopic.c_str());
+      PRINTLNS("Succeeded");
     } else {
-      PRINTDS("failed, rc=");
-      PRINTDS(client.state());
-      PRINTDS(" try again in 5 seconds");
+      PRINTF("FAILED! Code: %i", client.state()) PRINTLF
+      PRINTLNS("Try again in 2 seconds")
       // Wait 2 seconds before retrying
       delay(2000);
     }
