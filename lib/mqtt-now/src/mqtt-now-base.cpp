@@ -64,7 +64,7 @@ MqttNowBase::MqttNowBase() {
 };
 
 void MqttNowBase::begin() {
-  PRINTF("MqttNow %s started\n", FIRMWARE_VERSION);
+  PRINTF("MqttNow %s started\n", QUOTE(FIRMWARE_VERSION));
   #ifdef M5STACK_FIRE
   M5.begin();
   M5.Power.begin();
