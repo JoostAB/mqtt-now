@@ -115,10 +115,11 @@ class MqttNowClient : public MqttNowBridge {
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
       makeDiscoverable(),
-      makeDiscoverable(Node node),
-      _doAction(char act);
+      makeDiscoverable(Node node);
       
-
+  protected:
+    result_t _doAction(char act);
+  
   private:
     void
       _setupWifi(),
@@ -130,27 +131,19 @@ class MqttNowClient : public MqttNowBridge {
     result_t 
       _sendStringToController(const char* msg),
       _sendMqttMsgToController(),
-      //_handleComm(),
       _handleSubscribe(),
       _handleUnsubscribe(),
       _handleCommand(),
-      _handleReboot(),
+      
       _handlePublish(String com = String(""));
 
-    String _modTopic(String topic),
-           _getFullDiscoveryPath(Node node);
+    String 
+      _getFullDiscoveryPath(Node node),
+      _getConfigJson(Node node);
     
     
     String 
       _host,
-      _rootTopic,
-      _cmdTopic,
-      _statusTopic,
-      _lwtTopic,
-      _devTopic,
-      _discoveryTopic = "homeassistant",
-      _onCmd,
-      _offCmd,
       _onlineLwt,
       _offlineLwt,
       _mqttId,

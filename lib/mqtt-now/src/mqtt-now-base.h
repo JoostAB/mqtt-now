@@ -198,14 +198,25 @@ class MqttNowBase {
        * 
        */
       stopOTA();
+      
+      #ifdef DEBUGLOG
+      /**
+       * @brief Show firmware info on serial monitor
+       * 
+       * For debug puposes only.
+       * 
+       */
+      void echoFirmwareInfo();
+      #endif
 
-    /**
-     * @brief Generate and return a Node structure
-     * 
-     * @return Node 
-     */
-    Node  getNodeStruct();
+      /**
+       * @brief Generate and return a Node structure
+       * 
+       * @return Node 
+       */
+      Node  getNodeStruct();
 
+      result_t _handleReboot();
   private:
     String _name;
     ComponentType _type = noneType;

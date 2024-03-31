@@ -17,7 +17,14 @@ bool serverRunning = false;
 
 #ifdef ESP32
   #include <esp_wifi.h>
-  void getmac(uint8_t *macaddr) {esp_wifi_get_mac(WIFI_IF_STA, macaddr);}
+  void getmac(uint8_t *macaddr) {
+    if(WiFiGenericClass::getMode() == WIFI_MODE_NULL){
+        esp_read_mac(macaddr, ESP_MAC_WIFI_STA);
+    }
+    else{
+        esp_wifi_get_mac((wifi_interface_t)ESP_IF_WIFI_STA, macaddr);
+    }
+  }
 #endif
 #ifdef ESP8266
   void getmac(uint8_t *macaddr) {wifi_get_macaddr(STATION_IF, macaddr);}
@@ -72,15 +79,31 @@ void MqttNowBase::begin() {
   #ifdef HAS_DISPLAY
   setupDisplay();
   #endif
+  #ifdef DEBUGLOG
+  echoFirmwareInfo();
+  #endif
 };
 
 void MqttNowBase::update() {
   // if (serverRunning) {
   //   server.handleClient();
   // }
+  #if (!(defined(MQTT_NOW_CLIENT) || defined(MQTT_NOW_CONTROLLER))) | defined(MQTT_TEST_COMPILE)
+  // Bridge has its own serial input handling
+    #ifdef DEBUGLOG
+      while (Serial.available()) {
+        char c = Serial.read();
+        if (c == 10 || c == 13) {
+          echoFirmwareInfo();
+        }
+      }
+    #endif
+  #endif
+
   #ifdef M5STACK_FIRE
   M5.update();
   #endif
+
   #ifdef HAS_DISPLAY
   updateDisplay();
   #endif
@@ -138,10 +161,9 @@ void MqttNowBase::startWifi() {
     delay(200);
   }
 
-  PRINTS("connected as :");
-  PRINTLNSA(WiFi.localIP());
-  PRINTS("MAC :");
-  PRINTLNSA(WiFi.macAddress());
+  PRINTLNS("Succeeded")
+  PRINTF("IP address: %s", WiFi.localIP().toString().c_str()) PRINTLF
+  PRINTF("MAC: %s", WiFi.macAddress().c_str()) PRINTLF
   #ifdef HAS_DISPLAY
   log2Display("Connected to WiFI");
   log2Display(WiFi.localIP().toString().c_str());
@@ -164,6 +186,27 @@ void MqttNowBase::stopServer(){
   serverRunning = false;
 }
 
+#ifdef DEBUGLOG
+void MqttNowBase::echoFirmwareInfo() {
+  PRINTF("Platform: %s", FIRMWARE_TARGET) PRINTLF;
+  PRINTF("Node ID: %s", getNodeId().c_str()) PRINTLF;
+  PRINTF2("Firmware: %s v%s", FIRMWARE_NAME, FIRMWARE_VERSION) PRINTLF;
+  PRINTLNS("Build flags:")
+  PRINTDS("MQTT_NOW_CLIENT: ")
+  #ifdef MQTT_NOW_CLIENT
+    PRINTLNS("true")
+  #else
+    PRINTLNS("false")
+  #endif
+  PRINTDS("MQTT_NOW_CONTROLLER: ")
+  #ifdef MQTT_NOW_CONTROLLER
+    PRINTLNS("true")
+  #else
+    PRINTLNS("false")
+  #endif
+}
+#endif
+
 String MqttNowBase::getNodeId() {
   char id[14];
   if (_id[0] != 'M') {
@@ -182,4 +225,10 @@ Node MqttNowBase::getNodeStruct() {
   me.id = getNodeId();
   me.name = getName();
   return me;
+}
+
+result_t MqttNowBase::_handleReboot() {
+  delay(500);
+  ESP.restart();
+  return result_success;
 }

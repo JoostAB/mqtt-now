@@ -120,18 +120,17 @@ void MqttNowClient::begin() {
 void MqttNowClient::_reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
-    PRINTLNS("Attempting MQTT connection...");
+    PRINTS("Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_ID, MQTT_USER, MQTT_PW, _lwtTopic.c_str(), 1, true, _offlineLwt.c_str())) {
-      PRINTLNS("connected");
       // Once connected, LWT Online message...
       client.publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
       // ... and resubscribe to command topic
       client.subscribe(_cmdTopic.c_str());
+      PRINTLNS("Succeeded");
     } else {
-      PRINTDS("failed, rc=");
-      PRINTDS(client.state());
-      PRINTDS(" try again in 5 seconds");
+      PRINTF("FAILED! Code: %i", client.state()) PRINTLF
+      PRINTLNS("Try again in 2 seconds")
       // Wait 2 seconds before retrying
       delay(2000);
     }
@@ -189,27 +188,6 @@ void MqttNowClient::update() {
 };
 
 /** Serial communication **/
-
-/**
- * @brief Handle incomming serial communication
- * 
- * @param comm 
- * @return mqttnow_result 
- */
-// result_t MqttNowClient::_handleComm() {
-//   PRINTLN("Communication received: ", _comBuff);
-//   #ifdef HAS_DISPLAY
-//   log2Display(("IN: "+_comBuff).c_str());
-//   #endif
-//   if (!_comBuff.startsWith(MSG_START)) {
-//     PRINTLNS("Unknown communication");
-//     return result_error;
-//   }
-
-//   // Get character after MSG_START (the action tag)
-//   char act = _comBuff.charAt(3);
-//   return _doAction(act);
-// }
 
 result_t MqttNowClient::_doAction(char act) {
   switch (act) {
@@ -372,12 +350,6 @@ result_t MqttNowClient::_handleCommand() {
   return result_error;
 }
 
-result_t MqttNowClient::_handleReboot() {
-  delay(500);
-  ESP.restart();
-  return result_success;
-}
-
 result_t MqttNowClient::_sendStringToController(const char* msg) {
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
@@ -501,20 +473,8 @@ String MqttNowClient::_getFullDiscoveryPath(Node node) {
   return _discoveryTopic + "/" + node.component + "/" + node.id + "/config";
 }
 
-/** Utilities **/
-String MqttNowClient::_modTopic(String topic) {
-  String ret;
-  switch (topic.charAt(0)) {
-    case '/':
-      ret = _devTopic + PATHSEP + topic.substring(1);
-      break;
-    case '@':
-      ret = _rootTopic + PATHSEP + topic.substring(1);
-      break;
-    default:
-      ret = topic;
-      break;
-  }
-  return ret;
+String MqttNowClient::_getConfigJson(Node node) {
+  return "";
 }
+
 #endif // MQTT_NOW_CLIENT

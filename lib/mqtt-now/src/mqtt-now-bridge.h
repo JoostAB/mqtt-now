@@ -16,10 +16,18 @@
 #include <baseinclude.h>
 #include <mqtt-now-base.h>
 
+#ifdef MQTT_NOW_CONTROLLER
+#include <mqtt-now-node.h>
+#define BRIDGEPARENT MqttNowNode
+#else
+#define BRIDGEPARENT MqttNowBase
+#endif
+
 #if !defined(COM)
 #define COM Serial
 #endif
 
+// MQTT topics also defined here since controller needs them as well
 #ifndef MQTT_ROOT_TOPIC
 #define MQTT_ROOT_TOPIC "mqtt-now"
 #endif
@@ -79,6 +87,10 @@
 
 #define MSG_ACTIONRBT 'B' // Reboot the target device
 
+#ifdef DEBUGLOG
+#define MSG_ACTIONINF 'I' // Show firmware info on serial monitor
+#endif
+
 // In case of publish, topic and payload are seperated by MSG_PAYLOAD tag
 #define MSG_PAYLOAD "#P#"
 
@@ -101,7 +113,7 @@
 #define RET_OK "OK"
 #define RET_ERROR "ERR"
 
-class MqttNowBridge : public MqttNowBase {
+class MqttNowBridge : public BRIDGEPARENT {
   public:
     MqttNowBridge();
 
@@ -121,7 +133,19 @@ class MqttNowBridge : public MqttNowBase {
   protected:
 
       virtual result_t _doAction(char act); 
-      String  _comBuff;
+      String 
+        _modTopic(String topic),
+        _stripDeviceId(String topic);
+
+      String  _comBuff,
+              _rootTopic,
+              _cmdTopic,
+              _statusTopic,
+              _lwtTopic,
+              _devTopic,
+              _discoveryTopic = "homeassistant",
+              _onCmd,
+              _offCmd;
       #ifdef DEBUGLOG
       String  _serBuff;
       #endif
