@@ -109,10 +109,11 @@ Inheritance diagram for MqttNowBase:</div>
  <div class="center">
   <img src="../../da/dc7/class_mqtt_now_base.png" usemap="#MqttNowBase_map" alt=""/>
   <map id="MqttNowBase_map" name="MqttNowBase_map">
-<area href="../../da/ddc/class_mqtt_now_client.html" title="The MQTT client that connects to an MQTT broker over HTTP." alt="MqttNowClient" shape="rect" coords="0,56,116,80"/>
-<area href="../../df/d94/class_mqtt_now_node.html" alt="MqttNowNode" shape="rect" coords="126,56,242,80"/>
-<area href="../../d1/d50/class_mqtt_now_controller.html" title="Controller of the MqttNow network." alt="MqttNowController" shape="rect" coords="63,112,179,136"/>
-<area href="../../d9/d16/class_mqtt_now_slave.html" title="Base for the end-device." alt="MqttNowSlave" shape="rect" coords="189,112,305,136"/>
+<area href="../../de/d49/class_mqtt_now_bridge.html" alt="MqttNowBridge" shape="rect" coords="0,56,116,80"/>
+<area href="../../df/d94/class_mqtt_now_node.html" alt="MqttNowNode" shape="rect" coords="189,56,305,80"/>
+<area href="../../da/ddc/class_mqtt_now_client.html" title="The MQTT client that connects to an MQTT broker over HTTP." alt="MqttNowClient" shape="rect" coords="0,112,116,136"/>
+<area href="../../d1/d50/class_mqtt_now_controller.html" title="Controller of the MqttNow network." alt="MqttNowController" shape="rect" coords="126,112,242,136"/>
+<area href="../../d9/d16/class_mqtt_now_slave.html" title="Base for the end-device." alt="MqttNowSlave" shape="rect" coords="252,112,368,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -184,7 +185,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p >Base class for all MqttNow classes. </p>
 <p >Defines basic functionalities. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00102">102</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00101">101</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af6bfbb204b3a991f13234da36ed060c5" name="af6bfbb204b3a991f13234da36ed060c5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6bfbb204b3a991f13234da36ed060c5">&#9670;&#160;</a></span>MqttNowBase()</h2>
@@ -234,7 +235,7 @@ Private Attributes</h2></td></tr>
 <p>Initializes the node. </p>
 <p >To be called once from the main setup. </p>
 
-<p>Reimplemented in <a class="el" href="../../da/ddc/class_mqtt_now_client.html#a5c2c383ea95ab4374030ab9bf2f3da04">MqttNowClient</a>, <a class="el" href="../../d1/d50/class_mqtt_now_controller.html#a982d6ace8f84c5ab5fee72487cc9b3a8">MqttNowController</a>, <a class="el" href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">MqttNowNode</a>, and <a class="el" href="../../d9/d16/class_mqtt_now_slave.html#adfaf0c8c20c1505ab9cfd2f053e9f851">MqttNowSlave</a>.</p>
+<p>Reimplemented in <a class="el" href="../../de/d49/class_mqtt_now_bridge.html#aeeef37407b9d640aa6508f5028f36558">MqttNowBridge</a>, <a class="el" href="../../da/ddc/class_mqtt_now_client.html#a5c2c383ea95ab4374030ab9bf2f3da04">MqttNowClient</a>, <a class="el" href="../../d1/d50/class_mqtt_now_controller.html#a982d6ace8f84c5ab5fee72487cc9b3a8">MqttNowController</a>, <a class="el" href="../../df/d94/class_mqtt_now_node.html#a8841ba481c5bfe43a46de01b6d746342">MqttNowNode</a>, and <a class="el" href="../../d9/d16/class_mqtt_now_slave.html#adfaf0c8c20c1505ab9cfd2f053e9f851">MqttNowSlave</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00066">66</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
@@ -264,7 +265,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00088">88</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00101">101</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +286,7 @@ Private Attributes</h2></td></tr>
 
 <p>Returns the name. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00084">84</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00097">97</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -307,7 +308,7 @@ Private Attributes</h2></td></tr>
 <p>Generates and returns an identifier for this node. </p>
 <p >For now this is the formatted MAC address as String </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00150">150</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00167">167</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +338,7 @@ Private Attributes</h2></td></tr>
 <p>Generate and return a <a class="el" href="../../db/d8b/struct_node.html">Node</a> structure. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../db/d8b/struct_node.html">Node</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00162">162</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00179">179</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -356,7 +357,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00092">92</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00105">105</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +385,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00076">76</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00089">89</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -412,7 +413,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00080">80</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00093">93</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -441,7 +442,7 @@ Private Attributes</h2></td></tr>
 
 <p>Start listening to OTA packages. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00096">96</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00109">109</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +471,7 @@ Private Attributes</h2></td></tr>
 
 <p>Start the webserver. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00141">141</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00158">158</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +500,7 @@ Private Attributes</h2></td></tr>
 
 <p>Start WiFi radio and connect to SSID. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00114">114</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00127">127</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -528,7 +529,7 @@ Private Attributes</h2></td></tr>
 
 <p>Stop listening to OTA packages. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00106">106</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00119">119</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -557,7 +558,7 @@ Private Attributes</h2></td></tr>
 
 <p>Stop the webserver. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00146">146</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00163">163</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -586,7 +587,7 @@ Private Attributes</h2></td></tr>
 
 <p>Stop the wifi radio. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00134">134</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00151">151</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,7 +609,7 @@ Private Attributes</h2></td></tr>
 <p>Running loop of the node. </p>
 <p >To be called as often as possible from main loop </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00070">70</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html#l00077">77</a> of file <a class="el" href="../../d7/d41/mqtt-now-base_8cpp_source.html">mqtt-now-base.cpp</a>.</p>
 
 </div>
 </div>
@@ -633,7 +634,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00214">214</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00213">213</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>
@@ -657,7 +658,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00213">213</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00212">212</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>
@@ -681,7 +682,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00211">211</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00210">210</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>
@@ -705,7 +706,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00212">212</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00211">211</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>

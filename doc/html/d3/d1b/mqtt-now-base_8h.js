@@ -3,9 +3,11 @@ var mqtt_now_base_8h =
     [ "Node", "db/d8b/struct_node.html", "db/d8b/struct_node" ],
     [ "MqttNowBase", "da/dc7/class_mqtt_now_base.html", "da/dc7/class_mqtt_now_base" ],
     [ "__MQTT_NOW_BASE_H__", "d3/d1b/mqtt-now-base_8h.html#a5a53af359f1985bb8eaa7fffb09460c1", null ],
-    [ "OTA_START", "d3/d1b/mqtt-now-base_8h.html#a1768951d1549744e7872bb94590985fb", null ],
-    [ "OTA_STOP", "d3/d1b/mqtt-now-base_8h.html#afe98a772df56984f1252d607c19cc5cd", null ],
-    [ "result_t", "d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0", null ],
+    [ "CMD_CLIENT_REBOOT", "d3/d1b/mqtt-now-base_8h.html#adee950f43e7397d1b9fc0e2c34972531", null ],
+    [ "CMD_CTRL_REBOOT", "d3/d1b/mqtt-now-base_8h.html#a7ec5915ca6b06e78bdfae1c1003045c3", null ],
+    [ "CMD_NODE_REBOOT", "d3/d1b/mqtt-now-base_8h.html#a0b6e9bd27602f2ad3dd70475d454e219", null ],
+    [ "CMD_OTA_START", "d3/d1b/mqtt-now-base_8h.html#a0e3ced450eff71950d2c80c95080c1ed", null ],
+    [ "CMD_OTA_STOP", "d3/d1b/mqtt-now-base_8h.html#a61a4f40310235a410c5eb2ba593f2170", null ],
     [ "ComponentType", "d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0", [
       [ "noneType", "d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a032c13375b9b84cd23b70f832e0b389b", null ],
       [ "controllerType", "d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a017138a1ed327172865658625a36ba00", null ],
@@ -31,8 +33,6 @@ var mqtt_now_base_8h =
       [ "vacuumType", "d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a19792562041b82417c3bf5baf81a7721", null ]
     ] ],
     [ "toName", "d3/d1b/mqtt-now-base_8h.html#a497080558881f183a76dad689e731225", null ],
-    [ "result_error", "d3/d1b/mqtt-now-base_8h.html#af1e73900d17ad6484f06896746bb0e6c", null ],
-    [ "result_success", "d3/d1b/mqtt-now-base_8h.html#aad8412bfd7583c8ada28b8c25be6c035", null ],
     [ "server", "d3/d1b/mqtt-now-base_8h.html#a83668b7d69c8b19120722a418bb3d292", null ],
     [ "stopWifiAfterOta", "d3/d1b/mqtt-now-base_8h.html#a4d69baaf649fbbe9b7a71d8dd2225f23", null ]
 ];

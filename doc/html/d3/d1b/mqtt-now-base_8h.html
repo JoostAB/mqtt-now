@@ -93,7 +93,6 @@ $(document).ready(function(){initNavTree('d3/d1b/mqtt-now-base_8h.html','../../'
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -116,15 +115,16 @@ Classes</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a5a53af359f1985bb8eaa7fffb09460c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a5a53af359f1985bb8eaa7fffb09460c1">__MQTT_NOW_BASE_H__</a></td></tr>
 <tr class="separator:a5a53af359f1985bb8eaa7fffb09460c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1768951d1549744e7872bb94590985fb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a1768951d1549744e7872bb94590985fb">OTA_START</a>&#160;&#160;&#160;&quot;STARTOTA&quot;</td></tr>
-<tr class="separator:a1768951d1549744e7872bb94590985fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe98a772df56984f1252d607c19cc5cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#afe98a772df56984f1252d607c19cc5cd">OTA_STOP</a>&#160;&#160;&#160;&quot;STOPOTA&quot;</td></tr>
-<tr class="separator:afe98a772df56984f1252d607c19cc5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:abaf4123f21fbaf609b69ad5e7812d4f0"><td class="memItemLeft" align="right" valign="top">typedef int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a></td></tr>
-<tr class="separator:abaf4123f21fbaf609b69ad5e7812d4f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e3ced450eff71950d2c80c95080c1ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a0e3ced450eff71950d2c80c95080c1ed">CMD_OTA_START</a>&#160;&#160;&#160;&quot;STARTOTA&quot;</td></tr>
+<tr class="separator:a0e3ced450eff71950d2c80c95080c1ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61a4f40310235a410c5eb2ba593f2170"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a61a4f40310235a410c5eb2ba593f2170">CMD_OTA_STOP</a>&#160;&#160;&#160;&quot;STOPOTA&quot;</td></tr>
+<tr class="separator:a61a4f40310235a410c5eb2ba593f2170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ec5915ca6b06e78bdfae1c1003045c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a7ec5915ca6b06e78bdfae1c1003045c3">CMD_CTRL_REBOOT</a>&#160;&#160;&#160;&quot;REBOOTCTRL&quot;</td></tr>
+<tr class="separator:a7ec5915ca6b06e78bdfae1c1003045c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee950f43e7397d1b9fc0e2c34972531"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#adee950f43e7397d1b9fc0e2c34972531">CMD_CLIENT_REBOOT</a>&#160;&#160;&#160;&quot;REBOOTCLIENT&quot;</td></tr>
+<tr class="separator:adee950f43e7397d1b9fc0e2c34972531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b6e9bd27602f2ad3dd70475d454e219"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a0b6e9bd27602f2ad3dd70475d454e219">CMD_NODE_REBOOT</a>&#160;&#160;&#160;&quot;REBOOT&quot;</td></tr>
+<tr class="separator:a0b6e9bd27602f2ad3dd70475d454e219"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -168,10 +168,6 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aad8412bfd7583c8ada28b8c25be6c035"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#aad8412bfd7583c8ada28b8c25be6c035">result_success</a> = 1</td></tr>
-<tr class="separator:aad8412bfd7583c8ada28b8c25be6c035"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1e73900d17ad6484f06896746bb0e6c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#af1e73900d17ad6484f06896746bb0e6c">result_error</a> = -1</td></tr>
-<tr class="separator:af1e73900d17ad6484f06896746bb0e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83668b7d69c8b19120722a418bb3d292"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a83668b7d69c8b19120722a418bb3d292">server</a></td></tr>
 <tr class="separator:a83668b7d69c8b19120722a418bb3d292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d69baaf649fbbe9b7a71d8dd2225f23"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#a4d69baaf649fbbe9b7a71d8dd2225f23">stopWifiAfterOta</a></td></tr>
@@ -201,14 +197,46 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a1768951d1549744e7872bb94590985fb" name="a1768951d1549744e7872bb94590985fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1768951d1549744e7872bb94590985fb">&#9670;&#160;</a></span>OTA_START</h2>
+<a id="adee950f43e7397d1b9fc0e2c34972531" name="adee950f43e7397d1b9fc0e2c34972531"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adee950f43e7397d1b9fc0e2c34972531">&#9670;&#160;</a></span>CMD_CLIENT_REBOOT</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OTA_START&#160;&#160;&#160;&quot;STARTOTA&quot;</td>
+          <td class="memname">#define CMD_CLIENT_REBOOT&#160;&#160;&#160;&quot;REBOOTCLIENT&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00022">22</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+
+</div>
+</div>
+<a id="a7ec5915ca6b06e78bdfae1c1003045c3" name="a7ec5915ca6b06e78bdfae1c1003045c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec5915ca6b06e78bdfae1c1003045c3">&#9670;&#160;</a></span>CMD_CTRL_REBOOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CMD_CTRL_REBOOT&#160;&#160;&#160;&quot;REBOOTCTRL&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00021">21</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+
+</div>
+</div>
+<a id="a0b6e9bd27602f2ad3dd70475d454e219" name="a0b6e9bd27602f2ad3dd70475d454e219"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b6e9bd27602f2ad3dd70475d454e219">&#9670;&#160;</a></span>CMD_NODE_REBOOT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CMD_NODE_REBOOT&#160;&#160;&#160;&quot;REBOOT&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -217,36 +245,35 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="afe98a772df56984f1252d607c19cc5cd" name="afe98a772df56984f1252d607c19cc5cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe98a772df56984f1252d607c19cc5cd">&#9670;&#160;</a></span>OTA_STOP</h2>
+<a id="a0e3ced450eff71950d2c80c95080c1ed" name="a0e3ced450eff71950d2c80c95080c1ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e3ced450eff71950d2c80c95080c1ed">&#9670;&#160;</a></span>CMD_OTA_START</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OTA_STOP&#160;&#160;&#160;&quot;STOPOTA&quot;</td>
+          <td class="memname">#define CMD_OTA_START&#160;&#160;&#160;&quot;STARTOTA&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00024">24</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00019">19</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="abaf4123f21fbaf609b69ad5e7812d4f0" name="abaf4123f21fbaf609b69ad5e7812d4f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaf4123f21fbaf609b69ad5e7812d4f0">&#9670;&#160;</a></span>result_t</h2>
+<a id="a61a4f40310235a410c5eb2ba593f2170" name="a61a4f40310235a410c5eb2ba593f2170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61a4f40310235a410c5eb2ba593f2170">&#9670;&#160;</a></span>CMD_OTA_STOP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef int8_t <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a></td>
+          <td class="memname">#define CMD_OTA_STOP&#160;&#160;&#160;&quot;STOPOTA&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00018">18</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00020">20</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +317,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a81f78fc173dedefe5a049c0aa3eed2c0a19792562041b82417c3bf5baf81a7721" name="a81f78fc173dedefe5a049c0aa3eed2c0a19792562041b82417c3bf5baf81a7721"></a>vacuumType&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00038">38</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00037">37</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
 
 </div>
 </div>
@@ -316,38 +343,6 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="af1e73900d17ad6484f06896746bb0e6c" name="af1e73900d17ad6484f06896746bb0e6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1e73900d17ad6484f06896746bb0e6c">&#9670;&#160;</a></span>result_error</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> result_error = -1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00021">21</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
-
-</div>
-</div>
-<a id="aad8412bfd7583c8ada28b8c25be6c035" name="aad8412bfd7583c8ada28b8c25be6c035"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad8412bfd7583c8ada28b8c25be6c035">&#9670;&#160;</a></span>result_success</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="../../d3/d1b/mqtt-now-base_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> result_success = 1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html#l00020">20</a> of file <a class="el" href="../../d3/d1b/mqtt-now-base_8h_source.html">mqtt-now-base.h</a>.</p>
-
-</div>
-</div>
 <a id="a83668b7d69c8b19120722a418bb3d292" name="a83668b7d69c8b19120722a418bb3d292"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83668b7d69c8b19120722a418bb3d292">&#9670;&#160;</a></span>server</h2>
 

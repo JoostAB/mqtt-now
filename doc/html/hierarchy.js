@@ -1,7 +1,9 @@
 var hierarchy =
 [
     [ "MqttNowBase", "da/dc7/class_mqtt_now_base.html", [
-      [ "MqttNowClient", "da/ddc/class_mqtt_now_client.html", null ],
+      [ "MqttNowBridge", "de/d49/class_mqtt_now_bridge.html", [
+        [ "MqttNowClient", "da/ddc/class_mqtt_now_client.html", null ]
+      ] ],
       [ "MqttNowNode", "df/d94/class_mqtt_now_node.html", [
         [ "MqttNowController", "d1/d50/class_mqtt_now_controller.html", null ],
         [ "MqttNowSlave", "d9/d16/class_mqtt_now_slave.html", null ]

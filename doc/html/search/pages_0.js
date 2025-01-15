@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mqttnow_0',['MQTTNow',['../index.html',1,'']]]
+  ['controller_0',['Controller',['../db/d73/md_lib_mqtt_now_docs_controller.html',1,'']]]
 ];

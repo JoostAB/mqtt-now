@@ -99,85 +99,133 @@ $(document).ready(function(){initNavTree('d2/d0b/mqtt-now-bridge_8h_source.html'
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#ifndef __MQTT_NOW_BRIDGE__</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a8109abc0c24c729096b5b6919d577f9c">   14</a></span><span class="preprocessor">#define __MQTT_NOW_BRIDGE__</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifndef MQTT_ROOT_TOPIC</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0d02ab9c916ff57c25541d7bcf2fdf14">   17</a></span><span class="preprocessor">#define MQTT_ROOT_TOPIC &quot;mqtt-now&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#ifndef MQTT_CMD_TOPIC</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a2bd50ecf18bbb3a8ea9e7588403d0a14">   21</a></span><span class="preprocessor">#define MQTT_CMD_TOPIC &quot;cmd&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#ifndef MQTT_STATUS_TOPIC</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a56a2aaf2bf5e6cab81fc94e1d34612fa">   25</a></span><span class="preprocessor">#define MQTT_STATUS_TOPIC &quot;status&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#ifndef MQTT_LWT_TOPIC</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#abde5de4d7217bb1f3528e905c9dfdc10">   29</a></span><span class="preprocessor">#define MQTT_LWT_TOPIC &quot;lwt&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#ifndef MQTT_DEV_TOPIC</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#ab381ea40cfa7b7631963ceedd49e559d">   33</a></span><span class="preprocessor">#define MQTT_DEV_TOPIC &quot;devices&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#ifndef MQTT_ON_CMD</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a38ea3ab00b6236e094538032edd7de9e">   37</a></span><span class="preprocessor">#define MQTT_ON_CMD &quot;on&quot;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#ifndef MQTT_OFF_CMD</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a128bd1e225d05aca26faeba460c1b0dd">   41</a></span><span class="preprocessor">#define MQTT_OFF_CMD &quot;off&quot;</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#ifndef MQTT_ONLINE_LWT</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#abb870a0ec38b4df693569e202332b9f1">   45</a></span><span class="preprocessor">#define MQTT_ONLINE_LWT &quot;online&quot;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#ifndef MQTT_OFFLINE_LWT</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#aebb331d86dce98515e6443f5e1f65ecb">   49</a></span><span class="preprocessor">#define MQTT_OFFLINE_LWT &quot;offline&quot;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">// The pathseperator for MQTT topic paths</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#add147d27dd39c3119dfd2d2e7868a66b">   53</a></span><span class="preprocessor">#define PATHSEP &#39;/&#39;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;<a class="code" href="../../da/de5/baseinclude_8h.html">baseinclude.h</a>&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;<a class="code" href="../../d3/d1b/mqtt-now-base_8h.html">mqtt-now-base.h</a>&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#if !defined(COM)</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a1557807c0d07a5b03c12753033006bdb">   20</a></span><span class="preprocessor">#define COM Serial</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef MQTT_ROOT_TOPIC</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0d02ab9c916ff57c25541d7bcf2fdf14">   24</a></span><span class="preprocessor">#define MQTT_ROOT_TOPIC &quot;mqtt-now&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifndef MQTT_CMD_TOPIC</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a2bd50ecf18bbb3a8ea9e7588403d0a14">   28</a></span><span class="preprocessor">#define MQTT_CMD_TOPIC &quot;cmd&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#ifndef MQTT_STATUS_TOPIC</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a56a2aaf2bf5e6cab81fc94e1d34612fa">   32</a></span><span class="preprocessor">#define MQTT_STATUS_TOPIC &quot;status&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#ifndef MQTT_LWT_TOPIC</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#abde5de4d7217bb1f3528e905c9dfdc10">   36</a></span><span class="preprocessor">#define MQTT_LWT_TOPIC &quot;lwt&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#ifndef MQTT_DEV_TOPIC</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#ab381ea40cfa7b7631963ceedd49e559d">   40</a></span><span class="preprocessor">#define MQTT_DEV_TOPIC &quot;devices&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifndef MQTT_ON_CMD</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a38ea3ab00b6236e094538032edd7de9e">   44</a></span><span class="preprocessor">#define MQTT_ON_CMD &quot;on&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#ifndef MQTT_OFF_CMD</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a128bd1e225d05aca26faeba460c1b0dd">   48</a></span><span class="preprocessor">#define MQTT_OFF_CMD &quot;off&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#ifndef MQTT_ONLINE_LWT</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#abb870a0ec38b4df693569e202332b9f1">   52</a></span><span class="preprocessor">#define MQTT_ONLINE_LWT &quot;online&quot;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">/* Serial Protocol definition */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">// All messages start with MSG_START tag, just to be sure noise gets filtered out</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a7fd6c8410abcff67443a07f8e49e45d6">   59</a></span><span class="preprocessor">#define MSG_START &quot;###&quot;</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">// First character after MSG_START defines the action (type of message)</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a9eda62e8d44d6fcc5bdc9ba34553dad0">   62</a></span><span class="preprocessor">#define MSG_ACTIONSUB &#39;S&#39; </span><span class="comment">// Subscribe to following topic</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                          <span class="comment">// Directly after MSG_ACTIONSUB a 0,1 or 2 should follow to identify QOS</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#ifndef MQTT_OFFLINE_LWT</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#aebb331d86dce98515e6443f5e1f65ecb">   56</a></span><span class="preprocessor">#define MQTT_OFFLINE_LWT &quot;offline&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">// The pathseperator for MQTT topic paths</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#add147d27dd39c3119dfd2d2e7868a66b">   60</a></span><span class="preprocessor">#define PATHSEP &#39;/&#39;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/* Serial Protocol definition */</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#adaa780c2b26cf02f63d751ac29e8caa9">   65</a></span><span class="preprocessor">#define MSG_ACTIONUNS &#39;U&#39; </span><span class="comment">// Unsubscribe from following topic</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0888d20179c32932d009c92c5a86a092">   67</a></span><span class="preprocessor">#define MSG_ACTIONPUB &#39;P&#39; </span><span class="comment">// Publish payload to topic</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                          <span class="comment">// Directly after MSG_ACTIONPUB a 0,1 or 2 should follow to identify QOS,</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                          <span class="comment">// followed by 1 or 0 for retained flag</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a7686baf2664e44c0eaacbbda385e621f">   71</a></span><span class="preprocessor">#define MSG_ACTIONREC &#39;R&#39; </span><span class="comment">// Received message returned to controller</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">// In case of publish, topic and payload are seperated by MSG_PAYLOAD tag</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0244f6b49ec16c50454d7dd8216e786a">   74</a></span><span class="preprocessor">#define MSG_PAYLOAD &quot;#P#&quot;</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">// Examples of messages:</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">// </span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">// ###S1my-topic/status           : Subscibe to topic &#39;my-topic/status&#39; with QOS 1</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">// ###Umy-topic/status            : Unsubscibe from topic &#39;my-topic/status&#39;</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">// ###P11my-topic/status#P#data   : Publish payload &#39;data&#39; to topic &#39;my-topic/status&#39; with QOS 1</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">//                                  and retained flag set to true</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">// ###Rmy-topic/status#P#data     : A message with payload &#39;data&#39; on topic &#39;my-topic/status&#39;</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">//                                  was received from the MQTT broker en is send back to the </span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">//                                  controller.</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">//</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">// Notes:</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">// - If a topic starts with &#39;/&#39;, it is presumed to be a device specific message and the topic will</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">//   be prepended with &#39;MQTT_ROOT_TOPIC/MQTT_DEV_TOPIC/&#39;</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">// - To access the MQTT_ROOT_TOPIC (eg &#39;mqtt-now&#39; by default) start your topic with &#39;@&#39;</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a76117585e8ddc62f21ca0e3061b7830e">   91</a></span><span class="preprocessor">#define RET_OK &quot;OK&quot;</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#ac85ec14a8569291eb4e79a1d4cb32e41">   92</a></span><span class="preprocessor">#define RET_ERROR &quot;ERR&quot;</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#endif </span><span class="comment">// __MQTT_NOW_BRIDGE__</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif </span><span class="comment">// MQTT_NOW_CLIENT | MQTT_NOW_CONTROLLER</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">// All messages start with MSG_START tag, just to be sure noise gets filtered out</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a7fd6c8410abcff67443a07f8e49e45d6">   66</a></span><span class="preprocessor">#define MSG_START &quot;###&quot;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">// First character after MSG_START defines the action (type of message)</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a9eda62e8d44d6fcc5bdc9ba34553dad0">   69</a></span><span class="preprocessor">#define MSG_ACTIONSUB &#39;S&#39; </span><span class="comment">// Subscribe to following topic</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                          <span class="comment">// Directly after MSG_ACTIONSUB a 0,1 or 2 should follow to identify QOS</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#adaa780c2b26cf02f63d751ac29e8caa9">   72</a></span><span class="preprocessor">#define MSG_ACTIONUNS &#39;U&#39; </span><span class="comment">// Unsubscribe from following topic</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0888d20179c32932d009c92c5a86a092">   74</a></span><span class="preprocessor">#define MSG_ACTIONPUB &#39;P&#39; </span><span class="comment">// Publish payload to topic</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                          <span class="comment">// Directly after MSG_ACTIONPUB a 0,1 or 2 should follow to identify QOS,</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                          <span class="comment">// followed by 1 or 0 for retained flag</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a7686baf2664e44c0eaacbbda385e621f">   78</a></span><span class="preprocessor">#define MSG_ACTIONREC &#39;R&#39; </span><span class="comment">// Received message returned to controller</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a794189eff0ecca253bccd3870cc2cba9">   80</a></span><span class="preprocessor">#define MSG_ACTIONRBT &#39;B&#39; </span><span class="comment">// Reboot the target device</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">// In case of publish, topic and payload are seperated by MSG_PAYLOAD tag</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a0244f6b49ec16c50454d7dd8216e786a">   83</a></span><span class="preprocessor">#define MSG_PAYLOAD &quot;#P#&quot;</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">// Examples of messages:</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">// </span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">// ###S1/my-topic/status          : Subscibe to topic &#39;my-topic/status&#39; with QOS 1</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">// ###U/my-topic/status           : Unsubscibe from topic &#39;my-topic/status&#39;</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">// ###P10/my-topic/status#P#data  : Publish payload &#39;data&#39; to topic &#39;my-topic/status&#39; with QOS 1</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">//                                  and retained flag set to false</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">// ###Rmy-topic/status#P#data     : A message with payload &#39;data&#39; on topic &#39;my-topic/status&#39;</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">//                                  was received from the MQTT broker en is send back to the </span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">//                                  controller.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">// ###B                           : Reboot the target client device</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">//</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">// Notes:</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">// - If a topic starts with &#39;/&#39;, it is presumed to be a device specific message and the topic will</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">//   be prepended with &#39;MQTT_ROOT_TOPIC/MQTT_DEV_TOPIC/&#39;</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">// - To access the MQTT_ROOT_TOPIC (eg &#39;mqtt-now&#39; by default) start your topic with &#39;@&#39;</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#a76117585e8ddc62f21ca0e3061b7830e">  101</a></span><span class="preprocessor">#define RET_OK &quot;OK&quot;</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="../../d2/d0b/mqtt-now-bridge_8h.html#ac85ec14a8569291eb4e79a1d4cb32e41">  102</a></span><span class="preprocessor">#define RET_ERROR &quot;ERR&quot;</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="../../de/d49/class_mqtt_now_bridge.html">  104</a></span><span class="keyword">class </span><a class="code hl_class" href="../../de/d49/class_mqtt_now_bridge.html">MqttNowBridge</a> : <span class="keyword">public</span> <a class="code hl_class" href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a> {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <a class="code hl_function" href="../../de/d49/class_mqtt_now_bridge.html#acab39977a4e9799140ab15a9df5921e9">MqttNowBridge</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <a class="code hl_function" href="../../de/d49/class_mqtt_now_bridge.html#aeeef37407b9d640aa6508f5028f36558">begin</a>(),</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      <a class="code hl_function" href="../../de/d49/class_mqtt_now_bridge.html#a9ebba8576691181e092afcc328e855ec">update</a>();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>      <span class="keyword">virtual</span> <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> <a class="code hl_function" href="../../de/d49/class_mqtt_now_bridge.html#a109da4468e980b76067bb6c3370f87b6">_doAction</a>(<span class="keywordtype">char</span> act); </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="../../de/d49/class_mqtt_now_bridge.html#aa7601914087218d25d915b3f9b2c1d44">  124</a></span>      String  <a class="code hl_variable" href="../../de/d49/class_mqtt_now_bridge.html#aa7601914087218d25d915b3f9b2c1d44">_comBuff</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="preprocessor">      #ifdef DEBUGLOG</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>      String  _serBuff;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">      #endif</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> <a class="code hl_function" href="../../de/d49/class_mqtt_now_bridge.html#a08f1a67085deb6465f12cb366623a61d">_handleComm</a>();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="../../de/d49/class_mqtt_now_bridge.html#ae8b3a9624ed0e9e0476a417dbfde26bc">_readSerial</a>(Stream&amp; uart, String&amp; buff);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>};</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">#endif </span><span class="comment">// __MQTT_NOW_BRIDGE__</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="preprocessor">#endif </span><span class="comment">// MQTT_NOW_CLIENT | MQTT_NOW_CONTROLLER</span></div>
+<div class="ttc" id="abaseinclude_8h_html"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html">baseinclude.h</a></div></div>
+<div class="ttc" id="abaseinclude_8h_html_abaf4123f21fbaf609b69ad5e7812d4f0"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a></div><div class="ttdeci">int8_t result_t</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00017">baseinclude.h:17</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_base_html"><div class="ttname"><a href="../../da/dc7/class_mqtt_now_base.html">MqttNowBase</a></div><div class="ttdoc">Base class for all MqttNow classes.</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d1b/mqtt-now-base_8h_source.html#l00101">mqtt-now-base.h:101</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html">MqttNowBridge</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d0b/mqtt-now-bridge_8h_source.html#l00104">mqtt-now-bridge.h:104</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_a08f1a67085deb6465f12cb366623a61d"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#a08f1a67085deb6465f12cb366623a61d">MqttNowBridge::_handleComm</a></div><div class="ttdeci">result_t _handleComm()</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/df3/mqtt-now-bridge_8cpp_source.html#l00062">mqtt-now-bridge.cpp:62</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_a109da4468e980b76067bb6c3370f87b6"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#a109da4468e980b76067bb6c3370f87b6">MqttNowBridge::_doAction</a></div><div class="ttdeci">virtual result_t _doAction(char act)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/df3/mqtt-now-bridge_8cpp_source.html#l00077">mqtt-now-bridge.cpp:77</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_a9ebba8576691181e092afcc328e855ec"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#a9ebba8576691181e092afcc328e855ec">MqttNowBridge::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">To be called from main loop.</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/df3/mqtt-now-bridge_8cpp_source.html#l00024">mqtt-now-bridge.cpp:24</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_aa7601914087218d25d915b3f9b2c1d44"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#aa7601914087218d25d915b3f9b2c1d44">MqttNowBridge::_comBuff</a></div><div class="ttdeci">String _comBuff</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d0b/mqtt-now-bridge_8h_source.html#l00124">mqtt-now-bridge.h:124</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_acab39977a4e9799140ab15a9df5921e9"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#acab39977a4e9799140ab15a9df5921e9">MqttNowBridge::MqttNowBridge</a></div><div class="ttdeci">MqttNowBridge()</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/df3/mqtt-now-bridge_8cpp_source.html#l00014">mqtt-now-bridge.cpp:14</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_ae8b3a9624ed0e9e0476a417dbfde26bc"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#ae8b3a9624ed0e9e0476a417dbfde26bc">MqttNowBridge::_readSerial</a></div><div class="ttdeci">void _readSerial(Stream &amp;uart, String &amp;buff)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/df3/mqtt-now-bridge_8cpp_source.html#l00033">mqtt-now-bridge.cpp:33</a></div></div>
+<div class="ttc" id="aclass_mqtt_now_bridge_html_aeeef37407b9d640aa6508f5028f36558"><div class="ttname"><a href="../../de/d49/class_mqtt_now_bridge.html#aeeef37407b9d640aa6508f5028f36558">MqttNowBridge::begin</a></div><div class="ttdeci">void begin()</div><div class="ttdoc">To be called from main setup.</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/df3/mqtt-now-bridge_8cpp_source.html#l00016">mqtt-now-bridge.cpp:16</a></div></div>
+<div class="ttc" id="amqtt-now-base_8h_html"><div class="ttname"><a href="../../d3/d1b/mqtt-now-base_8h.html">mqtt-now-base.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -94,41 +94,60 @@ $(document).ready(function(){initNavTree('da/de5/baseinclude_8h_source.html','..
 </div><!--header-->
 <div class="contents">
 <a href="../../da/de5/baseinclude_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="../../d3/d6f/jbdebug_8h.html">jbdebug.h</a>&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;secrets.h&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifdef ESP8266</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="comment">//#include &lt;ESP8266WebServer.h&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">  #include &lt;ESP8266WiFi.h&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="comment">// #include &lt;ESPAsyncTCP.h&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="comment">//typedef ESP8266WebServer WServer;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#elif defined(ESP32)</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">  #include &lt;WiFi.h&gt;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="comment">// #include &lt;WebServer.h&gt;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">  #include &lt;AsyncTCP.h&gt;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="comment">//typedef WebServer WServer;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#ifdef M5STACK_FIRE</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">  #include &lt;Wire.h&gt;</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">  #include &lt;M5Stack.h&gt;</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;ESPAsyncWebServer.h&gt;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;AsyncElegantOTA.h&gt;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">   36</a></span><span class="keyword">typedef</span> AsyncWebServer <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;Arduino.h&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef __BASE_INCLUDE_H__</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define __BASE_INCLUDE_H__</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">   17</a></span><span class="keyword">typedef</span> int8_t <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#aad8412bfd7583c8ada28b8c25be6c035">   19</a></span><span class="keyword">const</span> <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> <a class="code hl_variable" href="../../da/de5/baseinclude_8h.html#aad8412bfd7583c8ada28b8c25be6c035">result_success</a> = 1;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#af1e73900d17ad6484f06896746bb0e6c">   20</a></span><span class="keyword">const</span> <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a> <a class="code hl_variable" href="../../da/de5/baseinclude_8h.html#af1e73900d17ad6484f06896746bb0e6c">result_error</a> = -1;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;<a class="code" href="../../d3/d6f/jbdebug_8h.html">jbdebug.h</a>&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;secrets.h&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#ifdef ESP8266</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="comment">//#include &lt;ESP8266WebServer.h&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">  #include &lt;ESP8266WiFi.h&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="comment">// #include &lt;ESPAsyncTCP.h&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="comment">//typedef ESP8266WebServer WServer;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#elif defined(ESP32)</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">  #include &lt;WiFi.h&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">// #include &lt;WebServer.h&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">  #include &lt;AsyncTCP.h&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">//typedef WebServer WServer;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#if !defined(SERIALBAUDRATE)</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a56c12268b04ea40f5b60990d30fb7546">   39</a></span><span class="preprocessor">#define SERIALBAUDRATE 115200</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a347bab05abec85d23b5207309a5223b8">   42</a></span><span class="preprocessor">#define SIZE_IP 4</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a00e730fcfbe11a9f6db66ee1f0bbc015">   43</a></span><span class="preprocessor">#define SIZE_MAC 6</span></div>
-<div class="ttc" id="abaseinclude_8h_html_a305c3ecf32381a4001db07b96a69b910"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a></div><div class="ttdeci">AsyncWebServer WServer</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00036">baseinclude.h:36</a></div></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#ifdef M5STACK_FIRE</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">  #include &lt;Wire.h&gt;</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">  #include &lt;M5Stack.h&gt;</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#ifdef HAS_DISPLAY</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">  #include &lt;<a class="code" href="../../d7/df2/mqtt-now-display_8h.html">mqtt-now-display.h</a>&gt;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &lt;ESPAsyncWebServer.h&gt;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &lt;AsyncElegantOTA.h&gt;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">   50</a></span><span class="keyword">typedef</span> AsyncWebServer <a class="code hl_typedef" href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#if !defined(SERIALBAUDRATE)</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a56c12268b04ea40f5b60990d30fb7546">   53</a></span><span class="preprocessor">#define SERIALBAUDRATE 115200</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a347bab05abec85d23b5207309a5223b8">   56</a></span><span class="preprocessor">#define SIZE_IP 4</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="../../da/de5/baseinclude_8h.html#a00e730fcfbe11a9f6db66ee1f0bbc015">   57</a></span><span class="preprocessor">#define SIZE_MAC 6</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif </span><span class="comment">// __BASE_INCLUDE_H__</span></div>
+<div class="ttc" id="abaseinclude_8h_html_a305c3ecf32381a4001db07b96a69b910"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#a305c3ecf32381a4001db07b96a69b910">WServer</a></div><div class="ttdeci">AsyncWebServer WServer</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00050">baseinclude.h:50</a></div></div>
+<div class="ttc" id="abaseinclude_8h_html_aad8412bfd7583c8ada28b8c25be6c035"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#aad8412bfd7583c8ada28b8c25be6c035">result_success</a></div><div class="ttdeci">const result_t result_success</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00019">baseinclude.h:19</a></div></div>
+<div class="ttc" id="abaseinclude_8h_html_abaf4123f21fbaf609b69ad5e7812d4f0"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#abaf4123f21fbaf609b69ad5e7812d4f0">result_t</a></div><div class="ttdeci">int8_t result_t</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00017">baseinclude.h:17</a></div></div>
+<div class="ttc" id="abaseinclude_8h_html_af1e73900d17ad6484f06896746bb0e6c"><div class="ttname"><a href="../../da/de5/baseinclude_8h.html#af1e73900d17ad6484f06896746bb0e6c">result_error</a></div><div class="ttdeci">const result_t result_error</div><div class="ttdef"><b>Definition:</b> <a href="../../da/de5/baseinclude_8h_source.html#l00020">baseinclude.h:20</a></div></div>
 <div class="ttc" id="ajbdebug_8h_html"><div class="ttname"><a href="../../d3/d6f/jbdebug_8h.html">jbdebug.h</a></div></div>
+<div class="ttc" id="amqtt-now-display_8h_html"><div class="ttname"><a href="../../d7/df2/mqtt-now-display_8h.html">mqtt-now-display.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

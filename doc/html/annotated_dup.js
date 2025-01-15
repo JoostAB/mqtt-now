@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "MqttNowBase", "da/dc7/class_mqtt_now_base.html", "da/dc7/class_mqtt_now_base" ],
+    [ "MqttNowBridge", "de/d49/class_mqtt_now_bridge.html", "de/d49/class_mqtt_now_bridge" ],
     [ "MqttNowClient", "da/ddc/class_mqtt_now_client.html", "da/ddc/class_mqtt_now_client" ],
     [ "MqttNowController", "d1/d50/class_mqtt_now_controller.html", "d1/d50/class_mqtt_now_controller" ],
     [ "MqttNowNode", "df/d94/class_mqtt_now_node.html", "df/d94/class_mqtt_now_node" ],

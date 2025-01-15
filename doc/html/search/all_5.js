@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['error_5fcode_0',['error_code',['../db/db0/structmsg__error.html#a1305adca322d80bff308cb0eed1ac817',1,'msg_error']]],
-  ['error_5fmsg_1',['error_msg',['../db/db0/structmsg__error.html#a08e9eba562b07b4946012349f7ebdf1c',1,'msg_error']]],
-  ['esp8266_2dnow_2dmock_2eh_2',['esp8266-now-mock.h',['../d5/dd1/esp8266-now-mock_8h.html',1,'']]],
-  ['espclient_3',['espClient',['../d0/d94/mqtt-now-client_8cpp.html#abd77e757e4b3bb6f1e4b42b21ea9e040',1,'mqtt-now-client.cpp']]]
+  ['data_0',['data',['../d3/d60/structmsg__data.html#af912ec122d097bfce33d0016164425e7',1,'msg_data']]],
+  ['data_5ftype_1',['data_type',['../d3/d60/structmsg__data.html#a1f0b1271373dc6fe88582c7228960539',1,'msg_data']]],
+  ['device_5fcategory_2',['device_category',['../d6/d79/structmsg__intro.html#ad130dfed2b24b1f295cbaa062fb04097',1,'msg_intro']]],
+  ['devicetrackertype_3',['deviceTrackerType',['../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0ae67f900371588d9e606f0ac617ba89e7',1,'mqtt-now-base.h']]],
+  ['devicetriggertype_4',['deviceTriggerType',['../d3/d1b/mqtt-now-base_8h.html#a81f78fc173dedefe5a049c0aa3eed2c0a7551b4d226eeed5c1ae0f505d11ce67a',1,'mqtt-now-base.h']]]
 ];

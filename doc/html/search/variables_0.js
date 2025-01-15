@@ -1,7 +1,7 @@
 var searchData=
 [
   ['_5fcmdtopic_0',['_cmdTopic',['../da/ddc/class_mqtt_now_client.html#ae93520cf51b53020f7402351bf56cb8e',1,'MqttNowClient']]],
-  ['_5fcombuff_1',['_comBuff',['../da/ddc/class_mqtt_now_client.html#a11d4a5de3af5ac0798a0b8da1fc5848d',1,'MqttNowClient']]],
+  ['_5fcombuff_1',['_comBuff',['../de/d49/class_mqtt_now_bridge.html#aa7601914087218d25d915b3f9b2c1d44',1,'MqttNowBridge']]],
   ['_5fdevtopic_2',['_devTopic',['../da/ddc/class_mqtt_now_client.html#afebcf449461cc82cb3c1348377b785a1',1,'MqttNowClient']]],
   ['_5fdiscoverytopic_3',['_discoveryTopic',['../da/ddc/class_mqtt_now_client.html#a3a0a47950e6a73185987f7469f538993',1,'MqttNowClient']]],
   ['_5fesp_5fnow_5fid_4',['_esp_now_id',['../da/dc7/class_mqtt_now_base.html#a4d86b754c7aaaafca38028a24f031b4e',1,'MqttNowBase']]],

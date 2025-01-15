@@ -4,7 +4,7 @@ var searchData=
   ['senddatamessage_1',['sendDataMessage',['../df/d94/class_mqtt_now_node.html#a18c7aff448e9fc44e3f496a1d4eb4100',1,'MqttNowNode']]],
   ['senderrormessage_2',['sendErrorMessage',['../df/d94/class_mqtt_now_node.html#a9d68c1a1751c1817c0f3ea04994c48df',1,'MqttNowNode']]],
   ['sendintromessage_3',['sendIntroMessage',['../df/d94/class_mqtt_now_node.html#a0b676a3196584e1cbaabd93222fe718b',1,'MqttNowNode']]],
-  ['sendmessage_4',['sendMessage',['../df/d94/class_mqtt_now_node.html#a080d4328f30d379d85df075a60c38a5c',1,'MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive)'],['../df/d94/class_mqtt_now_node.html#adfe36144e82ae7b6458e6db4b1c2faba',1,'MqttNowNode::sendMessage(msg_base *msg, const uint8_t *macReceive)']]],
+  ['sendmessage_4',['sendMessage',['../df/d94/class_mqtt_now_node.html#ad30c45752b214e930586e48a0c1fb116',1,'MqttNowNode::sendMessage(msg_base *msg, size_t msgSize, const uint8_t *macReceive)'],['../df/d94/class_mqtt_now_node.html#a080d4328f30d379d85df075a60c38a5c',1,'MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive)']]],
   ['sendreqcfgmessage_5',['sendReqCfgMessage',['../df/d94/class_mqtt_now_node.html#ae0ff688a6f1d227668934ff4ef3424cb',1,'MqttNowNode']]],
   ['sendwelcomemessage_6',['sendWelcomeMessage',['../df/d94/class_mqtt_now_node.html#ad4c929c0498c36e93d729efbae2ed897',1,'MqttNowNode']]],
   ['server_7',['server',['../d7/d41/mqtt-now-base_8cpp.html#a401cdfda6eb959c25e32116afb7214f4',1,'mqtt-now-base.cpp']]],
