@@ -20,7 +20,6 @@ void mqttMsgReceived(char* topic, byte* payload, unsigned int length) {
   lastReceivedTopic = String(topic);
   lastReceivedPayload = "";
   for (unsigned int i = 0; i < length; i++) {
-    //Serial.print((char)payload[i]);
     lastReceivedPayload += (char)payload[i];
   }
   PRINTLNSA(lastReceivedPayload);
@@ -71,6 +70,7 @@ MqttNowClient::MqttNowClient(
       String statusTopic, 
       String lwtTopic, 
       String devTopic, 
+      String sysinfoTopic,
       String onCmd, 
       String offCmd, 
       String onlineLwt,
@@ -88,6 +88,7 @@ MqttNowClient::MqttNowClient(
     _statusTopic = _rootTopic + PATHSEP + statusTopic;
     _lwtTopic = _rootTopic + PATHSEP + lwtTopic;
     _devTopic = _rootTopic + PATHSEP + devTopic;
+    _sysinfoTopic = _rootTopic + PATHSEP + sysinfoTopic;
     _onCmd = onCmd;
     _offCmd = offCmd;
     _onlineLwt = onlineLwt;
@@ -95,6 +96,9 @@ MqttNowClient::MqttNowClient(
   }
 
   PRINTLNS("Topics set");
+
+  //client.setBufferSize(1024);
+  client.setBufferSize(4096);
 
   stopWifiAfterOta = false;
 }
@@ -123,9 +127,12 @@ void MqttNowClient::_reconnect() {
     PRINTLNS("Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_ID, MQTT_USER, MQTT_PW, _lwtTopic.c_str(), 1, true, _offlineLwt.c_str())) {
-      PRINTLNS("connected");
+      PRINTLNSA("connected to " + _host);
       // Once connected, LWT Online message...
-      client.publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
+      publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
+      publishSysInfo();
+      //makeDiscoverable();
+      setupAutoDiscover();
       // ... and resubscribe to command topic
       client.subscribe(_cmdTopic.c_str());
     } else {
@@ -169,7 +176,12 @@ void MqttNowClient::update() {
 
   // Now check if a message was received from the broker
   if (mqttReceived) {
-    if (lastReceivedTopic.equals(_cmdTopic)) {
+    if (lastReceivedTopic.equals(_lastPublishedTopic) && lastReceivedPayload.equals(_lastPublishedPayload)) {
+      // Self send message, so do nothing with it but clear buffers
+      PRINTLN("Received our own message on ", lastReceivedTopic);
+      _lastPublishedPayload.clear();
+      _lastPublishedPayload.clear();
+    } else if (lastReceivedTopic.equals(_cmdTopic)) {
       // A message on the command topic is meant for the client itself
       _handleCommand();
     } else {
@@ -283,6 +295,7 @@ result_t MqttNowClient::_handlePublish(String com) {
 
   // Try max 5 times to publish this
   if (publish(topic, payload, (retained == '1'), (qos - '0')) == result_success) {
+    PRINTLNS("Publish ok");
     ctr = 0;
     return result_success;
   } else {
@@ -334,10 +347,28 @@ result_t MqttNowClient::publishCmd(String cmd) {
 result_t MqttNowClient::publish(String topic, String payload, bool retain, uint8_t qos) {
   PRINTLN("Publishing to ", topic);
   PRINTLN("Payload: ", payload);
+  
   #ifdef HAS_DISPLAY
   log2Display(("Publishing to: " + topic).c_str());
   #endif
+
+  _lastPublishedTopic = topic;
+  _lastPublishedPayload = payload;
   return client.publish(topic.c_str(), payload.c_str(), retain);
+}
+
+result_t MqttNowClient::publishSysInfo() {
+  JsonDocument doc;
+  JsonObject netw = doc["network"].to<JsonObject>();
+  netw["ip_address"] = WiFi.localIP();
+  netw["hostname"] = WiFi.getHostname();
+  
+  doc.shrinkToFit();
+
+  String json;
+
+  serializeJson(doc, json);
+  return publish(_sysinfoTopic, json, true, 1);
 }
 
 result_t MqttNowClient::makeDiscoverable() {
@@ -397,12 +428,13 @@ result_t MqttNowClient::_sendStringToController(const char* msg) {
 }
 
 result_t MqttNowClient::_sendMqttMsgToController() {
+  PRINTS("Sending to controller: ");
+
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
     yield();
   }
-  
-  PRINTS("Sending to controller: ");
+    
   PRINTS(MSG_START);
   PRINTDS(MSG_ACTIONREC);
   PRINTDS(lastReceivedTopic);
@@ -497,15 +529,150 @@ void MqttNowClient::setOfflineLwt(String offlineLwt) {
 //     server.send(404, "text/plain", "404: File Not Found");
 // }
 
-String MqttNowClient::_getFullDiscoveryPath(Node node) {
-  return _discoveryTopic + "/" + node.component + "/" + node.id + "/config";
+#ifdef HASS_AUTODISCOVER
+result_t MqttNowClient::setupAutoDiscover() {
+  setADaddress();
+  setADstate();
+  return result_success;
 }
 
+
+result_t MqttNowClient::setADaddress() {
+  String path = _discoveryTopic + "/sensor/mqtt-now-" + getNodeId() + "/ip-address/config";
+
+  JsonDocument doc;
+  
+  JsonObject dev = doc["device"].to<JsonObject>();
+  dev["hw"] = HARDWARE_VERSION;
+  dev["ids"] = "mqttnow_bridge_" + getNodeId();
+  dev["mf"] = "MQTT-NOW";
+  dev["mdl"] = "Bridge";
+  dev["name"] = "MQTT-NOW Bridge";
+  dev["sw"] = FIRMWARE_VERSION;
+
+  JsonObject origin = doc["origin"].to<JsonObject>();
+  origin["name"] = "MQTT-NOW";
+  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
+
+  doc["entity_category"] = "diagnostic";
+  
+  doc["avty_t"] = _lwtTopic,
+  doc["pl_avail"] = _onlineLwt;
+  doc["pl_not_avail"] = _offlineLwt;
+
+  doc["icon"] = "mdi:ip";
+  doc["name"] = "WiFi IP address";
+  
+  doc["stat_t"] = _sysinfoTopic;
+  doc["unique_id"] = "mqttnow_bridge_" + getNodeId() + "_connection_ip";
+  doc["object_id"] = doc["unique_id"];
+  doc["val_tpl"] = "{{ value_json.network.ip_address }}";
+  doc.shrinkToFit();
+
+  String json;
+
+  serializeJson(doc, json);
+  PRINTLN("setADaddress: ",json);
+  return publish(path, json, true, 1);
+}
+
+result_t MqttNowClient::setADstate() {
+  String path = _discoveryTopic + "/binary_sensor/mqtt-now-" + getNodeId() + "/state/config";
+  
+  JsonDocument doc;
+  
+  doc["entity_category"] = "diagnostic";
+
+  JsonObject dev = doc["device"].to<JsonObject>();
+  dev["hw"] = HARDWARE_VERSION;
+  dev["ids"] = "mqttnow_bridge_" + getNodeId();
+  dev["mf"] = "MQTT-NOW";
+  dev["mdl"] = "Bridge";
+  dev["name"] = "MQTT-NOW Bridge";
+  dev["sw"] = FIRMWARE_VERSION;
+  
+  JsonObject origin = doc["origin"].to<JsonObject>();
+  origin["name"] = "MQTT-NOW";
+  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
+
+  doc["entity_category"] = "diagnostic";
+  
+  doc["stat_t"] = _lwtTopic;
+  doc["payload_off"] = _offlineLwt;
+  doc["payload_on"] = _onlineLwt;
+  doc["unique_id"] = "mqttnow_bridge_" + getNodeId() + "_state";
+  doc["object_id"] = doc["unique_id"];
+  doc.shrinkToFit();
+
+  String json;
+
+  serializeJson(doc, json);
+  return publish(path, json, true, 1);
+}
+
+result_t MqttNowClient::addDevice(JsonDocument* doc) {
+  JsonObject docObject = (*doc).to<JsonObject>();
+  return addDevice(&docObject);
+}
+
+result_t MqttNowClient::addDevice(JsonObject* obj) {
+  JsonObject device = (*obj)["dev"].to<JsonObject>();
+  device["hw"] = HARDWARE_VERSION;
+  device["ids"][0] = "mqttnow_bridge_" + getNodeId();
+  device["mf"] = "MQTT-NOW";
+  device["mdl"] = "Bridge";
+  device["name"] = "MQTT-NOW Bridge";
+      
+  device["sw"] = FIRMWARE_VERSION;
+  
+  return result_success;
+}
+
+JsonObject MqttNowClient::getDeviceObj() {
+  JsonObject dev;
+  dev["hw"] = HARDWARE_VERSION;
+  dev["ids"][0] = "mqttnow_bridge_" + getNodeId();
+  dev["mf"] = "MQTT-NOW";
+  dev["mdl"] = "Bridge";
+  dev["name"] = "MQTT-NOW Bridge";
+      
+  dev["sw"] = FIRMWARE_VERSION;
+  return dev;
+}
+
+result_t MqttNowClient::addAvailability(JsonDocument* doc) {
+  JsonObject docObject = (*doc).to<JsonObject>();
+  return addAvailability(&docObject);
+}
+
+result_t MqttNowClient::addAvailability(JsonObject* obj) {
+  (*obj)["avty_t"] = _lwtTopic,
+  (*obj)["pl_avail"] = _onlineLwt;
+  (*obj)["pl_not_avail"] = _offlineLwt;
+  return result_success;
+}
+
+result_t MqttNowClient::addOrigin(JsonDocument* doc) {
+  JsonObject docObject = (*doc).to<JsonObject>();
+  return addOrigin(&docObject);
+}
+
+result_t MqttNowClient::addOrigin(JsonObject* obj) {
+  JsonObject origin = (*obj)["origin"].to<JsonObject>();
+  origin["name"] = "MQTT-NOW";
+  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
+  return result_success;
+}
+
+String MqttNowClient::_getFullDiscoveryPath(Node node) {
+  return _discoveryTopic + PATHSEP + node.component + PATHSEP + node.id + PATHSEP + "config";
+}
+#endif
 /** Utilities **/
 String MqttNowClient::_modTopic(String topic) {
   String ret;
   switch (topic.charAt(0)) {
-    case '/':
+    case PATHSEP:
       ret = _devTopic + PATHSEP + topic.substring(1);
       break;
     case '@':

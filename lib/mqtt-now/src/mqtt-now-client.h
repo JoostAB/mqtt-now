@@ -18,6 +18,8 @@
 #include <mqtt-now-bridge.h>
 #include <PubSubClient.h>
 #include <ESPConnect.h>
+#include <ArduinoJson.h>
+
 // #include <DNSServer.h>
 
 // #ifdef ESP8266
@@ -77,6 +79,7 @@ class MqttNowClient : public MqttNowBridge {
       String statusTopic = MQTT_STATUS_TOPIC, 
       String lwtTopic = MQTT_LWT_TOPIC, 
       String devTopic = MQTT_DEV_TOPIC, 
+      String sysinfoTopic = MQTT_SYSINFO_TOPIC,
       String onCmd = MQTT_ON_CMD, 
       String offCmd = MQTT_OFF_CMD, 
       String onlineLwt = MQTT_ONLINE_LWT,
@@ -86,6 +89,21 @@ class MqttNowClient : public MqttNowBridge {
       handleUpdate(),
       handleNotFound(),
       handleCommand();
+
+#ifdef HASS_AUTODISCOVER
+      result_t 
+        setupAutoDiscover(),
+        setADstate(),
+        setADaddress(),
+        addDevice(JsonDocument* doc),
+        addDevice(JsonObject* obj),
+        addAvailability(JsonDocument* doc),
+        addAvailability(JsonObject* obj),
+        addOrigin(JsonDocument* doc),
+        addOrigin(JsonObject* obj);
+      JsonObject
+        getDeviceObj();
+#endif
 
     void
       /**
@@ -114,17 +132,24 @@ class MqttNowClient : public MqttNowBridge {
       publishStatus(String status),
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
+      publishSysInfo(),
       makeDiscoverable(),
       makeDiscoverable(Node node),
       _doAction(char act);
       
 
   private:
+    String
+      _lastPublishedTopic,
+      _lastPublishedPayload;
+
     void
       _setupWifi(),
       _callback(char* topic, byte* payload, unsigned int length),
       _reconnect();
 
+    JsonObject* getObject(JsonDocument* doc);
+    
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
     result_t 
@@ -148,6 +173,7 @@ class MqttNowClient : public MqttNowBridge {
       _statusTopic,
       _lwtTopic,
       _devTopic,
+      _sysinfoTopic,
       _discoveryTopic = "homeassistant",
       _onCmd,
       _offCmd,

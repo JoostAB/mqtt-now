@@ -20,6 +20,9 @@
 #define COM Serial
 #endif
 
+// The pathseperator for MQTT topic paths
+#define PATHSEP '/'
+
 #ifndef MQTT_ROOT_TOPIC
 #define MQTT_ROOT_TOPIC "mqtt-now"
 #endif
@@ -33,7 +36,11 @@
 #endif
 
 #ifndef MQTT_LWT_TOPIC
-#define MQTT_LWT_TOPIC "lwt"
+#define MQTT_LWT_TOPIC "bridge/status"
+#endif
+
+#ifndef MQTT_SYSINFO_TOPIC
+#define MQTT_SYSINFO_TOPIC "bridge/system"
 #endif
 
 #ifndef MQTT_DEV_TOPIC
@@ -56,8 +63,6 @@
 #define MQTT_OFFLINE_LWT "offline"
 #endif
 
-// The pathseperator for MQTT topic paths
-#define PATHSEP '/'
 
 
 /* Serial Protocol definition */
