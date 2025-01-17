@@ -532,10 +532,50 @@ void MqttNowClient::setOfflineLwt(String offlineLwt) {
 #ifdef HASS_AUTODISCOVER
 result_t MqttNowClient::setupAutoDiscover() {
   setADaddress();
+  setADhostname();
   setADstate();
   return result_success;
 }
 
+result_t MqttNowClient::setADhostname() {
+  String path = _discoveryTopic + "/sensor/mqtt-now-" + getNodeId() + "/hostname/config";
+
+  JsonDocument doc;
+  
+  JsonObject dev = doc["device"].to<JsonObject>();
+  dev["hw"] = HARDWARE_VERSION;
+  dev["ids"] = "mqttnow_bridge_" + getNodeId();
+  dev["mf"] = "MQTT-NOW";
+  dev["mdl"] = "Bridge";
+  dev["name"] = "MQTT-NOW Bridge";
+  dev["sw"] = FIRMWARE_VERSION;
+
+  JsonObject origin = doc["origin"].to<JsonObject>();
+  origin["name"] = "MQTT-NOW";
+  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
+
+  doc["entity_category"] = "diagnostic";
+  
+  doc["avty_t"] = _lwtTopic,
+  doc["pl_avail"] = _onlineLwt;
+  doc["pl_not_avail"] = _offlineLwt;
+
+  doc["icon"] = "mdi:network";
+  doc["name"] = "Hostname";
+  
+  doc["stat_t"] = _sysinfoTopic;
+  doc["unique_id"] = "mqttnow_bridge_" + getNodeId() + "_hostname";
+  doc["object_id"] = doc["unique_id"];
+  doc["val_tpl"] = "{{ value_json.network.hostname }}";
+  doc.shrinkToFit();
+
+  String json;
+
+  serializeJson(doc, json);
+  PRINTLN("setADaddress: ",json);
+  return publish(path, json, true, 1);
+
+}
 
 result_t MqttNowClient::setADaddress() {
   String path = _discoveryTopic + "/sensor/mqtt-now-" + getNodeId() + "/ip-address/config";

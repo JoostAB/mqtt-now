@@ -95,6 +95,7 @@ class MqttNowClient : public MqttNowBridge {
         setupAutoDiscover(),
         setADstate(),
         setADaddress(),
+        setADhostname(),
         addDevice(JsonDocument* doc),
         addDevice(JsonObject* obj),
         addAvailability(JsonDocument* doc),
