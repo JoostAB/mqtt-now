@@ -19,6 +19,8 @@
 #include <PubSubClient.h>
 #include <ESPConnect.h>
 #include <ArduinoJson.h>
+#include <time.h>
+#include <map>
 
 // #include <DNSServer.h>
 
@@ -37,12 +39,55 @@
 #define MQTT_HOST "none"
 #endif
 
+#ifdef HASS_AUTODISCOVER
 /**
  * @brief MQTT topic used for auto discovery
  * 
  */
 #ifndef HA_DISCOVERY_TOPIC
 #define HA_DISCOVERY_TOPIC "homeassistant"
+#endif
+
+enum ADCATEGORY {
+  none,
+  diagnostic,
+  config
+};
+
+
+
+struct ADInfo {
+  String component;
+  String node;
+  ADCATEGORY category;
+  String stateTopic;
+  String valtemplate;
+  String name;
+  String objectID;
+  String uniqueID;
+  bool availability;
+  String availabilityTopic;
+  String payloadAvailable;
+  String payloadNotAvailable;
+  String payloadOn;
+  String payloadOff;
+  String deviceClass;
+  bool enabledDefault;
+  String icon;
+  String attrTopic;
+  String attrTempl;
+  /*
+    device_class
+    enabled_by_default
+    icon
+    "json_attributes_template": "{{ value_json.data.value | tojson }}",
+    "json_attributes_topic": "zigbee2mqtt/bridge/response/networkmap",
+  */
+  ADInfo() : 
+    category(none), 
+    availability(true), 
+    enabledDefault(false) {};
+};
 #endif
 
 // Callback
@@ -66,6 +111,7 @@ class MqttNowClient : public MqttNowBridge {
      * @param statusTopic 
      * @param lwtTopic 
      * @param devTopic 
+     * @param sysinfoTopic
      * @param onCmd 
      * @param offCmd 
      * @param onlineLwt 
@@ -85,64 +131,67 @@ class MqttNowClient : public MqttNowBridge {
       String onlineLwt = MQTT_ONLINE_LWT,
       String offlineLwt = MQTT_OFFLINE_LWT);
   
-    static void
-      handleUpdate(),
-      handleNotFound(),
-      handleCommand();
-
+    /** Webserver handlers **/
+    /*
+    static void handleUpdate();
+    static void handleNotFound();
+    static void handleCommand();
+    */
+    
+      
 #ifdef HASS_AUTODISCOVER
-      result_t 
-        setupAutoDiscover(),
-        setADstate(),
-        setADaddress(),
-        setADhostname(),
-        addDevice(JsonDocument* doc),
-        addDevice(JsonObject* obj),
-        addAvailability(JsonDocument* doc),
-        addAvailability(JsonObject* obj),
-        addOrigin(JsonDocument* doc),
-        addOrigin(JsonObject* obj);
-      JsonObject
-        getDeviceObj();
+      result_t setupAutoDiscover();
+      result_t setADstate();
+      result_t setADaddress();
+      result_t setADhostname();
+      result_t setADboottime();
+      result_t setADsysinfotime();
+      result_t setADfreeheap();
+      result_t setADcputemp();
+      
 #endif
 
-    void
-      /**
-       * @brief To be called from main setup
-       * 
-       */
-      begin(),
+    /**
+     * @brief To be called from main setup
+     * 
+     */
+    void begin();
 
-      /**
-       * @brief To be called from main loop
-       * 
-       */
-      update(),
-      setRootTopic(String rootTopic),
-      setCmdTopic(String cmdTopic),
-      setstatusTopic(String statusTopic),
-      setLwtTopic(String lwtTopic),
-      setDiscoveryTopic(String discoveryTopic),
-      setDevicesTopic(String devTopic),
-      setOnCmd(String onCmd),
-      setOffCmd(String offCmd),
-      setOnlineLwt(String onlineLwt),
-      setOfflineLwt(String offlineLwt);
+    /**
+     * @brief To be called from main loop
+     * 
+     */
+    void update();
+    void setCurrentTime();
+    void setRootTopic(String rootTopic);
+    void setCmdTopic(String cmdTopic);
+    void setstatusTopic(String statusTopic);
+    void setLwtTopic(String lwtTopic);
+    void setDiscoveryTopic(String discoveryTopic);
+    void setDevicesTopic(String devTopic);
+    void setOnCmd(String onCmd);
+    void setOffCmd(String offCmd);
+    void setOnlineLwt(String onlineLwt);
+    void setOfflineLwt(String offlineLwt);
     
     result_t
       publishStatus(String status),
       publishCmd(String cmd),
       publish(String topic, String payload, bool retain = false, uint8_t qos = (uint8_t)1U),
       publishSysInfo(),
-      makeDiscoverable(),
+      /**
+       * @brief: Make a node discoverable by HA in MQTT (Not yet implemented)
+       * 
+       */
       makeDiscoverable(Node node),
       _doAction(char act);
       
-
+    
   private:
     String
       _lastPublishedTopic,
-      _lastPublishedPayload;
+      _lastPublishedPayload,
+      _bootTime;
 
     void
       _setupWifi(),
@@ -150,6 +199,8 @@ class MqttNowClient : public MqttNowBridge {
       _reconnect();
 
     JsonObject* getObject(JsonDocument* doc);
+    
+    String _timeStructToString(tm* time);
     
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
@@ -164,7 +215,8 @@ class MqttNowClient : public MqttNowBridge {
       _handlePublish(String com = String(""));
 
     String _modTopic(String topic),
-           _getFullDiscoveryPath(Node node);
+           _getFullDiscoveryPath(Node node),
+           _getCurrentTime();
     
     
     String 
@@ -185,6 +237,10 @@ class MqttNowClient : public MqttNowBridge {
       _mqttPwd;
     WiFiClient* _wifiClient;
     PubSubClient* _mqttClient;
+
+    #ifdef HASS_AUTODISCOVER
+    result_t _postADinfo(ADInfo* info);
+    #endif
 };
 
 #endif // __MQTT_NOW_CLIENT_H__

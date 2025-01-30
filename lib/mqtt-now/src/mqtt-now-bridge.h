@@ -43,6 +43,10 @@
 #define MQTT_SYSINFO_TOPIC "bridge/system"
 #endif
 
+#ifndef MQTT_ATTR_TOPIC
+#define MQTT_ATTR_TOPIC "bridge/attr"
+#endif
+
 #ifndef MQTT_DEV_TOPIC
 #define MQTT_DEV_TOPIC "devices"
 #endif

@@ -11,6 +11,14 @@
 #include <mqtt-now-client.h>
 #if defined(MQTT_NOW_CLIENT) | defined(MQTT_TEST_COMPILE)
 
+#ifdef HASS_AUTODISCOVER
+std::map<ADCATEGORY, String> adCategory {
+  {none, "none"},
+  {diagnostic, "diagnostic"},
+  {config, "config"}
+};
+#endif
+
 bool mqttReceived = false;
 String lastReceivedTopic;
 String lastReceivedPayload;
@@ -28,40 +36,9 @@ void mqttMsgReceived(char* topic, byte* payload, unsigned int length) {
 
 /** Constructors **/
 
-/**
- * @brief Construct a new MqttNowClient object
- * 
- */
-// /**
-//  * @brief Construct a new MqttNowClient object
-//  * 
-//  * @param host Hostname of the host running the MQTT broker
-//  * @param rootTopic 
-//  * @param port Port of the MQTT broker (default 1883)
-//  */
-// MqttNowClient::MqttNowClient(String host, String rootTopic, uint16_t port) {
-//   MqttNowClient(host, rootTopic, port, MQTT_CMD_TOPIC, MQTT_STATUS_TOPIC, MQTT_LWT_TOPIC,
-//      MQTT_ON_CMD, MQTT_OFF_CMD, MQTT_ONLINE_LWT, MQTT_OFFLINE_LWT);
-// }
-
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-/**
- * @brief Construct a new Mqtt Now Client:: Mqtt Now Client object
- * 
- * @param host Hostname of the host running the MQTT broker
- * @param port Port of the MQTT broker (default 1883)
- * @param rootTopic 
- * @param cmdTopic 
- * @param statusTopic 
- * @param lwtTopic 
- * @param devTopic 
- * @param onCmd 
- * @param offCmd 
- * @param onlineLwt 
- * @param offlineLwt 
- */
 MqttNowClient::MqttNowClient(
       String host, 
       uint16_t mqttPort,
@@ -97,8 +74,7 @@ MqttNowClient::MqttNowClient(
 
   PRINTLNS("Topics set");
 
-  //client.setBufferSize(1024);
-  client.setBufferSize(4096);
+  client.setBufferSize(JSON_BUFFER);
 
   stopWifiAfterOta = false;
 }
@@ -114,28 +90,55 @@ void MqttNowClient::begin() {
     COM.begin(SERIALBAUDRATE);
   }
 
-  //_setupWifi();
   startWifi();
- 
+  setCurrentTime();
+  _bootTime = _getCurrentTime();
   client.setServer(MQTT_HOST, MQTT_PORT);
   client.setCallback(mqttMsgReceived);
-};
+// };
+
+// void MqttNowClient::initWebHandlers() {
+  server.on("/test", HTTP_GET, [&](AsyncWebServerRequest *request){
+        #if defined(ESP8266)
+            request->send(200, "text/plain", "Test succeeded!");
+        #elif defined(ESP32)
+            request->send(200, "text/plain", "Test succeeded!");
+        #endif
+    });
+    PRINTLNS("Webhandlers initialized");
+}
+
+void MqttNowClient::setCurrentTime() {
+  if (WiFi.status() == WL_CONNECTED) {
+    const char* ntpServer = NTP_SERVER;
+    const long  gmtOffset_sec = 3600;
+    const int   daylightOffset_sec = 3600;
+    configTime(gmtOffset_sec, daylightOffset_sec, ntpServer); 
+    PRINTLN("System time set to ",_getCurrentTime());
+  }
+}
 
 void MqttNowClient::_reconnect() {
+  static u8_t retrycount = 0;
   // Loop until we're reconnected
   while (!client.connected()) {
+    retrycount ++;
     PRINTLNS("Attempting MQTT connection...");
     // Attempt to connect
     if (client.connect(MQTT_ID, MQTT_USER, MQTT_PW, _lwtTopic.c_str(), 1, true, _offlineLwt.c_str())) {
+      retrycount = 0;
       PRINTLNSA("connected to " + _host);
       // Once connected, LWT Online message...
       publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
-      publishSysInfo();
-      //makeDiscoverable();
       setupAutoDiscover();
       // ... and resubscribe to command topic
       client.subscribe(_cmdTopic.c_str());
+      PRINTLN("Subscribed to ", _cmdTopic);
     } else {
+      if (retrycount > 10) {
+        PRINTDS("10 failed attempts to reconnect to MQTT broker... rebooting");
+        ESP.restart();
+      }
       PRINTDS("failed, rc=");
       PRINTDS(client.state());
       PRINTDS(" try again in 5 seconds");
@@ -145,31 +148,17 @@ void MqttNowClient::_reconnect() {
   }
 }
 
-void MqttNowClient::_setupWifi() {
-
-  // delay(10);
-  // // We start by connecting to a WiFi network
-
-  // PRINTS("connecting to Wifi...");
-  // WiFi.mode(WIFI_STA);
-  // WiFi.begin(WIFI_SSID, WIFI_PW);
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   PRINTS(".");
-  //   delay(200);
-  // }
-
-  // PRINTS("connected as :");
-  // PRINTLNSA(WiFi.localIP());
-  // PRINTS("MAC :");
-  // PRINTLNSA(WiFi.macAddress());
-}
-
 /**
  * @brief To be called from main loop
  * 
  */
 void MqttNowClient::update() {
+  static u32_t nextSysinfoUpdate = 0; 
   //MqttNowBase::update();
+  if (millis() > nextSysinfoUpdate ) {
+    nextSysinfoUpdate = millis() + 5000;
+    publishSysInfo();
+  }
 
   // Listen to serial port
   MqttNowBridge::update();
@@ -179,7 +168,7 @@ void MqttNowClient::update() {
     if (lastReceivedTopic.equals(_lastPublishedTopic) && lastReceivedPayload.equals(_lastPublishedPayload)) {
       // Self send message, so do nothing with it but clear buffers
       PRINTLN("Received our own message on ", lastReceivedTopic);
-      _lastPublishedPayload.clear();
+      _lastPublishedTopic.clear();
       _lastPublishedPayload.clear();
     } else if (lastReceivedTopic.equals(_cmdTopic)) {
       // A message on the command topic is meant for the client itself
@@ -201,27 +190,6 @@ void MqttNowClient::update() {
 };
 
 /** Serial communication **/
-
-/**
- * @brief Handle incomming serial communication
- * 
- * @param comm 
- * @return mqttnow_result 
- */
-// result_t MqttNowClient::_handleComm() {
-//   PRINTLN("Communication received: ", _comBuff);
-//   #ifdef HAS_DISPLAY
-//   log2Display(("IN: "+_comBuff).c_str());
-//   #endif
-//   if (!_comBuff.startsWith(MSG_START)) {
-//     PRINTLNS("Unknown communication");
-//     return result_error;
-//   }
-
-//   // Get character after MSG_START (the action tag)
-//   char act = _comBuff.charAt(3);
-//   return _doAction(act);
-// }
 
 result_t MqttNowClient::_doAction(char act) {
   switch (act) {
@@ -363,6 +331,11 @@ result_t MqttNowClient::publishSysInfo() {
   netw["ip_address"] = WiFi.localIP();
   netw["hostname"] = WiFi.getHostname();
   
+  JsonObject sysinfo = doc["sysinfo"].to<JsonObject>();
+  sysinfo["boottime"] = _bootTime;
+  sysinfo["sysinfotime"] = _getCurrentTime();
+  sysinfo["freeheap"] = ESP.getFreeHeap();
+  sysinfo["CPU-temp"] = temperatureRead();
   doc.shrinkToFit();
 
   String json;
@@ -371,8 +344,20 @@ result_t MqttNowClient::publishSysInfo() {
   return publish(_sysinfoTopic, json, true, 1);
 }
 
-result_t MqttNowClient::makeDiscoverable() {
-  return makeDiscoverable(getNodeStruct());
+String MqttNowClient::_getCurrentTime() {
+  struct tm timeinfo;
+  if(!getLocalTime(&timeinfo)){
+    return "Unavailable";
+  }
+  
+  return _timeStructToString(&timeinfo);
+ 
+}
+
+String MqttNowClient::_timeStructToString(tm* time) {
+  char timestring[20];
+  strftime(timestring, 20, "%Y-%m-%d %H:%M:%S", time);
+  return String(timestring);
 }
 
 result_t MqttNowClient::makeDiscoverable(Node node) {
@@ -410,6 +395,10 @@ result_t MqttNowClient::_handleReboot() {
 }
 
 result_t MqttNowClient::_sendStringToController(const char* msg) {
+  if (!String(msg).startsWith(MSG_START)) {
+    PRINTLNS("No valid message to send");
+    return result_error;
+  }
   if (!COM) {
     COM.begin(SERIALBAUDRATE);
     yield();
@@ -533,95 +522,130 @@ void MqttNowClient::setOfflineLwt(String offlineLwt) {
 result_t MqttNowClient::setupAutoDiscover() {
   setADaddress();
   setADhostname();
+  setADboottime();
+  setADsysinfotime();
+  setADfreeheap();
+  setADcputemp();
   setADstate();
   return result_success;
 }
 
 result_t MqttNowClient::setADhostname() {
-  String path = _discoveryTopic + "/sensor/mqtt-now-" + getNodeId() + "/hostname/config";
+  ADInfo info;
+  info.component = "sensor";
+  info.node = "hostname";
+  info.category = diagnostic;
+  info.stateTopic = _sysinfoTopic;
+  info.valtemplate = "value_json.network.hostname";
+  info.name = "Hostname";
+  info.availability = true;
+  return _postADinfo(&info);
+}
 
-  JsonDocument doc;
-  
-  JsonObject dev = doc["device"].to<JsonObject>();
-  dev["hw"] = HARDWARE_VERSION;
-  dev["ids"] = "mqttnow_bridge_" + getNodeId();
-  dev["mf"] = "MQTT-NOW";
-  dev["mdl"] = "Bridge";
-  dev["name"] = "MQTT-NOW Bridge";
-  dev["sw"] = FIRMWARE_VERSION;
+result_t MqttNowClient::setADboottime() {
+  ADInfo info;
+  info.component = "sensor";
+  info.node = "boottime";
+  info.category = diagnostic;
+  info.stateTopic = _sysinfoTopic;
+  info.valtemplate = "value_json.sysinfo.boottime";
+  info.availability = true;
+  return _postADinfo(&info);
+}
 
-  JsonObject origin = doc["origin"].to<JsonObject>();
-  origin["name"] = "MQTT-NOW";
-  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
+result_t MqttNowClient::setADsysinfotime() {
+  ADInfo info;
+  info.component = "sensor";
+  info.node = "sysinfotime";
+  info.stateTopic = _sysinfoTopic;
+  info.valtemplate = "value_json.sysinfo.sysinfotime";
+  info.availability = true;
+  return _postADinfo(&info);
+}
 
-  doc["entity_category"] = "diagnostic";
-  
-  doc["avty_t"] = _lwtTopic,
-  doc["pl_avail"] = _onlineLwt;
-  doc["pl_not_avail"] = _offlineLwt;
+result_t MqttNowClient::setADfreeheap() {
+  ADInfo info;
+  info.component = "sensor";
+  info.node = "freeheap";
+  info.category = diagnostic;
+  info.stateTopic = _sysinfoTopic;
+  info.valtemplate = "value_json.sysinfo.freeheap";
+  info.availability = true;
+  return _postADinfo(&info);
+}
 
-  doc["icon"] = "mdi:network";
-  doc["name"] = "Hostname";
-  
-  doc["stat_t"] = _sysinfoTopic;
-  doc["unique_id"] = "mqttnow_bridge_" + getNodeId() + "_hostname";
-  doc["object_id"] = doc["unique_id"];
-  doc["val_tpl"] = "{{ value_json.network.hostname }}";
-  doc.shrinkToFit();
-
-  String json;
-
-  serializeJson(doc, json);
-  PRINTLN("setADaddress: ",json);
-  return publish(path, json, true, 1);
-
+result_t MqttNowClient::setADcputemp() {
+  ADInfo info;
+  info.component = "sensor";
+  info.node = "cpu_temp";
+  info.category = diagnostic;
+  info.stateTopic = _sysinfoTopic;
+  info.valtemplate = "value_json.sysinfo.CPU-temp";
+  info.availability = true;
+  return _postADinfo(&info);
 }
 
 result_t MqttNowClient::setADaddress() {
-  String path = _discoveryTopic + "/sensor/mqtt-now-" + getNodeId() + "/ip-address/config";
-
-  JsonDocument doc;
   
-  JsonObject dev = doc["device"].to<JsonObject>();
-  dev["hw"] = HARDWARE_VERSION;
-  dev["ids"] = "mqttnow_bridge_" + getNodeId();
-  dev["mf"] = "MQTT-NOW";
-  dev["mdl"] = "Bridge";
-  dev["name"] = "MQTT-NOW Bridge";
-  dev["sw"] = FIRMWARE_VERSION;
-
-  JsonObject origin = doc["origin"].to<JsonObject>();
-  origin["name"] = "MQTT-NOW";
-  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
-
-  doc["entity_category"] = "diagnostic";
-  
-  doc["avty_t"] = _lwtTopic,
-  doc["pl_avail"] = _onlineLwt;
-  doc["pl_not_avail"] = _offlineLwt;
-
-  doc["icon"] = "mdi:ip";
-  doc["name"] = "WiFi IP address";
-  
-  doc["stat_t"] = _sysinfoTopic;
-  doc["unique_id"] = "mqttnow_bridge_" + getNodeId() + "_connection_ip";
-  doc["object_id"] = doc["unique_id"];
-  doc["val_tpl"] = "{{ value_json.network.ip_address }}";
-  doc.shrinkToFit();
-
-  String json;
-
-  serializeJson(doc, json);
-  PRINTLN("setADaddress: ",json);
-  return publish(path, json, true, 1);
+  ADInfo info;
+  info.component = "sensor";
+  info.node = "ip-address";
+  info.category = diagnostic;
+  info.stateTopic = _sysinfoTopic;
+  info.valtemplate = "value_json.network.ip_address";
+  info.name = "IP address";
+  info.availability = true;
+  return _postADinfo(&info);
 }
 
 result_t MqttNowClient::setADstate() {
-  String path = _discoveryTopic + "/binary_sensor/mqtt-now-" + getNodeId() + "/state/config";
+
+  ADInfo info;
+  info.component = "binary_sensor";
+  info.node = "state";
+  info.category = diagnostic;
+  info.stateTopic = _lwtTopic;
+  info.payloadOn = _onlineLwt;
+  info.payloadOff = _offlineLwt;
+  info.name = "State";
+  info.availability = false;
+
+  return _postADinfo(&info);
+}
+
+result_t MqttNowClient::_postADinfo(ADInfo* info) {
+  // For available entries see: https://www.home-assistant.io/integrations/mqtt/#discovery-payload
+  assert(!info->component.isEmpty());
+  assert(!info->node.isEmpty());
+  assert(!info->stateTopic.isEmpty());
+  
+  String path = _discoveryTopic + "/" + info->component + "/mqtt-now-" + getNodeId() + "/" + info->node + "/config";
   
   JsonDocument doc;
   
-  doc["entity_category"] = "diagnostic";
+  doc["name"] = strIfNull(info->name, info->node);
+  doc["stat_t"] = info->stateTopic;
+  if (!info->valtemplate.isEmpty()) doc["val_tpl"] = "{{ " + info->valtemplate + " }}";
+  if(!info->payloadOn.isEmpty()) doc["pl_on"] = info->payloadOn;
+  if(!info->payloadOff.isEmpty()) doc["pl_off"] = info->payloadOff;
+  // doc["pl_off"] = _offlineLwt;
+  // doc["pl_on"] = _onlineLwt;
+  doc["uniq_id"] = strIfNull(info->uniqueID, "mqttnow_bridge_" + getNodeId() + "_" + info->node);
+  doc["obj_id"] = strIfNull(info->objectID, doc["uniq_id"]);
+
+  if (!info->attrTempl.isEmpty()) {
+    // _rootTopic + PATHSEP
+    doc["json_attr_tpl"] = info->attrTempl;
+    doc["json_attr_t"] = strIfNull(info->attrTopic, _rootTopic + PATHSEP + MQTT_ATTR_TOPIC);
+  }
+
+  if (info->category>none) doc["ent_cat"] = adCategory[info->category];
+
+  if (info->availability) {
+    doc["avty_t"] = strIfNull(info->availabilityTopic, _lwtTopic);
+    doc["pl_avail"] = strIfNull(info->payloadAvailable, _onlineLwt);
+    doc["pl_not_avail"] = strIfNull(info->payloadNotAvailable, _offlineLwt);
+  }
 
   JsonObject dev = doc["device"].to<JsonObject>();
   dev["hw"] = HARDWARE_VERSION;
@@ -635,73 +659,12 @@ result_t MqttNowClient::setADstate() {
   origin["name"] = "MQTT-NOW";
   origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
 
-  doc["entity_category"] = "diagnostic";
-  
-  doc["stat_t"] = _lwtTopic;
-  doc["payload_off"] = _offlineLwt;
-  doc["payload_on"] = _onlineLwt;
-  doc["unique_id"] = "mqttnow_bridge_" + getNodeId() + "_state";
-  doc["object_id"] = doc["unique_id"];
   doc.shrinkToFit();
 
   String json;
 
   serializeJson(doc, json);
   return publish(path, json, true, 1);
-}
-
-result_t MqttNowClient::addDevice(JsonDocument* doc) {
-  JsonObject docObject = (*doc).to<JsonObject>();
-  return addDevice(&docObject);
-}
-
-result_t MqttNowClient::addDevice(JsonObject* obj) {
-  JsonObject device = (*obj)["dev"].to<JsonObject>();
-  device["hw"] = HARDWARE_VERSION;
-  device["ids"][0] = "mqttnow_bridge_" + getNodeId();
-  device["mf"] = "MQTT-NOW";
-  device["mdl"] = "Bridge";
-  device["name"] = "MQTT-NOW Bridge";
-      
-  device["sw"] = FIRMWARE_VERSION;
-  
-  return result_success;
-}
-
-JsonObject MqttNowClient::getDeviceObj() {
-  JsonObject dev;
-  dev["hw"] = HARDWARE_VERSION;
-  dev["ids"][0] = "mqttnow_bridge_" + getNodeId();
-  dev["mf"] = "MQTT-NOW";
-  dev["mdl"] = "Bridge";
-  dev["name"] = "MQTT-NOW Bridge";
-      
-  dev["sw"] = FIRMWARE_VERSION;
-  return dev;
-}
-
-result_t MqttNowClient::addAvailability(JsonDocument* doc) {
-  JsonObject docObject = (*doc).to<JsonObject>();
-  return addAvailability(&docObject);
-}
-
-result_t MqttNowClient::addAvailability(JsonObject* obj) {
-  (*obj)["avty_t"] = _lwtTopic,
-  (*obj)["pl_avail"] = _onlineLwt;
-  (*obj)["pl_not_avail"] = _offlineLwt;
-  return result_success;
-}
-
-result_t MqttNowClient::addOrigin(JsonDocument* doc) {
-  JsonObject docObject = (*doc).to<JsonObject>();
-  return addOrigin(&docObject);
-}
-
-result_t MqttNowClient::addOrigin(JsonObject* obj) {
-  JsonObject origin = (*obj)["origin"].to<JsonObject>();
-  origin["name"] = "MQTT-NOW";
-  origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);
-  return result_success;
 }
 
 String MqttNowClient::_getFullDiscoveryPath(Node node) {

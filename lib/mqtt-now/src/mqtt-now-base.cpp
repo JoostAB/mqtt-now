@@ -118,13 +118,14 @@ void MqttNowBase::startOTA() {
 
 void MqttNowBase::stopOTA() {
   // server.stop();
-  server.end();
-  if (stopWifiAfterOta) {
-    stopWifi();
+    server.end();
+    if (stopWifiAfterOta) {
+      stopWifi();
+    }
   }
-}
 
 void MqttNowBase::startWifi() {
+  static uint32_t retrycount = 0;
   if (WiFi.status() == WL_CONNECTED) return;
 
   delay(10);
@@ -134,10 +135,16 @@ void MqttNowBase::startWifi() {
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PW);
   while (WiFi.status() != WL_CONNECTED) {
+    retrycount ++;
+    if (retrycount > 50) {
+      PRINTLNS("Tried for 10 seconds... Rebooting");
+      delay(200);
+      ESP.restart();
+    }
     PRINTS(".");
     delay(200);
   }
-
+  retrycount = 0;
   PRINTS("connected as :");
   PRINTLNSA(WiFi.localIP());
   PRINTS("MAC :");
@@ -161,6 +168,7 @@ void MqttNowBase::startServer(){
 }
 
 void MqttNowBase::stopServer(){
+  server.end();
   serverRunning = false;
 }
 

@@ -206,6 +206,9 @@ class MqttNowBase {
      */
     Node  getNodeStruct();
 
+    String strIfNull(String val, String alt) {
+      return val.isEmpty()?alt:val;
+    }
   private:
     String _name;
     ComponentType _type = noneType;
