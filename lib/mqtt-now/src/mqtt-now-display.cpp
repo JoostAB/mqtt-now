@@ -1,16 +1,24 @@
 #include <mqtt-now-display.h>
 #ifdef HAS_DISPLAY
 
+#ifndef MAX_DISPL_LINES
 #define MAX_DISPL_LINES 10
+#endif
+
+#ifndef MAX_DISPL_LINE_LENGTH
 #define MAX_DISPL_LINE_LENGTH 25
+#endif
+
+#ifndef LINE_HEIGHT
 #define LINE_HEIGHT 20
+#endif
 
 char lines[MAX_DISPL_LINES][MAX_DISPL_LINE_LENGTH+1];
 uint8_t lastline = 0;
 
 void setupDisplay() {
-  M5.Lcd.setTextColor(WHITE);
-  M5.Lcd.setTextSize(2);
+  LCD.setTextColor(WHITE);
+  LCD.setTextSize(2);
 };
 
 void updateDisplay() {
@@ -32,12 +40,12 @@ void log2Display(const char* txt) {
   }
   lines[lastline][MAX_DISPL_LINE_LENGTH] = '\0';  
 
-  M5.Lcd.clear();
+  LCD.clear();
 
   for (uint8_t i = 0; i <= lastline; i++) {
     int16_t y = LINE_HEIGHT * (i+1);
-    M5.Lcd.setCursor(10,(LINE_HEIGHT * (i+1)));
-    M5.Lcd.print(lines[i]);
+    LCD.setCursor(10,(LINE_HEIGHT * (i+1)));
+    LCD.print(lines[i]);
   }
 }
 
