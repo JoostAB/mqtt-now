@@ -335,7 +335,7 @@ result_t MqttNowClient::publishSysInfo() {
   sysinfo["boottime"] = _bootTime;
   sysinfo["sysinfotime"] = _getCurrentTime();
   sysinfo["freeheap"] = ESP.getFreeHeap();
-  sysinfo["CPU-temp"] = temperatureRead();
+  sysinfo["cputemp"] = temperatureRead();
   doc.shrinkToFit();
 
   String json;
@@ -580,7 +580,7 @@ result_t MqttNowClient::setADcputemp() {
   info.node = "cpu_temp";
   info.category = diagnostic;
   info.stateTopic = _sysinfoTopic;
-  info.valtemplate = "value_json.sysinfo.CPU-temp";
+  info.valtemplate = "value_json.sysinfo.cputemp";
   info.availability = true;
   return _postADinfo(&info);
 }
