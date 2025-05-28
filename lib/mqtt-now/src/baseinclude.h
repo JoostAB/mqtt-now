@@ -47,6 +47,14 @@ const result_t result_error = -1;
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
 
+#include <Ticker.h>
+#ifdef TENSTAR_ESP32C3
+  #undef LED_BUILTIN
+  #define LED_BUILTIN PIN_NEOPIXEL
+  #define ARDUINO_USB_MODE 1
+  #define ARDUINO_USB_CDC_ON_BOOT 1
+#endif
+
 typedef AsyncWebServer WServer;
 
 #if !defined(SERIALBAUDRATE)

@@ -10,7 +10,7 @@
  */
 #include <mqtt-now-base.h>
 // #include <AsyncElegantOTA.h>
-
+Ticker ledflash;
 WServer server(80);
 bool stopWifiAfterOta = true;
 bool serverRunning = false;
@@ -21,6 +21,15 @@ bool serverRunning = false;
 #endif
 #ifdef ESP8266
   void getmac(uint8_t *macaddr) {wifi_get_macaddr(STATION_IF, macaddr);}
+#endif
+
+#ifdef LED_BUILTIN
+/**
+ * ISR to toggle the builtin LED for status info
+ */
+void _flashLed_isr() {
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));  
+}
 #endif
 
 const char* toName(ComponentType type) {
@@ -64,7 +73,13 @@ MqttNowBase::MqttNowBase() {
 };
 
 void MqttNowBase::begin() {
-  PRINTF("MqttNow %s started\n", FIRMWARE_VERSION);
+  #ifdef LED_BUILTIN
+  pinMode(LED_BUILTIN, OUTPUT);
+  ledflash.attach(0.4, _flashLed_isr);
+  #endif
+
+  PRINTF("MqttNow %s starting\n", FIRMWARE_VERSION);
+  
   #ifdef M5STACK_FIRE
   M5.begin();
   M5.Power.begin();
@@ -75,6 +90,15 @@ void MqttNowBase::begin() {
 };
 
 void MqttNowBase::update() {
+  static bool _firststart = true;
+  if (_firststart) {
+    #ifdef LED_BUILTIN
+    ledflash.detach();
+    digitalWrite(LED_BUILTIN, HIGH);
+    #endif
+    PRINTF2("MqttNow %s started for target %s\n", FIRMWARE_VERSION, FIRMWARE_TARGET);
+    _firststart = false;
+  }
   // if (serverRunning) {
   //   server.handleClient();
   // }
@@ -96,6 +120,22 @@ void MqttNowBase::setType(ComponentType type) {
 
 String MqttNowBase::getName() {
   return _name;
+}
+
+String MqttNowBase::getHostName() {
+  String nm = getName();
+  if (nm.length() == 0) {
+
+    char id[6];
+  
+    uint8_t mac[6];
+    
+    getmac(&mac[0]);
+    sprintf(id, "%02X%02X%02X", mac[0], mac[1], mac[2]);
+    nm = String(id);
+    //nm = "unknown";
+  }
+  return "MQTT-NOW-" + nm;
 }
 
 void MqttNowBase::getMac(uint8_t *macaddr) {
@@ -133,6 +173,7 @@ void MqttNowBase::startWifi() {
 
   PRINTS("connecting to Wifi...");
   WiFi.mode(WIFI_STA);
+  WiFi.setHostname(getHostName().c_str());
   WiFi.begin(WIFI_SSID, WIFI_PW);
   while (WiFi.status() != WL_CONNECTED) {
     retrycount ++;

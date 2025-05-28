@@ -26,7 +26,7 @@
 extern WServer server;
 extern bool stopWifiAfterOta; 
 // extern bool serverRunning ;
-
+extern Ticker ledflash;
 /**
  * @brief Enumeration of possible component types.
  * 
@@ -92,6 +92,8 @@ struct Node {
   String id;
 } ;
 
+void _flashLed_isr();
+
 /**
  * @brief Base class for all MqttNow classes
  * 
@@ -136,6 +138,8 @@ class MqttNowBase {
        * 
        */
       getName(),  
+
+      getHostName(),  
 
       /**
        * @brief Generates and returns an identifier for this node
