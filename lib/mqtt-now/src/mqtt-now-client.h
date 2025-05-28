@@ -195,7 +195,7 @@ class MqttNowClient : public MqttNowBridge {
       _lastUartCommandReceived,
       _lastUartCommandSend,
       _bootTime;
-
+    
     void
       _setupWifi(),
       _callback(char* topic, byte* payload, unsigned int length),
@@ -203,7 +203,7 @@ class MqttNowClient : public MqttNowBridge {
 
     JsonObject* getObject(JsonDocument* doc);
     
-    String _timeStructToString(tm* time);
+    //String _timeStructToString(tm* time);
     
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
@@ -221,7 +221,6 @@ class MqttNowClient : public MqttNowBridge {
     String _modTopic(String topic),
            _getFullDiscoveryPath(Node node),
            _getCurrentTime();
-    
     
     String 
       _host,

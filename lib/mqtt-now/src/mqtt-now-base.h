@@ -114,7 +114,7 @@ class MqttNowBase {
        * 
        * @param name 
        */
-      setName(char* name),
+      setName(const char* name),
 
       /**
        * @brief Set the type of component
@@ -141,6 +141,7 @@ class MqttNowBase {
 
       getHostName(),  
 
+      timeStructToString(tm* time),
       /**
        * @brief Generates and returns an identifier for this node
        * 

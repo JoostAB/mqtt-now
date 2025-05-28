@@ -85,6 +85,7 @@ MqttNowClient::MqttNowClient(
  */
 void MqttNowClient::begin() {
   MqttNowBase::begin();
+  setName("BRIDGE");
   _lastMqttCommand = "";
   _lastUartCommandReceived = "";
   _lastUartCommandSend = "";
@@ -334,6 +335,9 @@ result_t MqttNowClient::publishSysInfo() {
   netw["ip_address"] = WiFi.localIP();
   netw["hostname"] = WiFi.getHostname();
   
+  if (_bootTime == TXT_UNAVAILABLE) {
+    _bootTime = _getCurrentTime();
+  }
   JsonObject sysinfo = doc["sysinfo"].to<JsonObject>();
   sysinfo["boottime"] = _bootTime;
   sysinfo["sysinfotime"] = _getCurrentTime();
@@ -353,17 +357,10 @@ result_t MqttNowClient::publishSysInfo() {
 String MqttNowClient::_getCurrentTime() {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)){
-    return "Unavailable";
+    return TXT_UNAVAILABLE;
   }
   
-  return _timeStructToString(&timeinfo);
- 
-}
-
-String MqttNowClient::_timeStructToString(tm* time) {
-  char timestring[20];
-  strftime(timestring, 20, "%Y-%m-%d %H:%M:%S", time);
-  return String(timestring);
+  return timeStructToString(&timeinfo);
 }
 
 result_t MqttNowClient::makeDiscoverable(Node node) {

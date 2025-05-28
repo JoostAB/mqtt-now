@@ -110,7 +110,7 @@ void MqttNowBase::update() {
   #endif
 };
 
-void MqttNowBase::setName(char* name) {
+void MqttNowBase::setName(const char* name) {
   _name = String(name);
 }
 
@@ -123,7 +123,12 @@ String MqttNowBase::getName() {
 }
 
 String MqttNowBase::getHostName() {
+  
+  #ifdef DEVNAME
+  String nm = QUOTE(DEVNAME);
+  #else 
   String nm = getName();
+  #endif
   if (nm.length() == 0) {
 
     char id[6];
@@ -133,13 +138,19 @@ String MqttNowBase::getHostName() {
     getmac(&mac[0]);
     sprintf(id, "%02X%02X%02X", mac[0], mac[1], mac[2]);
     nm = String(id);
-    //nm = "unknown";
   }
+  
   return "MQTT-NOW-" + nm;
 }
 
 void MqttNowBase::getMac(uint8_t *macaddr) {
   getmac(macaddr);
+}
+
+String MqttNowBase::timeStructToString(tm* time) {
+  char timestring[20];
+  strftime(timestring, 20, "%Y-%m-%d %H:%M:%S", time);
+  return String(timestring);
 }
 
 ComponentType MqttNowBase::getType() {

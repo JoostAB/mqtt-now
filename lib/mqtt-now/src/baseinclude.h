@@ -64,4 +64,14 @@ typedef AsyncWebServer WServer;
 #define SIZE_IP 4
 #define SIZE_MAC 6
 
+#define TXT_UNAVAILABLE "Unavailable"
+
+#ifndef __BASE_INCLUDE_H_UTILS_
+#define __BASE_INCLUDE_H_UTILS_ 1
+// String timeStructToString(tm* time) {
+//   char timestring[20];
+//   strftime(timestring, 20, "%Y-%m-%d %H:%M:%S", time);
+//   return String(timestring);
+// }
+#endif //  __BASE_INCLUDE_H_UTILS_
 #endif // __BASE_INCLUDE_H__
