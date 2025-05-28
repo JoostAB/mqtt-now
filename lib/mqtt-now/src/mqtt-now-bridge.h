@@ -1,7 +1,7 @@
 /**
  * @file mqtt-now-bridge.h
  * @author Joost Bloemsma (joost.a@bloemsma.net)
- * @brief Defines the serial protocol between mqtt-client and controller
+ * @brief Defines the serial protocol between mqtt-client and bridgecontroller
  * @version 0.1
  * @date 2022-04-12
  * 
@@ -16,8 +16,8 @@
 #include <baseinclude.h>
 #include <mqtt-now-base.h>
 
-#if !defined(COM)
-#define COM Serial
+#if !defined(UART)
+#define UART Serial
 #endif
 
 // The pathseperator for MQTT topic paths
@@ -128,19 +128,19 @@ class MqttNowBridge : public MqttNowBase {
       update();
 
   protected:
-
+      result_t initUart();
       virtual result_t _doAction(char act); 
       String  _comBuff;
+      result_t sendSerial(const char* buff);
       #ifdef DEBUGLOG
       String  _serBuff;
       #endif
   
   private:
     result_t _handleComm();
-
-    
-
+   
     void _readSerial(Stream& uart, String& buff);
+    
 };
 
 #endif // __MQTT_NOW_BRIDGE__

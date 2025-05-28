@@ -14,13 +14,16 @@
 MqttNowController::MqttNowController() : MqttNowNode() {};
 
 void MqttNowController::begin() {
+  #ifdef MQTT_NOW_BRIDGE
+  MqttNowBridge::begin();
+  #endif
   MqttNowNode::begin();
-  if (!COM) {
-    COM.begin(SERIALBAUDRATE);
-  }
 };
 
 void MqttNowController::update() {
+  #ifdef MQTT_NOW_BRIDGE
+  MqttNowBridge::update();
+  #endif
   MqttNowNode::update();
 };
 
@@ -38,7 +41,56 @@ void MqttNowController::messageReceived(const uint8_t *macFrom, uint8_t type, ms
       return;
     }
   }
-
 }
 
+#ifdef MQTT_NOW_BRIDGE
+result_t MqttNowController::_doAction(char act) {
+  PRINTLNS("On controller:");
+  switch (act) {
+    case MSG_ACTIONREC:
+      PRINTLNS("Returned message received");
+      return _handleBridgeMessage();
+    case MSG_ACTIONSUB:
+      PRINTLNS("Subscribe command received");
+      //return _handleSubscribe();
+      break;
+    case MSG_ACTIONUNS:
+      PRINTLNS("Unsubscribe command received");
+      //return _handleUnsubscribe();
+      break;
+    case MSG_ACTIONPUB:
+      PRINTLNS("Publish command received");
+      //return _handlePublish();
+      break;
+    case MSG_ACTIONRBT:
+      PRINTLNS("Reboot command received");
+      return _handleReboot();
+      
+    default:
+      PRINTLNS("Unknown command received");
+      return result_error;
+  }
+  return result_success;
+}
+
+result_t MqttNowController::_handleReboot() {
+  delay(500);
+  ESP.restart();
+  return result_success;
+}
+
+result_t MqttNowController::_handleBridgeMessage() {
+  // Strip first 4 characters from buffer
+  _comBuff = _comBuff.substring(4);
+  // Check if combuff starts with MSG_START
+  if (_comBuff.startsWith(MSG_START)) {
+    PRINTF("Resulting combuff (%s) starting with MSG_START, send to client\n",_comBuff.c_str());
+    return sendSerial(_comBuff.c_str());
+  }
+  // Resulting string is not a command, so check if it is a returned MQTT message
+
+  return result_error;
+}
+
+#endif
 #endif // MQTT_NOW_CONTROLLER

@@ -191,6 +191,9 @@ class MqttNowClient : public MqttNowBridge {
     String
       _lastPublishedTopic,
       _lastPublishedPayload,
+      _lastMqttCommand,
+      _lastUartCommandReceived,
+      _lastUartCommandSend,
       _bootTime;
 
     void
@@ -205,8 +208,9 @@ class MqttNowClient : public MqttNowBridge {
     uint16_t _mqttPort = MQTT_PORT;
     uint32_t _timeout = 5000;
     result_t 
-      _sendStringToController(const char* msg),
+      //_sendStringToController(const char* msg),
       _sendMqttMsgToController(),
+      _sendToController(const char* msg),
       //_handleComm(),
       _handleSubscribe(),
       _handleUnsubscribe(),

@@ -15,22 +15,25 @@
 
 #include <baseinclude.h>
 #include <mqtt-now-node.h>
+#ifdef MQTT_NOW_BRIDGE
 #include <mqtt-now-bridge.h>
-#include <list>
-
-#if !defined(COM)
-#define COM Serial
 #endif
+#include <list>
 
 using namespace std;
 
 /**
  * @brief Controller of the MqttNow network. 
  * 
- * Relays all messages between the MqttNowClient and the MqttNow Node's in the esp-now network.
+ * If also build as bridge, it relays all messages between the MqttNowClient and 
+ * the MqttNow Node's in the esp-now network.
  * 
  */
+#ifdef MQTT_NOW_BRIDGE
+class MqttNowController : public MqttNowBridge , public MqttNowNode {
+#else
 class MqttNowController : public MqttNowNode {
+#endif
   public:
 
     /**
@@ -59,11 +62,20 @@ class MqttNowController : public MqttNowNode {
      */
     void update(); 
   
+  #ifdef MQTT_NOW_BRIDGE
+    result_t _doAction(char act);
+  #endif
+
   private:
     /**
      * @brief A list of registered esp-now clients
      */
     std::list<esp_now_peer_info_t> _slaves;
+
+    result_t _handleReboot();
+  #ifdef MQTT_NOW_BRIDGE
+    result_t _handleBridgeMessage();
+  #endif
 };
 
 #endif // __MQTT_NOW_CONTROLLER_H__

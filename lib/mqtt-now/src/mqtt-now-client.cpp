@@ -85,10 +85,10 @@ MqttNowClient::MqttNowClient(
  */
 void MqttNowClient::begin() {
   MqttNowBase::begin();
-
-  if (!COM) {
-    COM.begin(SERIALBAUDRATE);
-  }
+  _lastMqttCommand = "";
+  _lastUartCommandReceived = "";
+  _lastUartCommandSend = "";
+  initUart();
 
   startWifi();
   setCurrentTime();
@@ -130,7 +130,9 @@ void MqttNowClient::_reconnect() {
       PRINTLNSA("connected to " + _host);
       // Once connected, LWT Online message...
       publish(_lwtTopic.c_str(), _onlineLwt.c_str(), true);
+      #ifdef HASS_AUTODISCOVER
       setupAutoDiscover();
+      #endif
       // ... and resubscribe to command topic
       client.subscribe(_cmdTopic.c_str());
       PRINTLN("Subscribed to ", _cmdTopic);
@@ -192,6 +194,7 @@ void MqttNowClient::update() {
 /** Serial communication **/
 
 result_t MqttNowClient::_doAction(char act) {
+  _lastUartCommandReceived = String(_comBuff);
   switch (act) {
     case MSG_ACTIONSUB:
       PRINTLNS("Subscribe command received");
@@ -336,6 +339,9 @@ result_t MqttNowClient::publishSysInfo() {
   sysinfo["sysinfotime"] = _getCurrentTime();
   sysinfo["freeheap"] = ESP.getFreeHeap();
   sysinfo["cputemp"] = temperatureRead();
+  sysinfo["lastmqttcommand"] = _lastMqttCommand;
+  sysinfo["lastuartreceived"] = _lastUartCommandReceived;
+  sysinfo["lastuartsend"] = _lastUartCommandSend;
   doc.shrinkToFit();
 
   String json;
@@ -366,6 +372,7 @@ result_t MqttNowClient::makeDiscoverable(Node node) {
 
 result_t MqttNowClient::_handleCommand() {
   PRINTLN("Performing command: ", lastReceivedPayload);
+  _lastMqttCommand = String(lastReceivedPayload);
   if (lastReceivedPayload.equals(CMD_OTA_START)) {
     startOTA();
     return result_success;
@@ -377,7 +384,7 @@ result_t MqttNowClient::_handleCommand() {
   }
   
   if (lastReceivedPayload.equals(CMD_CTRL_REBOOT)) {
-    return _sendStringToController("###B");
+    return _sendToController("###B");
   }
 
   if (lastReceivedPayload.equals(CMD_CLIENT_REBOOT)) {
@@ -394,35 +401,15 @@ result_t MqttNowClient::_handleReboot() {
   return result_success;
 }
 
-result_t MqttNowClient::_sendStringToController(const char* msg) {
-  if (!String(msg).startsWith(MSG_START)) {
-    PRINTLNS("No valid message to send");
-    return result_error;
-  }
-  if (!COM) {
-    COM.begin(SERIALBAUDRATE);
-    yield();
-  }
-  PRINTS("Sending to controller: ");
-  PRINTLNSA(msg);
-  #ifdef HAS_DISPLAY
-  log2Display("OUT:");
-  log2Display(msg);
-  #endif
-  size_t send = 0;
-  send += COM.print(msg);
-  COM.print("\n");
-  PRINTLN("Nr of bytes send to controller: ", send);
-  return (send > 0)?result_success:result_error;
+result_t MqttNowClient::_sendToController(const char* msg) {
+  _lastUartCommandSend = String(msg);
+  return sendSerial(msg);
 }
 
 result_t MqttNowClient::_sendMqttMsgToController() {
   PRINTS("Sending to controller: ");
 
-  if (!COM) {
-    COM.begin(SERIALBAUDRATE);
-    yield();
-  }
+  initUart();
     
   PRINTS(MSG_START);
   PRINTDS(MSG_ACTIONREC);
@@ -436,14 +423,11 @@ result_t MqttNowClient::_sendMqttMsgToController() {
   log2Display(lastReceivedPayload.c_str());
   #endif
   
-  size_t send = 0;
-  send += COM.print(MSG_START);
-  send += COM.print(MSG_ACTIONREC);
-  send += COM.print(lastReceivedTopic);
-  send += COM.print(MSG_PAYLOAD);
-  send += COM.print(lastReceivedPayload);
-  COM.print("\n");
-  return (send > 0)?result_success:result_error;
+  String msg = MSG_START + MSG_ACTIONREC +
+               lastReceivedTopic + MSG_PAYLOAD +
+               lastReceivedPayload;
+  
+  return _sendToController(msg.c_str());
 }
 
 /** Simple setters **/
