@@ -609,6 +609,11 @@ result_t MqttNowClient::_postADinfo(ADInfo* info) {
   if (!info->valtemplate.isEmpty()) doc["val_tpl"] = "{{ " + info->valtemplate + " }}";
   if(!info->payloadOn.isEmpty()) doc["pl_on"] = info->payloadOn;
   if(!info->payloadOff.isEmpty()) doc["pl_off"] = info->payloadOff;
+  if (!info->stateClass.isEmpty()) doc["state_class"] = info->stateClass;
+  if (!info->deviceClass.isEmpty()) doc["device_class"] = info->deviceClass;
+  if (!info->icon.isEmpty()) doc["icon"] = info->icon;
+  if (!info->unitOfMeasurement.isEmpty()) doc["unit_of_meas"] = info->unitOfMeasurement;
+    
   // doc["pl_off"] = _offlineLwt;
   // doc["pl_on"] = _onlineLwt;
   doc["uniq_id"] = strIfNull(info->uniqueID, "mqttnow_bridge_" + getNodeId() + "_" + info->node);
@@ -635,7 +640,8 @@ result_t MqttNowClient::_postADinfo(ADInfo* info) {
   dev["mdl"] = "Bridge";
   dev["name"] = "MQTT-NOW Bridge";
   dev["sw"] = FIRMWARE_VERSION;
-  
+  //if (!info->viaDevice.isEmpty()) dev["via_device"] = info->viaDevice;
+
   JsonObject origin = doc["origin"].to<JsonObject>();
   origin["name"] = "MQTT-NOW";
   origin["sw"] = "MQTT-NOW " + String(FIRMWARE_VERSION);

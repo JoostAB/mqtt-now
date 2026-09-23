@@ -76,6 +76,7 @@ struct ADInfo {
   String icon;
   String attrTopic;
   String attrTempl;
+  String stateClass;
   /*
     device_class
     enabled_by_default

@@ -85,6 +85,8 @@ void MqttNowNode::begin() {
     return;
   }
 
+  addPeer(broadcastAddress, 2, false);
+
   PRINTLNS("ESP-NOW initialized");
 
   esp_now_register_send_cb(OnDataSent);
@@ -104,8 +106,10 @@ void MqttNowNode::update() {
 esp_err_t MqttNowNode::addPeer(esp_now_peer_info_t *peer) {
   #ifdef ESP32
     if (!esp_now_is_peer_exist(peer->peer_addr)) {
+      PRINTLNS("Adding ESPNOW peer");
       return esp_now_add_peer(peer);
     } else {
+      PRINTLNS("ESPNOW peer already exists");
       return ESP_OK;
     }
   #elif defined(ESP8266)
@@ -133,12 +137,13 @@ esp_err_t MqttNowNode::addPeer(uint8_t *mac_addr, uint8_t channel, bool encrypt)
   #endif
 }
 
-esp_err_t MqttNowNode::sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver) {
+esp_err_t MqttNowNode::sendIntroMessage(uint8_t category, const char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver) {
   // msg_intro *msg;
   // getMessageStruct(msgTypeIntro, msg);
   // msg->device_category = category;
   // memcpy(msg->friendly_name, friendlyName, SIZE_FRIENDNAME);
   // return sendMessage(msg, macReceiver);
+  PRINTLNS("ESPNOW Sending intro message");
   msg_intro msg;
   msg.device_category = category;
   memcpy(msg.friendly_name, friendlyName, SIZE_FRIENDNAME);
@@ -209,6 +214,7 @@ esp_err_t MqttNowNode::sendDataMessage(uint8_t data_type, const int8_t *data, co
       
 
 esp_err_t MqttNowNode::sendMessage(msg_base *msg, size_t msgSize, const uint8_t *macReceive) {
+  PRINTLNS("ESPNOW Sending message");
   struct_msg wrapper;
   uint8_t mac[SIZE_MAC];
   memcpy(mac, macReceive, SIZE_MAC);
@@ -216,7 +222,13 @@ esp_err_t MqttNowNode::sendMessage(msg_base *msg, size_t msgSize, const uint8_t 
   wrapper.type = msg->msgtype;
   wrapper.msgSize = msgSize;
   memcpy(wrapper.contents, msg, wrapper.msgSize);
-  return esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper) + msgSize);
+  esp_err_t res = esp_now_send(mac, (uint8_t *) &wrapper, sizeof(wrapper) + msgSize);
+  if (res != ESP_OK) {
+    PRINTLN("ESPNOW message send with error ", res);
+  } else {
+    PRINTLNS("ESPNOW message send successfully");
+  }
+  return res;
 }
 
 esp_err_t MqttNowNode::sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive) {

@@ -13,10 +13,15 @@
 #include <secrets.h>
 #define MQTTNOW_DEBUG 1
 #include <jbdebug.h>
+
+#ifdef TESTNODE
+#include <testnode.h>
+MqttNowTestNode mqttNow;
+#else
 #include <mqtt-now.h>
 
 MqttNow mqttNow;
-
+#endif
 void setup() {
   mqttNow.begin();
 }

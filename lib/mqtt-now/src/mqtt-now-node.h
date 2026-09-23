@@ -214,7 +214,7 @@ class MqttNowNode : public MqttNowBase {
     esp_err_t addPeer(esp_now_peer_info_t *peer);
     esp_err_t sendMessage(msg_base *msg, size_t msgSize, const uint8_t *macReceive);
     esp_err_t sendMessage(msgType type, msg_base *msg, const uint8_t *macReceive);
-    esp_err_t sendIntroMessage(uint8_t category, char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver);
+    esp_err_t sendIntroMessage(uint8_t category, const char friendlyName[SIZE_FRIENDNAME], const uint8_t *macReceiver);
     esp_err_t sendWelcomeMessage(const uint8_t *macReceiver);
     esp_err_t sendReqCfgMessage(const uint8_t *macReceiver);
     esp_err_t sendCfgMessage(const char *wifi_ssid, const char *wifi_key, const uint8_t mqtt_ip[SIZE_IP], 
