@@ -77,6 +77,7 @@ struct ADInfo {
   String attrTopic;
   String attrTempl;
   String stateClass;
+  String unitOfMeasurement;
   /*
     device_class
     enabled_by_default
